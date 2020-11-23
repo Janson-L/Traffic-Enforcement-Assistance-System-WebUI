@@ -1,5 +1,5 @@
 <?php
-include "dbh.php";
+include "connection.php";
 <?
 
 <!DOCTYPE html>
@@ -111,12 +111,11 @@ include "dbh.php";
         <h2>
        <?php
 if(isset($_POST['view-submit'])) {
-include "dbh.php";
 $schedule_id=$_POST['view-submit'];
     $location = "Satria";
 		
         $sql="SELECT count(location) FROM record WHERE location=? AND DATEDIFF(HOUR, EntryTime,ExitTime)>=8";
-		$stmt=mysqli_stmt_init($conn);
+		$stmt=mysqli_stmt_init($con);
 		mysqli_stmt_prepare($stmt,$sql);
 		mysqli_stmt_bind_param($stmt, "s", $location);
 		mysqli_stmt_execute($stmt);
@@ -135,12 +134,11 @@ header("../index.php?error=unknown");
         <h3>Lestari</h3>
         <h2><?php
 if(isset($_POST['view-submit'])) {
-include "dbh.php";
 $schedule_id=$_POST['view-submit'];
     $location = "Lestari";
 		
         $sql="SELECT count(location) FROM record WHERE location=? AND DATEDIFF(HOUR, EntryTime,ExitTime)>=8";
-		$stmt=mysqli_stmt_init($conn);
+		$stmt=mysqli_stmt_init($con);
 		mysqli_stmt_prepare($stmt,$sql);
 		mysqli_stmt_bind_param($stmt, "s", $location);
 		mysqli_stmt_execute($stmt);
