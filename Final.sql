@@ -1,6 +1,52 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: db-mysql-sgp1-01735-do-user-7518064-0.b.db.ondigitalocean.com:25060
+-- Generation Time: Nov 23, 2020 at 02:15 PM
+-- Server version: 8.0.20
+-- PHP Version: 7.4.11
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+08:00";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `traffic_enforcement_assistance_system`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `camera`
+--
+
+CREATE TABLE `camera` (
+  `CameraID` tinyint NOT NULL,
+  `Location` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `camera`
+--
+
+INSERT INTO `camera` (`CameraID`, `Location`) VALUES
+(1, 'Satria'),
+(2, 'Satria Exit'),
+(3, 'Lestari'),
+(4, 'Lestari Exit');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offense`
+--
 
 CREATE TABLE `offense` (
   `OffenseID` int NOT NULL,
@@ -8,18 +54,26 @@ CREATE TABLE `offense` (
   `CompoundRate` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `offense`
+--
 
 INSERT INTO `offense` (`OffenseID`, `OffenseName`, `CompoundRate`) VALUES
 (1, 'Sticker Misuse', 100),
 (2, 'Illegal Parking', 50);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
 
 CREATE TABLE `payment` (
   `PaymentID` int NOT NULL,
   `PaymentMethod` tinyint(1) NOT NULL,
   `PaymentDateTime` datetime NOT NULL,
   `SummonID` int NOT NULL,
-  `StaffID` varchar(15)  NOT NULL
+  `StaffID` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -30,6 +84,7 @@ CREATE TABLE `payment` (
 
 CREATE TABLE `record` (
   `RecordID` int NOT NULL,
+  `CameraID` tinyint NOT NULL,
   `EntryDateTime` datetime NOT NULL,
   `ExitDateTime` datetime DEFAULT NULL,
   `LicensePlate` varchar(10) NOT NULL
@@ -39,9 +94,9 @@ CREATE TABLE `record` (
 -- Dumping data for table `record`
 --
 
-INSERT INTO `record` (`RecordID`, `EntryDateTime`, `ExitDateTime`, `LicensePlate`) VALUES
-(1, '2020-11-23 00:06:32', NULL, 'WHM 831'),
-(2, '2020-11-22 23:54:46', NULL, 'JTL 1234');
+INSERT INTO `record` (`RecordID`, `CameraID`, `EntryDateTime`, `ExitDateTime`, `LicensePlate`) VALUES
+(1, 1, '2020-11-23 21:11:54', NULL, 'BEH 9873'),
+(2, 3, '2020-11-23 18:11:54', NULL, 'WRS 6725');
 
 -- --------------------------------------------------------
 
@@ -125,6 +180,12 @@ CREATE TABLE `vehicle` (
 --
 
 --
+-- Indexes for table `camera`
+--
+ALTER TABLE `camera`
+  ADD PRIMARY KEY (`CameraID`);
+
+--
 -- Indexes for table `offense`
 --
 ALTER TABLE `offense`
@@ -143,7 +204,8 @@ ALTER TABLE `payment`
 --
 ALTER TABLE `record`
   ADD PRIMARY KEY (`RecordID`),
-  ADD KEY `LicensePlate` (`LicensePlate`);
+  ADD KEY `LicensePlate` (`LicensePlate`),
+  ADD KEY `fk_cameraID_record` (`CameraID`);
 
 --
 -- Indexes for table `staff`
@@ -186,6 +248,12 @@ ALTER TABLE `vehicle`
 --
 
 --
+-- AUTO_INCREMENT for table `camera`
+--
+ALTER TABLE `camera`
+  MODIFY `CameraID` tinyint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `offense`
 --
 ALTER TABLE `offense`
@@ -201,7 +269,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `record`
 --
 ALTER TABLE `record`
-  MODIFY `RecordID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `RecordID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sticker`
@@ -227,6 +295,12 @@ ALTER TABLE `payment`
   ADD CONSTRAINT `fk_summonID_payment` FOREIGN KEY (`SummonID`) REFERENCES `summon` (`SummonID`);
 
 --
+-- Constraints for table `record`
+--
+ALTER TABLE `record`
+  ADD CONSTRAINT `fk_cameraID_record` FOREIGN KEY (`CameraID`) REFERENCES `camera` (`CameraID`);
+
+--
 -- Constraints for table `sticker`
 --
 ALTER TABLE `sticker`
@@ -240,10 +314,14 @@ ALTER TABLE `summon`
   ADD CONSTRAINT `fk_offenseID_summon` FOREIGN KEY (`OffenseID`) REFERENCES `offense` (`OffenseID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_staffID_summon` FOREIGN KEY (`StaffID`) REFERENCES `staff` (`StaffID`);
 
-
+--
+-- Constraints for table `vehicle`
+--
 ALTER TABLE `vehicle`
   ADD CONSTRAINT `fk_staffID_vehicle` FOREIGN KEY (`StaffID`) REFERENCES `staff` (`StaffID`),
   ADD CONSTRAINT `fk_studentID_vehicle` FOREIGN KEY (`StudentID`) REFERENCES `student` (`StudentID`);
 COMMIT;
 
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
