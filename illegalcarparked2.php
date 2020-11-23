@@ -1,6 +1,6 @@
 <?php
 include "connection.php";
-<?
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,22 +110,18 @@ include "connection.php";
         <h3>Satria</h3>
         <h2>
        <?php
-if(isset($_POST['view-submit'])) {
-$schedule_id=$_POST['view-submit'];
-    $location = "Satria";
+    $Location = "Satria";
 		
-        $sql="SELECT count(location) FROM record WHERE location=? AND DATEDIFF(HOUR, EntryTime,ExitTime)>=8";
+        $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND DATEDIFF(HOUR, EntryDateTime,ExitDateTime)>=8";
 		$stmt=mysqli_stmt_init($con);
 		mysqli_stmt_prepare($stmt,$sql);
-		mysqli_stmt_bind_param($stmt, "s", $location);
+		mysqli_stmt_bind_param($stmt, "s", $Location);
 		mysqli_stmt_execute($stmt);
 		
 		mysqli_stmt_bind_result($stmt, $result);
 		while(mysqli_stmt_fetch($stmt)) {
-						echo $result
+						echo $result;
                         }
-else {
-header("../index.php?error=unknown");
 ?></h2>
 
 
@@ -133,22 +129,19 @@ header("../index.php?error=unknown");
       <div class="col-sm-6" style="border-style:solid; width:20%; left:40%;" >
         <h3>Lestari</h3>
         <h2><?php
-if(isset($_POST['view-submit'])) {
-$schedule_id=$_POST['view-submit'];
-    $location = "Lestari";
+    $Location = "Lestari";
 		
-        $sql="SELECT count(location) FROM record WHERE location=? AND DATEDIFF(HOUR, EntryTime,ExitTime)>=8";
+        $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND DATEDIFF(HOUR, EntryDateTime,ExitDateTime)>=8";
 		$stmt=mysqli_stmt_init($con);
 		mysqli_stmt_prepare($stmt,$sql);
-		mysqli_stmt_bind_param($stmt, "s", $location);
+		mysqli_stmt_bind_param($stmt, "s", $Location);
 		mysqli_stmt_execute($stmt);
 		
 		mysqli_stmt_bind_result($stmt, $result);
 		while(mysqli_stmt_fetch($stmt)) {
-						echo $result
+						echo $result;
                         }
-else {
-header("../index.php?error=unknown");
+
 ?></h2>
       </div>
       
