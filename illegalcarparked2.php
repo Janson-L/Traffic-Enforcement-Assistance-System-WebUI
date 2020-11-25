@@ -112,16 +112,29 @@ include "connection.php";
        <?php
     $Location = "Satria";
 		
-        $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND DATEDIFF(HOUR, EntryDateTime,ExitDateTime)>=8";
-		$stmt=mysqli_stmt_init($con);
-		mysqli_stmt_prepare($stmt,$sql);
-		mysqli_stmt_bind_param($stmt, "s", $Location);
-		mysqli_stmt_execute($stmt);
-		
-		mysqli_stmt_bind_result($stmt, $result);
-		while(mysqli_stmt_fetch($stmt)) {
+    $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND DATEDIFF(HOUR, EntryDateTime,ExitDateTime)>=8";
+    //$stmt=mysqli_stmt_init($con);
+    $stmt=$con->prepare($sql);
+    if(!$stmt){
+      echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+    }
+    else{
+      $stmt->bind_param('s',$Location);
+      if(!stmt){
+        echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+      }
+      else{
+        //mysqli_stmt_bind_param($stmt, "s", $Location);
+        $stmt->execute();
+
+        mysqli_stmt_bind_result($stmt, $result);
+		    while(mysqli_stmt_fetch($stmt)) {
 						echo $result;
-                        }
+        }
+      }
+    }
+      
+		
 ?></h2>
 
 
@@ -131,16 +144,19 @@ include "connection.php";
         <h2><?php
     $Location = "Lestari";
 		
-        $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND DATEDIFF(HOUR, EntryDateTime,ExitDateTime)>=8";
-		$stmt=mysqli_stmt_init($con);
-		mysqli_stmt_prepare($stmt,$sql);
-		mysqli_stmt_bind_param($stmt, "s", $Location);
-		mysqli_stmt_execute($stmt);
-		
-		mysqli_stmt_bind_result($stmt, $result);
-		while(mysqli_stmt_fetch($stmt)) {
-						echo $result;
-                        }
+    $stmt->bind_param('s',$Location);
+    if(!stmt){
+      echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+    }
+    else{
+      //mysqli_stmt_bind_param($stmt, "s", $Location);
+      $stmt->execute();
+
+      mysqli_stmt_bind_result($stmt, $result);
+      while(mysqli_stmt_fetch($stmt)) {
+          echo $result;
+      }
+    }
 
 ?></h2>
       </div>
