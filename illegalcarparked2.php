@@ -112,8 +112,24 @@ include "connection.php";
        <?php
     $Location = "Satria";
 		
-    $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND DATEDIFF(HOUR, EntryDateTime,ExitDateTime)>=8";
-    //$stmt=mysqli_stmt_init($con);
+    $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND HOUR(TIMEDIFF(EntryDateTime,ExitDateTime))>=0";
+    if(!(mysqli_stmt_prepare($stmt, $sql))){
+        echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+    }
+    else {
+        if(!(mysqli_stmt_bind_param($stmt, "i", $Location))) {
+            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        else {
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt, $result);
+            while(mysqli_stmt_fetch($stmt)) {
+                echo $result;
+            }
+        }
+    }
+
+    /*
     $stmt=$con->prepare($sql);
     if(!$stmt){
       echo "Prepare failed: (" . $con->errno . ") " . $con->error;
@@ -133,7 +149,7 @@ include "connection.php";
         }
       }
     }
-      
+    */
 		
 ?></h2>
 
@@ -143,7 +159,23 @@ include "connection.php";
         <h3>Lestari</h3>
         <h2><?php
     $Location = "Lestari";
-		
+    if(!(mysqli_stmt_prepare($stmt, $sql))){
+        echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+    }
+    else {
+        if(!(mysqli_stmt_bind_param($stmt, "i", $Location))) {
+            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+        }
+        else {
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt, $result);
+            while(mysqli_stmt_fetch($stmt)) {
+                echo $result;
+            }
+        }
+    }
+	
+    /*
     $stmt->bind_param('s',$Location);
     if(!stmt){
       echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
@@ -157,7 +189,7 @@ include "connection.php";
           echo $result;
       }
     }
-
+    */
 ?></h2>
       </div>
       
