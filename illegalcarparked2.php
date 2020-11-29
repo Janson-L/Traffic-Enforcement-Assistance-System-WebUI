@@ -113,6 +113,7 @@ include "connection.php";
     $Location = "Satria";
 		
     $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND HOUR(TIMEDIFF(EntryDateTime,ExitDateTime))>=0";
+    $stmt=mysqli_stmt_init($con);
     if(!(mysqli_stmt_prepare($stmt, $sql))){
         echo "Prepare failed: (" . $con->errno . ") " . $con->error;
     }
