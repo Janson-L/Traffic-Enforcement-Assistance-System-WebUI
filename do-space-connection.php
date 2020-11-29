@@ -4,19 +4,24 @@
 require 'vendor/autoload.php';
 use Aws\S3\S3Client;
 
+$bucketName='utem-traffic-enforcement-sytstem';
+$key='JRSZSJZZSGM4GUEUTEJT';
+
 $client = new Aws\S3\S3Client([
         'version' => 'latest',
         'region'  => 'frankfurt-1',
-        'endpoint' => 'https://utem-traffic-enforcement-sytstem.fra1.digitaloceanspaces.com',
+        'endpoint' => 'https://fra1.digitaloceanspaces.com',
         'credentials' => [
-                'key'    => 'JRSZSJZZSGM4GUEUTEJT',
+                'key'    => $key,
                 'secret' => 'ElYMKwuYSRygUy4zguSoNPkGvFrTCcf/rIkW4x46e8s ',
             ],
 ]);
 
-$spaces = $client->listBuckets();
-foreach ($spaces['Buckets'] as $space){
-    echo $space['Name']."\n";
-}
+/* $objects = $client->listObjects([
+    'Bucket' => 'utem-traffic-enforcement-sytstem',
+]);
 
+foreach ($objects['Contents'] as $obj){
+    echo $obj['Key']."\n";
+} */
 ?>
