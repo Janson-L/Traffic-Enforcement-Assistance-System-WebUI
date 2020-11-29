@@ -1,4 +1,6 @@
 <?php
+//This script will need to be included in every php script that requires connection to DO Space
+
 
 // Included aws/aws-sdk-php via Composer's autoloader
 require 'vendor/autoload.php';
@@ -15,12 +17,4 @@ $client = new Aws\S3\S3Client([
                 'secret' => 'ElYMKwuYSRygUy4zguSoNPkGvFrTCcf/rIkW4x46e8s ',
             ],
 ]);
-
-/* $objects = $client->listObjects([
-    'Bucket' => 'utem-traffic-enforcement-sytstem',
-]);
-
-foreach ($objects['Contents'] as $obj){
-    echo $obj['Key']."\n";
-} */
 ?>
