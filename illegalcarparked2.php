@@ -107,18 +107,18 @@ include "connection.php";
       </div>
       </div>
            <div class="col-sm-6" style="border-style:solid; width:20%; left:20%;" >
-        <h3>Satria</h3>
+        <h3><a href="">Satria</a></h3>
         <h2>
        <?php
     $Location = "Satria";
 		
-    $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID  WHERE Location=? AND HOUR(TIMEDIFF(EntryDateTime,ExitDateTime))>=0";
+    $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID WHERE Location=? AND HOUR(TIMEDIFF(EntryDateTime,ExitDateTime))>=8";
     $stmt=mysqli_stmt_init($con);
     if(!(mysqli_stmt_prepare($stmt, $sql))){
         echo "Prepare failed: (" . $con->errno . ") " . $con->error;
     }
     else {
-        if(!(mysqli_stmt_bind_param($stmt, "i", $Location))) {
+        if(!(mysqli_stmt_bind_param($stmt, "s", $Location))) {
             echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
         }
         else {
@@ -164,7 +164,7 @@ include "connection.php";
         echo "Prepare failed: (" . $con->errno . ") " . $con->error;
     }
     else {
-        if(!(mysqli_stmt_bind_param($stmt, "i", $Location))) {
+        if(!(mysqli_stmt_bind_param($stmt, "s", $Location))) {
             echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
         }
         else {
