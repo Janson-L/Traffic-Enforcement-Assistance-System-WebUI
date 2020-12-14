@@ -136,7 +136,7 @@ th {
           <?php
         
         $sql="SELECT r.EntryDateTime, r.LicensePlate, c.Location FROM record r, camera c WHERE c.location= 'Satria'";
-        $sql="SELECT COUNT(*) FROM record WHERE DATEDIFF(HOUR,EntryDateTime,ExitDateTime)>=8 ";
+        //$sql="SELECT COUNT(*) FROM record WHERE DATEDIFF(HOUR,EntryDateTime,ExitDateTime)>=8 ";
          
 				$result = mysqli_query($con,$sql);
 				echo '<table> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
@@ -146,7 +146,7 @@ th {
 						echo "<td>".$row['LicensePlate']."</td>";
 						echo "<td>".$row['Location']."</td>";
 						echo "<td>".$row['EntryDateTime']."</td>";
-                        echo "<td>".$row['COUNT(*)']."</td>";
+                        //echo "<td>".$row['COUNT(*)']."</td>";
           
 						
 
