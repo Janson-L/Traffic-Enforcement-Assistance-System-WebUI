@@ -45,7 +45,7 @@ include "connection.php";
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboard<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="illegalcarparked.html">View all illegal Cars parked</a></li>
+            <li><a href="dashboard.php">Dashboard</a></li>
           </ul>
         </li>
         <li><a href="#">Analysis and Statistic</a></li>
