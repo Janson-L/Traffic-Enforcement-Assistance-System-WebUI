@@ -80,12 +80,15 @@ include "connection.php";
           <?php
         
         $sql="SELECT record.LicensePlate, camera.Location, record.EntryDateTime, HOUR(TIMEDIFF(record.EntryDateTime, ADDTIME(CURRENT_TIMESTAMP(), '08:00'))) AS overdue_by
-        FROM (record 
-        LEFT JOIN camera ON camera.CameraID = record.CameraID)
-        LEFT JOIN sticker
-        ON record.licenseplate = sticker.LicensePlate 
-        WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
-        and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
+        FROM ((record 
+LEFT JOIN camera ON camera.CameraID = record.CameraID)
+LEFT JOIN sticker
+ON record.licenseplate = sticker.LicensePlate)
+LEFT JOIN summon
+ON record.LicensePlate=summon.LicensePlate
+WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
+and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
+and (summon.SummonID is null or summon.OffenseID=2)
         and Location='Lestari'";
         
          
@@ -115,7 +118,7 @@ echo '</table>';
 
         
       <div class="col-sm-12 text-center">
-        <a href="illegalcarparked2.php" class="btn btn-primary">
+        <a href="dashboard.php" class="btn btn-primary">
           &larr; Back
         </a>
       </div>

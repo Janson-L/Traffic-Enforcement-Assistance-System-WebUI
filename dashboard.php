@@ -74,18 +74,21 @@ include "connection.php";
       </div>
       </div>
            <div class="col-sm-6" style="border-style:solid; width:20%; left:20%;" >
-        <h3><a href="illegalcarparked.php">Satria</a></h3>
+        <h3><a href="dashboardSatria.php">Satria</a></h3>
         <h2>
        <?php
     $Location = "Satria";
 		
     $sql="SELECT count(camera.location)
-    FROM (record 
-    LEFT JOIN camera ON camera.CameraID = record.CameraID)
-    LEFT JOIN sticker
-    ON record.licenseplate = sticker.LicensePlate 
-    WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
-    and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
+    FROM ((record 
+LEFT JOIN camera ON camera.CameraID = record.CameraID)
+LEFT JOIN sticker
+ON record.licenseplate = sticker.LicensePlate)
+LEFT JOIN summon
+ON record.LicensePlate=summon.LicensePlate
+WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
+and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
+and (summon.SummonID is null or summon.OffenseID=2)
     and Location=?";
     $stmt=mysqli_stmt_init($con);
     if(!(mysqli_stmt_prepare($stmt, $sql))){
@@ -131,7 +134,7 @@ include "connection.php";
 
       </div>
       <div class="col-sm-6" style="border-style:solid; width:20%; left:40%;" >
-        <h3><a href="illegalcarparked3.php">Lestari</a></h3>
+        <h3><a href="dashboardLestari.php">Lestari</a></h3>
         <h2><?php
     $Location = "Lestari";
     if(!(mysqli_stmt_prepare($stmt, $sql))){
