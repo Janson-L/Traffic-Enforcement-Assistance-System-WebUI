@@ -3,8 +3,8 @@
 $host="db-mysql-sgp1-01735-do-user-7518064-0.b.db.ondigitalocean.com";
 $port=25060;
 $socket="";
-$user="doadmin";
-$password="m3b42eqqb86gug7e";
+$user="admin";
+$password="wgo11px6esmhk36u";
 $dbname="traffic_enforcement_assistance_system";
 
 $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
