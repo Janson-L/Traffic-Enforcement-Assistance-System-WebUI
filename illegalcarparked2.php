@@ -79,7 +79,7 @@ include "connection.php";
        <?php
     $Location = "Satria";
 		
-    $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID WHERE Location=? AND HOUR(TIMEDIFF(EntryDateTime,ExitDateTime))>=8";
+    $sql="SELECT count(Location) FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID WHERE Location=? AND HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8";
     $stmt=mysqli_stmt_init($con);
     if(!(mysqli_stmt_prepare($stmt, $sql))){
         echo "Prepare failed: (" . $con->errno . ") " . $con->error;

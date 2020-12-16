@@ -79,7 +79,7 @@ include "connection.php";
      <div class="main-wrapper mx-auto">
           <?php
         
-        $sql="SELECT LicensePlate, Location, EntryDateTime, HOUR(TIMEDIFF(EntryDateTime, ADDTIME(CURRENT_TIMESTAMP(), '08:00'))) AS overdue_by FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID WHERE Location='Lestari' AND HOUR(TIMEDIFF(EntryDateTime,ExitDateTime))>=8";
+        $sql="SELECT LicensePlate, Location, EntryDateTime, HOUR(TIMEDIFF(EntryDateTime, ADDTIME(CURRENT_TIMESTAMP(), '08:00'))) AS overdue_by FROM camera LEFT JOIN record ON camera.CameraID = record.CameraID WHERE Location='Lestari' AND HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8";
         
          
 				$result = mysqli_query($con,$sql);
