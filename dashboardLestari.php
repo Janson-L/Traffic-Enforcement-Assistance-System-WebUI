@@ -88,7 +88,7 @@ LEFT JOIN summon
 ON record.LicensePlate=summon.LicensePlate
 WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
 and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
-and (summon.SummonID is null or summon.OffenseID=2)
+and (summon.SummonID is null or summon.OffenseID!=2)
         and Location='Lestari'";
         
          
