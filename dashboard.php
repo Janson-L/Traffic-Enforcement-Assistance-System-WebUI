@@ -170,19 +170,6 @@ and (summon.SummonID is null or summon.OffenseID!=2)
     */
 ?></h2>
       </div>
-      
-
-
-
-
- 
-
-        
-      <div class="col-sm-12 text-center">
-        <a href="interface.html" class="btn btn-primary">
-          &larr; Back
-        </a>
-      </div>
     </div>
     </div>
 
