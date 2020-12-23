@@ -27,14 +27,11 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class']=="2") {
 <br/>
  
 <?php include "navbar-footer/footer.php" ?>
-
-
 </body>
 </html>
 
 <?php 
 }else{
-    header("location: index.php");
-    exit();
+  include "nopermission.php";
 }     
 ?>
