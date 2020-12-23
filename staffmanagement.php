@@ -1,3 +1,9 @@
+
+<?php
+include "connection.php";
+SESSION_START();
+if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,14 +17,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
-<?php
-include "connection.php";
-SESSION_START();
-?>
-
 <body>
-    <?php include "navbar.php"; ?>
     <?php
+    include "navbar-footer/navbarCommander.php";
     $searchType = "";
     $searchQuery = "";
     $searchTable = 0;
@@ -81,7 +82,7 @@ SESSION_START();
         }
     }
     ?>
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <?php
         if ($searchTable == 0) { ?>
         <h3>Show All</h3>
@@ -94,15 +95,15 @@ SESSION_START();
         <?php
         //need to except the one logging in 
         if ($searchTable == 0) {
-            $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` where class != 0 AND staffID != '{$_SESSION["staffID"]}';";
+            $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` where class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
         }
 
         if (isset($_POST['search'])) {
 
             if ($searchTable == 1) {
-                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE staffID='$searchQuery' AND class != 0 AND staffID != '{$_SESSION["staffID"]}';";
+                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE staffID='$searchQuery' AND class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
             } else if ($searchTable == 2) {
-                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE name LIKE '%$searchQuery%' AND class != 0 AND staffID != '{$_SESSION["staffID"]}';";
+                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE name LIKE '%$searchQuery%' AND class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
             }
         }
         $result = mysqli_query($con, $query) or die("Query Failed");
@@ -187,10 +188,14 @@ SESSION_START();
 
     <?php
     mysqli_close($con);
-    $_SESSION = array();
+    include "navbar-footer/footer.php"
     ?>
+  </body>
 
-    <?php include "footer.php"; ?>
-</body>
+  </html>
 
-</html>
+<?php
+} else {
+  include "nopermission.php";
+}
+?>
