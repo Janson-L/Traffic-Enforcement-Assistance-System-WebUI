@@ -166,15 +166,9 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
                     </form>
                 </td>
                 <td>
-                    <form method='POST' action='deleteUser.php'>
-                        <input type="text" name="userID" value="<?php echo $row['userID']; ?>" style="display:none">
+                    <form method='POST' action='deleteStaff.php'>
+                        <input type="text" name="staffID" value="<?php echo $row['staffID']; ?>" style="display:none">
                         <input type="text" name="name" value="<?php echo $row['name']; ?>" style="display:none">
-                        <input type="text" name="matrixNo" value="<?php echo $row['matrixNo']; ?>" style="display:none">
-                        <input type="text" name="phoneNo" value="<?php echo $row['phoneNo']; ?>" style="display:none">
-                        <input type="text" name="loginAttempt" value="<?php echo $row['loginAttempt']; ?>"
-                            style="display:none">
-                        <input type="text" name="accountStatus" value="<?php echo $row['accountStatus']; ?>"
-                            style="display:none">
                         <input type="submit" name="deleteUser" class="form-control" value="Delete User">
                     </form>
                 </td>
