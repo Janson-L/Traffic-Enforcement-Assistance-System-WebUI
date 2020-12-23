@@ -155,10 +155,8 @@ $_SESSION['staffID'] = "00001";
                     </form>
                 </td>
                 <td>
-                    <form method='POST' action='admResetPassword.php'>
-                        <input type="text" name="userID" value="<?php echo $row['userID']; ?>" style="display:none">
-                        <input type="text" name="name" value="<?php echo $row['name']; ?>" style="display:none">
-                        <input type="text" name="matrixNo" value="<?php echo $row['matrixNo']; ?>" style="display:none">
+                    <form method='POST' action='resetPassword.php'>
+                        <input type="text" name="userID" value="<?php echo $row['staffID']; ?>" style="display:none">
                         <input type="text" name="phoneNo" value="<?php echo $row['phoneNo']; ?>" style="display:none">
                         <input type="text" name="password" value="<?php echo $row['password']; ?>" style="display:none">
                         <input type="text" name="loginAttempt" value="<?php echo $row['loginAttempt']; ?>"
@@ -169,7 +167,7 @@ $_SESSION['staffID'] = "00001";
                     </form>
                 </td>
                 <td>
-                    <form method='POST' action='admDeleteUser.php'>
+                    <form method='POST' action='deleteUser.php'>
                         <input type="text" name="userID" value="<?php echo $row['userID']; ?>" style="display:none">
                         <input type="text" name="name" value="<?php echo $row['name']; ?>" style="display:none">
                         <input type="text" name="matrixNo" value="<?php echo $row['matrixNo']; ?>" style="display:none">
