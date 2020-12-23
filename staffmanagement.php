@@ -156,8 +156,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
                 </td>
                 <td>
                     <form method='POST' action='resetPassword.php'>
-                        <input type="text" name="userID" value="<?php echo $row['staffID']; ?>" style="display:none">
-                        <input type="text" name="phoneNo" value="<?php echo $row['phoneNo']; ?>" style="display:none">
+                        <input type="text" name="staffID" value="<?php echo $row['staffID']; ?>" style="display:none">
                         <input type="text" name="password" value="<?php echo $row['password']; ?>" style="display:none">
                         <input type="text" name="loginAttempt" value="<?php echo $row['loginAttempt']; ?>"
                             style="display:none">
