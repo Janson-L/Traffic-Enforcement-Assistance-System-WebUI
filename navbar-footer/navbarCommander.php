@@ -14,7 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-          <li><a href="interface.html">Home</a></li>
+          <li><a href="commander.html">Home</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Enforcement Action and Resolution<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -23,12 +23,8 @@
             <li><a href="resolve.html">Resolve</a></li>
           </ul>
         </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboard<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="dashboard.php">Dashboard</a></li>
-          </ul>
-        </li>
+        <li><a href="dashboard.php">Dashboard</a></li>
+
         <li><a href="#">Analysis and Statistic</a></li>
           
           <ul class="nav navbar-nav navbar-right">
