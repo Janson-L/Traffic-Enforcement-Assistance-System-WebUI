@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-if (isset($_SESSION['StaffID']) && isset($_SESSION['Class'])) {
+if (isset($_SESSION['StaffID']) && $_SESSION['Class']=="2") {
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>COMMMANDER</title>
+	<title>Commander UI</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -21,7 +21,7 @@ if (isset($_SESSION['StaffID']) && isset($_SESSION['Class'])) {
 
 
     <h1>Commander Page</h1>
-    <p>Hello<b><?php echo $_SESSION['StaffID']; ?>
+    <p>Hello <b><?php echo $_SESSION['StaffID']; ?>
 
 <br/>
 <br/>
