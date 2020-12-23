@@ -18,14 +18,14 @@ if($check > 0){
 	if($data['Class']=="1"){
 		$_SESSION['StaffID'] = $StaffID;
 		$_SESSION['Class'] = "1";
-		header("location:commander.php");
+		header("location:officer.php");
     }
     
     else if($data['Class']=="2"){
 		$_SESSION['StaffID'] = $StaffID;
 		$_SESSION['Class'] = "2";
 		
-        header("location:officer.php");
+        header("location:commander.php");
     }
     
     else{
