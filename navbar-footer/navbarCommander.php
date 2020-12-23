@@ -23,6 +23,7 @@
             <li><a href="resolve.html">Resolve</a></li>
           </ul>
         </li>
+        <li><a href="staffmanagement.php">Staff Management</a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
 
         <li><a href="#">Analysis and Statistic</a></li>
