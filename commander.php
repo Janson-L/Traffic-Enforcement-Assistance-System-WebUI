@@ -17,7 +17,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class']=="2") {
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<?php include "navbar-footer/navbar.php" ?>
+<?php include "navbar-footer/navbarCommander.php" ?>
 
 
     <h1>Commander Page</h1>
