@@ -29,12 +29,12 @@ if($check > 0){
     }
     
     else{
-		header("location:index.php?message=failed");
+		header("location:login.php?message=failed");
 	}
 
 	
 }else{
-	header("location:index.php?message=failed");
+	header("location:login.php?message=failed");
 }
 
 
