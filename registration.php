@@ -12,13 +12,13 @@
 				<label>Staff ID</label><br>
 				<input type="text" name="StaffID" placeholder="Staff ID" required><br>
                 <label>Full Name</label><br>
-				<input type="text" name="FullName" placeholder="Name" required><br>
+				<input type="text" name="Name" placeholder="Name" required><br>
 				<label>Phone Number</label><br>
 				<input type="text" name="PhoneNo" placeholder="Phone Number" required><br>
 				<label>Password</label><br>
-				<input type="password" name="password" placeholder="Password" required><br>
+				<input type="password" name="Password" placeholder="Password" required><br>
 				<label>Re-enter Password</label><br>
-				<input type="password" name="password-repeat" placeholder="Repeat Password" required><br>
+				<input type="password" name="Password-repeat" placeholder="Repeat Password" required><br>
 				<button type="submit" name="register-submit" style="margin-top:10px">Add</button>
 </form>
               <a href="staffmanagement.php"> <button type="button" style="margin-top:10px">Back To Staff Management</button></a>

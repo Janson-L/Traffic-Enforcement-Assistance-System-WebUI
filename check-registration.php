@@ -22,13 +22,13 @@ $AccountStatus="1";
 	
 	if($resultCheck>0) {
 		echo "<script>alert('ID already exists. Try again.');
-				window.location='../registration.php';</script>";
+				window.location='registration.php';</script>";
 		exit();
 	}
     else {
         if($Password!==$PasswordRepeat) {
             echo "<script>alert('Passwords do not match. Try again.');	               
-            window.location='../registration.php';</script>";
+            window.location='registration.php';</script>";
             exit();
         }
         else {
