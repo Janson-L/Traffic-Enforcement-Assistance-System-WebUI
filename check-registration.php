@@ -33,7 +33,7 @@ $AccountStatus="1";
         }
         else {
 		//Username is not taken, proceed to registration
-			$sql="INSERT INTO staff (StaffID,Name,PhoneNo,,Class,LoginAttempt,AccountStatus) VALUES (?,?,?,?,?,?,?,?)";
+			$sql="INSERT INTO staff (StaffID,Name,PhoneNo,,Class,LoginAttempt,AccountStatus) VALUES (?,?,?,?,?,?,?)";
 			$hashedPassword=password_hash($Password,PASSWORD_DEFAULT);
 			$stmt=mysqli_stmt_init($con);
 			mysqli_stmt_prepare($stmt,$sql);
