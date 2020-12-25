@@ -6,11 +6,7 @@ include 'connection.php';
 $StaffID = $_POST['StaffID'];
 $Password = $_POST['Password'];
 
-function verify($Password, $hashedPassword) {
-	return crypt($Password, $hashedPassword) == $hashedPassword;
-}
-
-$login = mysqli_query($con,"select * from staff where StaffID='$StaffID' and Password='$hashedPassword'");
+$login = mysqli_query($con,"select * from staff where StaffID='$StaffID' and Password='$Password'");
 
 $check = mysqli_num_rows($login);
 
