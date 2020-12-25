@@ -40,7 +40,7 @@ $AccountStatus="1";
 			mysqli_stmt_bind_param($stmt, "ssssiii", $StaffID,$Name,$PhoneNo,$hashedPassword,$Class,$LoginAttempt,$AccountStatus);
             mysqli_stmt_execute($stmt);
             mysqli_close($con);
-            header("Location:../registration.php?register=successful");
+            header("Location:registration.php?register=successful");
         }
     }
 }
