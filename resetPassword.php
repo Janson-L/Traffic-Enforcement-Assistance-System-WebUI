@@ -62,7 +62,8 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
 
         <?php
         if ((isset($_POST['resetPasswordConfirm'])) && ($validUpdate == true)) {
-            $query = "UPDATE staff SET `password`='{$_POST['newPassword']}', loginAttempt='{$_POST['loginAttempt']}', accountStatus='{$_POST['accountStatus']}' WHERE staffID='{$_POST['staffID']}';";
+            $newPassword=password_hash($_POST['newPassword'],PASSWORD_DEFAULT);
+            $query = "UPDATE staff SET `password`='$newPassword', loginAttempt='{$_POST['loginAttempt']}', accountStatus='{$_POST['accountStatus']}' WHERE staffID='{$_POST['staffID']}';";
             $result = mysqli_query($con, $query) or die("Query Failed");
             mysqli_close($con);
         ?>
