@@ -14,7 +14,7 @@ $AccountStatus="1";
     $sql="SELECT StaffID FROM staff WHERE StaffID=?";
 	$stmt=mysqli_stmt_init($con);
 	mysqli_stmt_prepare($stmt,$sql);
-	mysqli_stmt_bind_param($stmt, "i",$StaffID);
+	mysqli_stmt_bind_param($stmt, "s",$StaffID);
 	mysqli_stmt_execute($stmt);
 	
 	mysqli_stmt_store_result($stmt);
