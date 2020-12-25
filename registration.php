@@ -26,7 +26,7 @@
 
 <?php 
 	if(isset($_GET['register'])){
-		if($_GET['register']=="succesful"){
+		if($_GET['register']=="successful"){
 			echo "<div class='register-alert'>Staff Registered!</div>";
 		}
 	}
