@@ -37,7 +37,7 @@ $AccountStatus="1";
 			$hashedPassword=password_hash($Password,PASSWORD_DEFAULT);
 			$stmt=mysqli_stmt_init($con);
 			mysqli_stmt_prepare($stmt,$sql);
-			mysqli_stmt_bind_param($stmt, "ssssiii", $StaffID,$Name,$PhoneNo,$hashedPassword,$Class,$LoginAttempt,$AccountStatus);
+			mysqli_stmt_bind_param($stmt, "isssiii", $StaffID,$Name,$PhoneNo,$hashedPassword,$Class,$LoginAttempt,$AccountStatus);
             mysqli_stmt_execute($stmt);
             mysqli_close($con);
             header("Location:registration.php?register=successful");
