@@ -6,36 +6,37 @@ include 'connection.php';
 $StaffID = $_POST['StaffID'];
 $Password = $_POST['Password'];
 
-$login = mysqli_query($con,"select * from staff where StaffID='$StaffID' and Password='$Password'");
+$sql="SELECT * FROM staff WHERE StaffID=?";
+$stmt=mysqli_stmt_init($con);
+mysqli_stmt_prepare($stmt,$sql);
+mysqli_stmt_bind_param($stmt, "s", $StaffID);
+mysqli_stmt_execute($stmt);
 
-$check = mysqli_num_rows($login);
+$result=mysqli_stmt_get_result($stmt);
 
-if($check > 0){
-
-	$data = mysqli_fetch_assoc($login);
-
-	if($data['Class']=="1"){
-		$_SESSION['StaffID'] = $StaffID;
-		$_SESSION['Class'] = "1";
-		header("location:officer.php");
-    }
-    
-    else if($data['Class']=="2"){
-		$_SESSION['StaffID'] = $StaffID;
-		$_SESSION['Class'] = "2";
-		
-        header("location:commander.php");
-    }
-    
-    else{
-		header("location:index.php?message=failed");
+if($data=mysqli_fetch_assoc($result)){
+	$passwordCheck=password_verify($Password, $data['Password']);
+	if($passwordCheck==false) {
+		header("Location:../login.php?error=wrongpassword");
+		$con->close();
+		exit();
+	}
+	else if($passwordCheck==true) {
+		if($data['Class']=="1"){
+			$_SESSION['StaffID'] = $StaffID;
+			$_SESSION['Class'] = "1";
+			$con->close();
+			header("location:officer.php");
+		}
+		else if($data['Class']=="2"){
+			$_SESSION['StaffID'] = $StaffID;
+			$_SESSION['Class'] = "2";
+			$con->close();
+			header("location:commander.php");
+		}
+		exit();
 	}
 
-	
-}else{
-	header("location:index.php?message=failed");
 }
-
-
 
 ?>
