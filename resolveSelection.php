@@ -14,6 +14,9 @@ if (isset($_SESSION['StaffID'])) {
         <link rel="stylesheet" href="style/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <script type="text/javascript" src="prompt.js"></script>
     </head>
 
     <body>
@@ -52,7 +55,7 @@ if (isset($_SESSION['StaffID'])) {
                         </form>
 
                         <br>
-                        <form method='POST' action='resolveWithFP.php'>
+                        <form id='overrideConfirmation' method='POST' action='resolveWithManualOverride.php' onsubmit="return confirm('Are you sure the vehicle is no longer in the area?');">
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
                             <input type="text" name="Location" value="<?php echo $_POST['Location']; ?>" style="display:none">
                             <input type="text" name="EntryDateTime" value="<?php echo $_POST['EntryDateTime']; ?>" style="display:none">
