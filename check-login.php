@@ -6,14 +6,20 @@ include 'connection.php';
 $StaffID = $_POST['StaffID'];
 $Password = $_POST['Password'];
 
+$sql="SELECT * FROM staff WHERE StaffID=?";
 
-$login = mysqli_query($con,"select * from staff where StaffID='$StaffID' and Password='$Password'");
+$stmt=mysqli_stmt_init($con);
+mysqli_stmt_prepare($stmt, $sql);
+mysqli_stmt_bind_param($stmt, "s", $StaffID);
+mysqli_stmt_execute($stmt);
 
-$check = mysqli_num_rows($login);
+$result=mysqli_stmt_get_result($stmt);
 
-if($check > 0){
+$check = mysqli_num_rows($result);
 
-	$data = mysqli_fetch_assoc($login);
+if($result > 0){
+
+	$data = mysqli_fetch_assoc($result);
 
 	if($data['Class']=="1"){
 		$_SESSION['StaffID'] = $StaffID;
