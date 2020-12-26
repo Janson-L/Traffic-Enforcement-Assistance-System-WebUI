@@ -26,7 +26,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile Management<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Update Personal Details</a></li>
+            <li><a href="editPersonalInfo.php">Update Personal Details</a></li>
             <li><a href="#">Reset Password</a></li>
           </ul>
         </li>
