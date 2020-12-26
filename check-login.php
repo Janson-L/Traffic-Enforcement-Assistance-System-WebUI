@@ -17,7 +17,8 @@ $result=mysqli_stmt_get_result($stmt);
 if($data=mysqli_fetch_assoc($result)){
 	$passwordCheck=password_verify($Password, $data['Password']);
 	if($passwordCheck==false) {
-		header("Location:../index.php?error=wrongpassword");
+		header("Location:login.php?error=wrongpassword");
+		$con->close();
 		exit();
 	}
 	else if($passwordCheck==true) {
