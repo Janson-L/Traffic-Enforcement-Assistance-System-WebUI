@@ -99,11 +99,12 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
         }
 
         if (isset($_POST['search'])) {
+            $searchQueryEsc=mysqli_real_escape_string($con, $searchQuery);
 
             if ($searchTable == 1) {
-                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE staffID='$searchQuery' AND class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
+                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE staffID='$searchQueryEsc' AND class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
             } else if ($searchTable == 2) {
-                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE name LIKE '%$searchQuery%' AND class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
+                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE name LIKE '%$searchQueryEsc%' AND class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
             }
         }
         $result = mysqli_query($con, $query) or die("Query Failed");
