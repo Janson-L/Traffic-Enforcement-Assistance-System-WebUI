@@ -21,6 +21,8 @@ if (isset($_SESSION['StaffID'])) {
         <div class="col-sm-12 text-center">
           <!--    Letak gambar dekat sini  -->
           <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
+          <h2>Resolve Overparked Vehicle</h2>
+          <h3>Select a vehicle to take action upon</h3>
         </div>
       </div>
     </div>

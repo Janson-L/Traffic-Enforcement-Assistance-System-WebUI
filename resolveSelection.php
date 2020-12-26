@@ -56,7 +56,7 @@ if (isset($_SESSION['StaffID'])) {
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
                             <input type="text" name="Location" value="<?php echo $_POST['Location']; ?>" style="display:none">
                             <input type="text" name="EntryDateTime" value="<?php echo $_POST['EntryDateTime']; ?>" style="display:none">
-                            <input type="submit" name="resolveWithFP" class="btn btn-primary" value="Vehicle Not Found">
+                            <input type="submit" name="resolveWithFP" class="btn btn-primary" value="Manual Override">
                         </form>
                     </div>
                 </div>
@@ -74,6 +74,7 @@ if (isset($_SESSION['StaffID'])) {
             <script>
                 if (!<?php echo $registeredVehicle?>) {
                     document.getElementById("summonBtn").disabled = true;
+                    alert("Not a registered vehicle. The vehicle cannot be summoned.\nPlease handle this vehicle manually.");
                 }
             </script>
         <?php
