@@ -12,6 +12,16 @@
 		if($_GET['message']=="failed"){
 			echo "<div class='login-alert'>ID and Password does not match!</div>";
 		}
+		else if(isset($_GET['wrong'])){
+			if($_GET['wrong']=="failed"){
+				echo "<div class='login-alert'>Login Failed!</div>";
+			}
+		}
+		else if(isset($_GET['login'])){
+			if($_GET['login']=="successful"){
+				echo "<div class='login-alert'>Login Successful!</div>";
+			}
+		}
 	}
 	?>
  

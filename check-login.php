@@ -17,7 +17,7 @@ $result=mysqli_stmt_get_result($stmt);
 if($data=mysqli_fetch_assoc($result)){
 	$passwordCheck=password_verify($Password, $data['Password']);
 	if($passwordCheck==false) {
-		header("Location:login.php?error=wrongpassword");
+		header("Location:login.php?wrong=failed");
 		$con->close();
 		exit();
 	}
@@ -32,9 +32,14 @@ if($data=mysqli_fetch_assoc($result)){
 			$_SESSION['Class'] = "2";
 			header("location:commander.php");
 		}
+		header("Location:login.php?login=successful");
 		exit();
 	}
 
+}
+
+else {
+	header("Location:login.php?message=failed")
 }
 
 ?>
