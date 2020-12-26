@@ -34,15 +34,7 @@
 			<br>
 			<label>Password</label>
 			<input type="password" name="Password" class="login-form" placeholder="Password" required="required">
-	<?php 
-		if(isset($_GET['message']))
-		{
-			if($_GET['message']=="failed")
-			{
-			echo "<div class='alert'>ID and Password does not match!</div>";
-			}
-		}
-	?>
+
 			<input type="submit" class="login-button" value="LOGIN">
  
 			<br/>
