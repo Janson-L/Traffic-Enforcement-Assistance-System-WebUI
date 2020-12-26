@@ -1,8 +1,8 @@
 
 <?php
-include "connection.php";
 SESSION_START();
 if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
+    include "connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
