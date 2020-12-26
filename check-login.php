@@ -25,14 +25,15 @@ if($data=mysqli_fetch_assoc($result)){
 		if($data['Class']=="1"){
 			$_SESSION['StaffID'] = $StaffID;
 			$_SESSION['Class'] = "1";
+			header("Location:login.php?login=successful");
 			header("location:officer.php");
 		}
 		else if($data['Class']=="2"){
 			$_SESSION['StaffID'] = $StaffID;
 			$_SESSION['Class'] = "2";
+			header("Location:login.php?login=successful");
 			header("location:commander.php");
 		}
-		header("Location:login.php?login=successful");
 		exit();
 	}
 
