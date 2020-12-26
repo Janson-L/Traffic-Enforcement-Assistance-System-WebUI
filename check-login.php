@@ -39,7 +39,7 @@ if($data=mysqli_fetch_assoc($result)){
 }
 
 else {
-	header("Location:login.php?message=failed")
+	header("Location:login.php?message=failed");
 }
 
 ?>
