@@ -1,6 +1,5 @@
 <?php
-    include "/digitalocean/do-space-upload.php";
-
-    doSpaceUpload($_POST['image']);
+    include "../digitalocean/do-space-upload.php";
+    doSpaceUploadb64uri($_POST['image']);
 
 ?>
