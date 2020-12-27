@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db-mysql-sgp1-01735-do-user-7518064-0.b.db.ondigitalocean.com:25060
--- Generation Time: Dec 23, 2020 at 12:55 PM
+-- Generation Time: Dec 27, 2020 at 04:08 PM
 -- Server version: 8.0.20
 -- PHP Version: 7.4.11
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `traffic_enforcement_assistance_system`
 --
+CREATE DATABASE IF NOT EXISTS `traffic_enforcement_assistance_system` DEFAULT CHARACTER SET utf8mb4;
+USE `traffic_enforcement_assistance_system`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +32,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `camera` (
   `CameraID` tinyint NOT NULL,
   `Location` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `camera`
@@ -48,7 +50,7 @@ INSERT INTO `camera` (`CameraID`, `Location`) VALUES
 
 CREATE TABLE `offense` (
   `OffenseID` int NOT NULL,
-  `OffenseName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `OffenseName` varchar(50) CHARACTER SET utf8mb4  NOT NULL,
   `CompoundRate` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -71,7 +73,7 @@ CREATE TABLE `payment` (
   `PaymentMethod` tinyint(1) NOT NULL,
   `PaymentDateTime` datetime NOT NULL,
   `SummonID` int NOT NULL,
-  `StaffID` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+  `StaffID` varchar(15) CHARACTER SET utf8mb4  NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -86,18 +88,19 @@ CREATE TABLE `record` (
   `EntryDateTime` datetime NOT NULL,
   `ExitDateTime` datetime DEFAULT NULL,
   `LicensePlate` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `record`
 --
 
 INSERT INTO `record` (`RecordID`, `CameraID`, `EntryDateTime`, `ExitDateTime`, `LicensePlate`) VALUES
-(1, 1, '2020-12-02 22:56:49', NULL, 'BEH9873'),
+(1, 1, '2020-12-02 22:56:49', '2020-12-27 14:08:52', 'BEH9873'),
 (2, 3, '2020-12-01 22:56:49', NULL, 'WRS6725'),
 (3, 1, '2020-12-01 23:32:34', NULL, 'WEH0132'),
 (12, 1, '2020-12-15 00:16:23', '2020-12-16 00:16:23', 'WHG3645'),
-(13, 1, '2020-12-01 22:38:47', NULL, 'WHA1234');
+(13, 1, '2020-12-01 22:38:47', NULL, 'WHA1234'),
+(14, 1, '2020-12-01 16:37:03', NULL, 'WEA0192');
 
 -- --------------------------------------------------------
 
@@ -110,18 +113,21 @@ CREATE TABLE `staff` (
   `Name` varchar(100) NOT NULL,
   `PhoneNo` varchar(115) NOT NULL,
   `Class` tinyint(1) NOT NULL COMMENT '0 is staff, 1 is officer, 2 is commander',
-  `Password` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Password` varchar(255) CHARACTER SET utf8mb4  DEFAULT NULL,
   `LoginAttempt` tinyint(1) NOT NULL DEFAULT '0',
   `AccountStatus` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `staff`
 --
 
 INSERT INTO `staff` (`StaffID`, `Name`, `PhoneNo`, `Class`, `Password`, `LoginAttempt`, `AccountStatus`) VALUES
-('00001', 'Ahmad', '0928394759374', 2, 'abc', 0, 1),
-('00002', 'Ababa', '7364758673', 1, 'abc', 0, 1);
+('00001', 'Ahmmmmad', '0923245632', 2, '$2y$10$K4Qfu1zzzD1q8RNaDUMiz./orit6EgKvOSyfcShhMGp9Oj8Kegq82', 0, 1),
+('00002', 'Abababa', '7364758673', 1, '$2y$10$3e87meocg/WN6cmKZqufe.gXBK.k2W0O9KndI/QTJfoLX3fDMY/v6', 0, 1),
+('00003', 'Abibi', '12856923', 1, '$2y$10$neJeRCXYYT7Iv0ZV08feSevyzSgfGJzZRZwGAMV.oqlIYJFBu/7Fu', 0, 1),
+('00004', 'Shiva', '0101234567', 2, '$2y$10$nEV4MrvDaOeU0pmdPMRihOIIYbrjGm7HIY6hzC/ZmHrQdQ9JAZz.W', 0, 1),
+('00005', 'asd', '7821649', 1, '$2y$10$b2xA5.CGqyugKihoSNzQNuBfEZSo.suzTJohZIw1CaDKU3Ek19qPW', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -134,7 +140,7 @@ CREATE TABLE `sticker` (
   `Type` tinyint(1) NOT NULL COMMENT '1 for staff, 2 for inside student, 3 for outside student',
   `IssueDate` date NOT NULL,
   `LicensePlate` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `sticker`
@@ -143,7 +149,8 @@ CREATE TABLE `sticker` (
 INSERT INTO `sticker` (`StickerID`, `Type`, `IssueDate`, `LicensePlate`) VALUES
 (1, 2, '2020-12-01', 'WEH0192'),
 (3, 3, '2020-12-01', 'WEH0132'),
-(4, 1, '2020-12-01', 'WHA1234');
+(4, 1, '2020-12-01', 'WHA1234'),
+(5, 3, '2020-12-01', 'WEA0192');
 
 -- --------------------------------------------------------
 
@@ -155,7 +162,7 @@ CREATE TABLE `student` (
   `StudentID` varchar(15) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `PhoneNo` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `student`
@@ -163,7 +170,8 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`StudentID`, `Name`, `PhoneNo`) VALUES
 ('B000000000', 'Abu', '0876543218'),
-('B000000001', 'Akau', '0192837465');
+('B000000001', 'Akau', '0192837465'),
+('B000000003', 'Chin', '1234132213');
 
 -- --------------------------------------------------------
 
@@ -173,19 +181,20 @@ INSERT INTO `student` (`StudentID`, `Name`, `PhoneNo`) VALUES
 
 CREATE TABLE `summon` (
   `SummonID` int NOT NULL,
-  `SummonTime` datetime NOT NULL,
+  `SummonDateTime` datetime NOT NULL,
   `PhotoDirectory` varchar(100) NOT NULL,
   `OffenseID` int NOT NULL,
   `LicensePlate` varchar(10) NOT NULL,
   `StaffID` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `summon`
 --
 
-INSERT INTO `summon` (`SummonID`, `SummonTime`, `PhotoDirectory`, `OffenseID`, `LicensePlate`, `StaffID`) VALUES
-(1, '2020-12-17 10:30:06', '1', 2, 'WEH0132', '00001');
+INSERT INTO `summon` (`SummonID`, `SummonDateTime`, `PhotoDirectory`, `OffenseID`, `LicensePlate`, `StaffID`) VALUES
+(2, '2020-12-27 16:39:00', '1', 2, 'WEA0192', '00001'),
+(3, '2020-12-27 16:39:00', '1', 1, 'WEA0192', '00001');
 
 -- --------------------------------------------------------
 
@@ -199,13 +208,14 @@ CREATE TABLE `vehicle` (
   `Year` int NOT NULL,
   `StaffID` varchar(15) DEFAULT NULL,
   `StudentID` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `vehicle`
 --
 
 INSERT INTO `vehicle` (`LicensePlate`, `Model`, `Year`, `StaffID`, `StudentID`) VALUES
+('WEA0192', 'Proton Saga', 1995, NULL, 'B000000003'),
 ('WEH0132', 'KIa Ria', 1998, NULL, 'B000000001'),
 ('WEH0192', 'Proton Saga', 1995, NULL, 'B000000000'),
 ('WHA1234', 'Perodua Myvi', 2008, '00001', NULL);
@@ -304,19 +314,19 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `record`
 --
 ALTER TABLE `record`
-  MODIFY `RecordID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `RecordID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `sticker`
 --
 ALTER TABLE `sticker`
-  MODIFY `StickerID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `StickerID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `summon`
 --
 ALTER TABLE `summon`
-  MODIFY `SummonID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `SummonID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
