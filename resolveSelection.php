@@ -36,6 +36,7 @@ if (isset($_SESSION['StaffID'])) {
             if ($resultCheck > 0) {
                 $registeredVehicle='true';
             }
+            mysqli_stmt_close($stmt);
             mysqli_close($con);
             
         ?>
@@ -57,8 +58,6 @@ if (isset($_SESSION['StaffID'])) {
                         <br>
                         <form id='overrideConfirmation' method='POST' action='resolveWithManualOverride.php' onsubmit="return confirm('Are you sure the vehicle is no longer in the area?');">
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
-                            <input type="text" name="Location" value="<?php echo $_POST['Location']; ?>" style="display:none">
-                            <input type="text" name="EntryDateTime" value="<?php echo $_POST['EntryDateTime']; ?>" style="display:none">
                             <input type="submit" name="resolveWithFP" class="btn btn-primary" value="Manual Override">
                         </form>
                     </div>

@@ -88,6 +88,7 @@ if (isset($_SESSION['StaffID'])) {
 
     </html>
     <?php
+    mysqli_stmt_close($stmt);
     mysqli_close($con);
     include "navbar-footer/footer.php"
     ?>
