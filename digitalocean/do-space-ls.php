@@ -8,6 +8,6 @@ $objects = $client->listObjectsV2([
 ]);
 
 foreach ($objects['Contents'] as $obj){
-    echo $obj['Key']."\n";
+    echo $obj['Key']."<br>";
 }
 ?>
