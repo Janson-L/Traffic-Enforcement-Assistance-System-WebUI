@@ -1,7 +1,7 @@
 <?php
 SESSION_START();
 if (isset($_SESSION['StaffID'])) {
-    include "connection.php";
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -18,9 +18,25 @@ if (isset($_SESSION['StaffID'])) {
 
     <body>
         <?php include "navbar-footer/navbarCommander.php";
-    
-            if (isset($_POST['resolveWithSummon'])) {
-            ?>
+
+        if (isset($_POST['resolveWithSummon'])) {
+            include "connection.php";
+            
+
+            $query = 'SELECT licensePlate FROM vehicle WHERE licensePlate=?';
+            $stmt = mysqli_stmt_init($con);
+            mysqli_stmt_prepare($stmt, $query);
+            mysqli_stmt_bind_param($stmt, "s", $licensePlate);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_store_result($stmt);
+            $resultCheck = mysqli_stmt_num_rows($stmt);
+
+            if ($resultCheck > 0) {
+                $registeredVehicle='true';
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($con);
+        ?>
             <div class="container-fluid text-center">
                 <div class="row">
                     <div class="col-sm-12 text-center">
@@ -40,25 +56,25 @@ if (isset($_SESSION['StaffID'])) {
                     <input type="submit" id='summonBtn' name="resolveWithSummonConfirm" class="btn btn-primary" value="Summon">
                 </form>
             </div>
+            <br><br>
             <div class="col-sm-12 text-center">
-            <a href="<?php if ($_SESSION['ResolutionOrigin']=='Satria') {
-                                    echo "resolveSatria.php";
-                                } else {
-                                    echo "resolveLestari.php";
-                                } ?>" class="btn btn-primary">
-                        &larr; Back
+                <a href="<?php if ($_SESSION['ResolutionOrigin'] == 'Satria') {
+                                echo "resolveSatria.php";
+                            } else {
+                                echo "resolveLestari.php";
+                            } ?>" class="btn btn-primary">
+                    &larr; Back
                 </a>
             </div>
-            <?php
+        <?php
         } else { ?>
             <br>
             <div>It seems that you did not navigate the pages properly. Please follow the UI and do not go back to a previous page.
                 <br>You will be redirected back to Resolve Page in 5 seconds.</div>
         <?php
-            if($_SESSION['ResolutionOrigin']=='Satria'){
+            if ($_SESSION['ResolutionOrigin'] == 'Satria') {
                 header("Refresh:5;URL=resolveSatria.php");
-            }
-            else{
+            } else {
                 header("Refresh:5;URL=resolveLestari.php");
             }
             die();
@@ -69,7 +85,6 @@ if (isset($_SESSION['StaffID'])) {
         include "navbar-footer/footer.php"
         ?>
     </body>
-
     </html>
 
 <?php
