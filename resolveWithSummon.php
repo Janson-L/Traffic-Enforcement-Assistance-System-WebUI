@@ -21,19 +21,38 @@ if (isset($_SESSION['StaffID'])) {
 
         if (isset($_POST['resolveWithSummon'])) {
             include "connection.php";
+            $timeOffset='08:00';
+            $photoDirectory='1';
+            $licensePlate = $_POST['LicensePlate'];
+            $offenseID=2;
+            $staffID=$_SESSION['StaffID'];
             
-
-            $query = 'SELECT licensePlate FROM vehicle WHERE licensePlate=?';
+            
+            $query = 'INSERT INTO summon (`SummonID`, `SummonDateTime`, `PhotoDirectory`, `OffenseID`,`LicensePlate`,`StaffID`) 
+            VALUES (NULL,ADDTIME(CURRENT_TIMESTAMP(), ?),?,?,?,?);';
             $stmt = mysqli_stmt_init($con);
             mysqli_stmt_prepare($stmt, $query);
-            mysqli_stmt_bind_param($stmt, "s", $licensePlate);
+            mysqli_stmt_bind_param($stmt, "sssss", $timeOffset,$photoDirectory,$offenseID,$licensePlate,$staffID);
             mysqli_stmt_execute($stmt);
-            mysqli_stmt_store_result($stmt);
-            $resultCheck = mysqli_stmt_num_rows($stmt);
+            mysqli_stmt_close($stmt);
 
-            if ($resultCheck > 0) {
-                $registeredVehicle='true';
-            }
+            $query = 'SELECT `SummonID`,`SummonDateTime`
+            FROM summon ORDER BY `SummonID` DESC LIMIT 1';
+            $stmt = mysqli_stmt_init($con);
+            mysqli_stmt_prepare($stmt, $query);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt, $summonID,$summonDateTime);
+            mysqli_stmt_fetch($stmt);
+            mysqli_stmt_close($stmt);
+
+            $summonDateTime= str_replace(" ","_",$summonDateTime);
+            $photoDirectory=$summonID.'_'.$summonDateTime;
+
+            $query = 'UPDATE `summon` SET`PhotoDirectory`= ? WHERE `SummonID`=?';
+            $stmt = mysqli_stmt_init($con);
+            mysqli_stmt_prepare($stmt, $query);
+            mysqli_stmt_bind_param($stmt, "si", $photoDirectory, $summonID);
+            mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             mysqli_close($con);
         ?>
@@ -48,7 +67,7 @@ if (isset($_SESSION['StaffID'])) {
                 </div>
             </div>
             <?php
-            $licensePlate = $_POST['LicensePlate'];
+            
             ?>
             <div class="col-sm-12 text-center">
                 <form method='POST' action='resolveWithSummon.php'>
