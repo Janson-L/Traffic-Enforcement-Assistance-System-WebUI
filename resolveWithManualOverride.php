@@ -37,7 +37,7 @@ if (isset($_SESSION['StaffID'])) {
         ?>
             <br>
             <div class="prompt">Overparked vehicle resolved successfully.
-            <br> You will now be redirected back to Resolve Overparked Vehicle Page.</div>
+            <br> You will now be redirected back to Resolve Overparked Vehicle page.</div>
         <?php
             header("Refresh:3;URL=resolve.php");
             die();
