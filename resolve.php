@@ -1,23 +1,23 @@
 <?php
 SESSION_START();
 if (isset($_SESSION['StaffID'])) {
-    include "connection.php";
+  include "connection.php";
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Resolve Overparked Vehicle</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style/style.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    </head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolve Overparked Vehicle</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
 
-    <body>
-        <?php include "navbar-footer/navbarCommander.php" ?>
+  <body>
+    <?php include "navbar-footer/navbarCommander.php" ?>
     <div class="container-fluid text-center">
       <div class="row">
         <div class="col-sm-12 text-center">
@@ -84,20 +84,26 @@ if (isset($_SESSION['StaffID'])) {
           ?>
       </h2>
     </div>
-    </body>
+    
+    <div class="col-sm-12 text-center">
+      <a href="resolve.php" class="btn btn-primary">
+        Refresh
+      </a>
+    </div>
+  </body>
 
-    </html>
-    <?php
-    mysqli_stmt_close($stmt);
-    mysqli_close($con);
-    include "navbar-footer/footer.php"
-    ?>
-    </body>
+  </html>
+  <?php
+  mysqli_stmt_close($stmt);
+  mysqli_close($con);
+  include "navbar-footer/footer.php"
+  ?>
+  </body>
 
-    </html>
+  </html>
 
 <?php
 } else {
-    include "nopermission.php";
+  include "nopermission.php";
 }
 ?>

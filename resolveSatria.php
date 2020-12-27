@@ -44,8 +44,8 @@ and (summon.SummonID is null or summon.OffenseID!=2)
 
 
       $result = mysqli_query($con, $sql);
-      echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
       if (mysqli_num_rows($result) > 0) {
+        echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
           echo "<td>" . $row['LicensePlate'] . "</td>";
@@ -63,8 +63,11 @@ and (summon.SummonID is null or summon.OffenseID!=2)
             </td>
           <?php
         }
+        echo '</table>';
       }
-      echo '</table>';
+      else{
+        echo"<div class='container-fluid text-center'>No vehicle that requires further action.</div>";
+      }
       ?>
       <br>
 
@@ -73,6 +76,9 @@ and (summon.SummonID is null or summon.OffenseID!=2)
     <div class="col-sm-12 text-center">
       <a href="resolve.php" class="btn btn-primary">
         &larr; Back
+      </a>
+      <a href="resolveSatria.php" class="btn btn-primary">
+        Refresh
       </a>
     </div>
 <?php

@@ -4,10 +4,10 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
   include "connection.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
-<head>
+  <head>
     <title>Lestari Dashboard</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,9 +17,9 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
-</head>
+  </head>
 
-<body>
+  <body>
     <?php
     include "navbar-footer/navbarCommander.php";
     ?>
@@ -27,17 +27,18 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
     <!-- start dekat sini i edit-->
 
     <div class="container-fluid text-center">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <!--    Letak gambar dekat sini  -->
-                <img src="image/Logo_Polis_Bantuan-01.png"
-                    style="height:100px;width: auto;margin: 0 auto;display: block;">
-            </div>
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <!--    Letak gambar dekat sini  -->
+          <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
         </div>
+        <h2>Lestari Dashboard</h2>
+        <h3>View details of overparked vehicles in Lestari Residential College</h3>
+      </div>
     </div>
 
     <div class="main-wrapper mx-auto">
-        <?php
+      <?php
 
       $sql = "SELECT record.LicensePlate, camera.Location, record.EntryDateTime, HOUR(TIMEDIFF(record.EntryDateTime, ADDTIME(CURRENT_TIMESTAMP(), '08:00'))) AS overdue_by
         FROM ((record 
@@ -53,8 +54,8 @@ and (summon.SummonID is null or summon.OffenseID!=2)
 
 
       $result = mysqli_query($con, $sql);
-      echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
       if (mysqli_num_rows($result) > 0) {
+        echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
           echo "<td>" . $row['LicensePlate'] . "</td>";
@@ -62,24 +63,27 @@ and (summon.SummonID is null or summon.OffenseID!=2)
           echo "<td>" . $row['EntryDateTime'] . "</td>";
           echo "<td>" . $row['overdue_by'] . " hours</td>";
         }
+        echo '</table>';
       }
-      echo '</table>';
       ?>
-        <br>
-        <div class="col-sm-12 text-center">
-            <a href="dashboard.php" class="btn btn-primary">
-                &larr; Back
-            </a>
-        </div>
+      <br>
+      <div class="col-sm-12 text-center">
+        <a href="dashboard.php" class="btn btn-primary">
+          &larr; Back
+        </a>
+        <a href="dashboardLestari.php" class="btn btn-primary">
+          Refresh
+        </a>
+      </div>
     </div>
 
     <?php
     mysqli_close($con);
     include "navbar-footer/footer.php"
     ?>
-</body>
+  </body>
 
-</html>
+  </html>
 
 <?php
 } else {

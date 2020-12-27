@@ -50,8 +50,6 @@ if (isset($_SESSION['StaffID'])) {
 
                         <form method='POST' action='resolveWithSummon.php'>
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
-                            <input type="text" name="Location" value="<?php echo $_POST['Location']; ?>" style="display:none">
-                            <input type="text" name="EntryDateTime" value="<?php echo $_POST['EntryDateTime']; ?>" style="display:none">
                             <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-primary" value="Summon">
                         </form>
 

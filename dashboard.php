@@ -91,6 +91,12 @@ and (summon.SummonID is null or summon.OffenseID!=2)
       </h2>
     </div>
 
+    <div class="col-sm-12 text-center">
+      <a href="dashboard.php" class="btn btn-primary">
+        Refresh
+      </a>
+    </div>
+
 
     <!--Finish here-->
     <?php
