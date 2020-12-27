@@ -21,7 +21,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <body>
         <?php include "navbar-footer/navbarCommander.php";
-        if (isset($_POST['resolveSelectionSatria']) || isset($_POST['resolveSelectionLestari'])) {
+        if (isset($_POST['resolveSelection'])) {
             $licensePlate = $_POST['LicensePlate'];
             $registeredVehicle='false';
 
@@ -62,7 +62,7 @@ if (isset($_SESSION['StaffID'])) {
                 </div>
                 <br><br><br>
                 <div class="col-sm-12 text-center">
-                    <a href="<?php if (isset($_POST['resolveSelectionSatria'])) {
+                    <a href="<?php if ($_SESSION['ResolutionOrigin']=='Satria') {
                                     echo "resolveSatria.php";
                                 } else {
                                     echo "resolveLestari.php";

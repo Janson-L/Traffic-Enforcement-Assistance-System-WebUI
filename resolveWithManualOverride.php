@@ -43,8 +43,16 @@ if (isset($_SESSION['StaffID'])) {
             die();
         } else { ?>
             <br>
-            <div class="error"><?php echo "$out" ?></div>
+            <div>It seems that you did not navigate the pages properly. Please follow the UI and do not go back to a previous page.
+                <br>You will be redirected back to Resolve Page in 5 seconds.</div>
         <?php
+            if($_SESSION['ResolutionOrigin']=='Satria'){
+                header("Refresh:5;URL=resolveSatria.php");
+            }
+            else{
+                header("Refresh:5;URL=resolveLestari.php");
+            }
+            die();
         }
         ?>
 <?php

@@ -52,13 +52,14 @@ and (summon.SummonID is null or summon.OffenseID!=2)
           echo "<td>" . $row['Location'] . "</td>";
           echo "<td>" . $row['EntryDateTime'] . "</td>";
           echo "<td>" . $row['overdue_by'] . " hours</td>";
+          $_SESSION['ResolutionOrigin'] = 'Satria';
           ?>
             <td>
                 <form method='POST' action='resolveSelection.php'>
                     <input type="text" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" style="display:none">
                     <input type="text" name="Location" value="<?php echo $row['Location']; ?>" style="display:none">
                     <input type="text" name="EntryDateTime" value="<?php echo $row['EntryDateTime']; ?>" style="display:none">
-                    <input type="submit" name="resolveSelectionSatria" class="form-control"  value="Resolve">
+                    <input type="submit" name="resolveSelection" class="form-control"  value="Resolve">
                 </form>
             </td>
           <?php
