@@ -31,6 +31,8 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
         <div class="col-sm-12 text-center">
           <!--    Letak gambar dekat sini  -->
           <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
+          <h2>Satria Dashboard</h2>
+          <h3>View details of overparked vehicles in Satria Residential College</h3>
         </div>
       </div>
     </div>
@@ -52,8 +54,8 @@ and (summon.SummonID is null or summon.OffenseID!=2)
 
 
       $result = mysqli_query($con, $sql);
-      echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
       if (mysqli_num_rows($result) > 0) {
+        echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
           echo "<td>" . $row['LicensePlate'] . "</td>";
@@ -61,8 +63,11 @@ and (summon.SummonID is null or summon.OffenseID!=2)
           echo "<td>" . $row['EntryDateTime'] . "</td>";
           echo "<td>" . $row['overdue_by'] . " hours</td>";
         }
+        echo '</table>';
       }
-      echo '</table>';
+      else{
+        echo"<div class='container-fluid text-center'>No vehicle that requires further action.</div>";
+      }
       ?>
       <br>
 
@@ -71,6 +76,9 @@ and (summon.SummonID is null or summon.OffenseID!=2)
     <div class="col-sm-12 text-center">
       <a href="dashboard.php" class="btn btn-primary">
         &larr; Back
+      </a>
+      <a href="dashboardSatria.php" class="btn btn-primary">
+        Refresh
       </a>
     </div>
 

@@ -1,39 +1,29 @@
 <?php
 SESSION_START();
-if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
-  include "connection.php";
+if (isset($_SESSION['StaffID'])) {
+    include "connection.php";
 ?>
-
-  <!DOCTYPE html>
-  <html lang="en">
-
-  <head>
-    <title>Lestari Dashboard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolve Lestari</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-  </head>
-
-  <body>
-    <?php
-    include "navbar-footer/navbarCommander.php";
-    ?>
-
-    <!-- start dekat sini i edit-->
-
-    <div class="container-fluid text-center">
+</head>
+<body>
+<?php include "navbar-footer/navbarCommander.php" ?>
+<div class="container-fluid text-center">
       <div class="row">
         <div class="col-sm-12 text-center">
           <!--    Letak gambar dekat sini  -->
           <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
+          <h2>Resolve Overparked Vehicle</h2>
+          <h3>Select a vehicle to take action upon</h3>
         </div>
-        <h2>Lestari Dashboard</h2>
-        <h3>View details of overparked vehicles in Lestari Residential College</h3>
       </div>
     </div>
 
@@ -62,31 +52,46 @@ and (summon.SummonID is null or summon.OffenseID!=2)
           echo "<td>" . $row['Location'] . "</td>";
           echo "<td>" . $row['EntryDateTime'] . "</td>";
           echo "<td>" . $row['overdue_by'] . " hours</td>";
+          $_SESSION['ResolutionOrigin'] = 'Lestari';
+          ?>
+            <td>
+                <form method='POST' action='resolveSelection.php'>
+                    <input type="text" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" style="display:none">
+                    <input type="text" name="Location" value="<?php echo $row['Location']; ?>" style="display:none">
+                    <input type="text" name="EntryDateTime" value="<?php echo $row['EntryDateTime']; ?>" style="display:none">
+                    <input type="submit" name="resolveSelection" class="form-control"  value="Resolve">
+                </form>
+            </td>
+          <?php
         }
         echo '</table>';
       }
+      else{
+        echo"<div class='container-fluid text-center'>No vehicle that requires further action.</div>";
+      }
       ?>
       <br>
-      <div class="col-sm-12 text-center">
-        <a href="dashboard.php" class="btn btn-primary">
-          &larr; Back
-        </a>
-        <a href="dashboardLestari.php" class="btn btn-primary">
-          Refresh
-        </a>
-      </div>
+
     </div>
 
-    <?php
+    <div class="col-sm-12 text-center">
+      <a href="resolve.php" class="btn btn-primary">
+        &larr; Back
+      </a>
+      <a href="resolveLestari.php" class="btn btn-primary">
+        Refresh
+      </a>
+    </div>
+<?php
     mysqli_close($con);
     include "navbar-footer/footer.php"
     ?>
-  </body>
+    </body>
 
-  </html>
+    </html>
 
 <?php
 } else {
-  include "nopermission.php";
+    include "nopermission.php";
 }
 ?>

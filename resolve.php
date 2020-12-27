@@ -1,16 +1,15 @@
 <?php
 SESSION_START();
-if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
+if (isset($_SESSION['StaffID'])) {
   include "connection.php";
 ?>
-
   <!DOCTYPE html>
   <html lang="en">
 
   <head>
-    <title>Dashboard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolve Overparked Vehicle</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,38 +17,33 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
   </head>
 
   <body>
-
-    <?php
-    include "navbar-footer/navbarCommander.php";
-    ?>
-    <!-- start dekat sini i edit-->
-
+    <?php include "navbar-footer/navbarCommander.php" ?>
     <div class="container-fluid text-center">
       <div class="row">
         <div class="col-sm-12 text-center">
           <!--    Letak gambar dekat sini  -->
           <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
-          <h2>Dashboard</h2>
-          <h3>View details of overparked vehicles in an area</h3>
+          <h2>Resolve Overparked Vehicle</h2>
+          <h3>Take action on Overparked Vehicles</h3>
         </div>
       </div>
     </div>
     <div class="col-sm-6 text-center" style="border-style:solid; width:20%; left:20%;">
-      <h3><a href="dashboardSatria.php">Satria</a></h3>
+      <h3><a href="resolveSatria.php">Satria</a></h3>
       <h2>
         <?php
         $Location = "Satria";
 
         $sql = "SELECT count(camera.location)
-    FROM ((record 
-LEFT JOIN camera ON camera.CameraID = record.CameraID)
-LEFT JOIN sticker
-ON record.licenseplate = sticker.LicensePlate)
-LEFT JOIN summon
-ON record.LicensePlate=summon.LicensePlate
-WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
-and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
-and (summon.SummonID is null or summon.OffenseID!=2)
+        FROM ((record 
+        LEFT JOIN camera ON camera.CameraID = record.CameraID)
+        LEFT JOIN sticker
+        ON record.licenseplate = sticker.LicensePlate)
+        LEFT JOIN summon
+        ON record.LicensePlate=summon.LicensePlate
+        WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
+        and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
+        and (summon.SummonID is null or summon.OffenseID!=2)
     and Location=?";
         $stmt = mysqli_stmt_init($con);
         if (!(mysqli_stmt_prepare($stmt, $sql))) {
@@ -71,7 +65,7 @@ and (summon.SummonID is null or summon.OffenseID!=2)
 
     </div>
     <div class="col-sm-6 text-center" style="border-style:solid; width:20%; left:40%;">
-      <h3><a href="dashboardLestari.php">Lestari</a></h3>
+      <h3><a href="resolveLestari.php">Lestari</a></h3>
       <h2><?php
           $Location = "Lestari";
           if (!(mysqli_stmt_prepare($stmt, $sql))) {
@@ -90,19 +84,20 @@ and (summon.SummonID is null or summon.OffenseID!=2)
           ?>
       </h2>
     </div>
-
+    
     <div class="col-sm-12 text-center">
-      <a href="dashboard.php" class="btn btn-primary">
+      <a href="resolve.php" class="btn btn-primary">
         Refresh
       </a>
     </div>
+  </body>
 
-
-    <!--Finish here-->
-    <?php
-    mysqli_close($con);
-    include "navbar-footer/footer.php"
-    ?>
+  </html>
+  <?php
+  mysqli_stmt_close($stmt);
+  mysqli_close($con);
+  include "navbar-footer/footer.php"
+  ?>
   </body>
 
   </html>

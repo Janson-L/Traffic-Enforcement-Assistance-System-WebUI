@@ -20,7 +20,7 @@
           <ul class="dropdown-menu">
             <li><a href="#">Scan Number Plate</a></li>
             <li><a href="#">Summon Payment</a></li>
-            <li><a href="#">Resolve</a></li>
+            <li><a href="resolve.php">Resolve Overparked Vehicles</a></li>
           </ul>
         </li>
         <li class="dropdown">

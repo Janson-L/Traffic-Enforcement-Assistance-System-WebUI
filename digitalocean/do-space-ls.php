@@ -1,6 +1,6 @@
 <?php
 //Diagnostic script. To view whether the file is uploaded to the DO Space
-include "do-space-connection.php";
+include "../digitalocean/do-space-connection.php";
 
 
 $objects = $client->listObjectsV2([
@@ -8,6 +8,6 @@ $objects = $client->listObjectsV2([
 ]);
 
 foreach ($objects['Contents'] as $obj){
-    echo $obj['Key']."\n";
+    echo $obj['Key']."<br>";
 }
 ?>
