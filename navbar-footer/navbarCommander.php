@@ -18,7 +18,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Enforcement Action and Resolution<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Scan Number Plate</a></li>
+            <li><a href="scanNumberPlate.php">Scan Number Plate</a></li>
             <li><a href="#">Summon Payment</a></li>
             <li><a href="resolve.php">Resolve Overparked Vehicles</a></li>
           </ul>
