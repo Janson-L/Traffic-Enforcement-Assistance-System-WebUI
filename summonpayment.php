@@ -37,8 +37,8 @@ include "connection.php";
                 <!--    Letak gambar dekat sini  -->
                 <img src="image/Logo_Polis_Bantuan-01.png"
                     style="height:100px;width: auto;margin: 0 auto;display: block;">
-                <h2>Staff Management</h2>
-                <h3>Manage other officer and commander accounts</h3>
+                <h2>Summon Payment</h2>
+                <h3>List of Summons</h3>
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@ include "connection.php";
                     JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID
-                    WHERE StudentID = '$searchQueryEsc';";
+                    WHERE vehicle.StudentID = '$searchQueryEsc';";
             } 
             else if ($searchTable == 2) {
                 $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.StudentID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
@@ -117,8 +117,8 @@ include "connection.php";
                     JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID 
-                WHERE Name LIKE '%$searchQueryEsc%';";
-            } 
+                    WHERE student.Name LIKE '%$searchQueryEsc%';";
+            }
         }
         $result = mysqli_query($con, $query);
       if (mysqli_num_rows($result) > 0) {
@@ -139,7 +139,7 @@ include "connection.php";
         echo '</table>';
       }
       else{
-        echo"<div class='container-fluid text-center'>No vehicle that requires further action.</div>";
+        echo"<div class='container-fluid text-center'>No records found.</div>";
       }
       ?>
 
