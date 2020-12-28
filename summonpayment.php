@@ -109,7 +109,7 @@ include "connection.php";
                     JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID
-                    WHERE StudentID='$searchQueryEsc';";
+                    WHERE StudentID = '$searchQueryEsc';";
             } 
             else if ($searchTable == 2) {
                 $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.StudentID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
