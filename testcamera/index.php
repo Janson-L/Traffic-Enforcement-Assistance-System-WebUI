@@ -22,7 +22,14 @@
   
 
 <div class="container">
-    <form method="POST" action="testcamera/storeImage.php">
+    <form method="POST" action="<?php 
+        if ($photoDirectory !== 'api'){
+            echo "/Traffic-Enforcement-Assistance-System/testcamera/storeImage.php";
+        }
+        else{
+            echo"/Traffic-Enforcement-Assistance-System/licensePlateConfirmation.php";
+        }
+    ?>">
         <div class="row">
             <div class="col-md-6">
                 <div id="my_camera"></div>

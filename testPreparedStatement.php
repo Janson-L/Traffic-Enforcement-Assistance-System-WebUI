@@ -22,6 +22,8 @@ if (isset($_SESSION['StaffID'])) {
     $stmt = mysqli_stmt_init($con);
     mysqli_stmt_prepare($stmt, $query);
     mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    echo mysqli_stmt_num_rows($stmt).'<br>';
     mysqli_stmt_bind_result($stmt, $summonID,$summonDateTime);
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
