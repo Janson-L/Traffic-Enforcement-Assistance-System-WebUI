@@ -61,7 +61,7 @@ include "connection.php";
                 <div class="form-group row">
                     <button type="submit" class="btn btn-default" name="search">Search</button>
             </form>
-            <form class="form-inline" method='POST' action='staffmanagement.php'>
+            <form class="form-inline" method='POST' action='summonpayment.php'>
                     <div><input type='submit' class="form-control" value='Refresh'></div>
                 </div>
             </form>
@@ -93,30 +93,42 @@ include "connection.php";
         <?php
         //need to except the one logging in 
         if ($searchTable == 0) {
-            $query = "SELECT SummonID,SummonDateTime,Name,LicensePlate,OffenseName,CompoundRate, 
-            FROM summon summ, student stu, offense offe, vehicle veh 
-            WHERE offe.OffenseID = summ.OffenseID 
-            AND summ.StudentID = stu.StudentID
-            AND stu.StudentID = vehicle.StudentID;";
+            $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.StudentID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
+            FROM summon
+                JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
+                JOIN offense ON summon.OffenseID = offense.OffenseID
+                join student ON vehicle.StudentID = student.StudentID;";
         }
 
-        /* if (isset($_POST['search'])) {
+        if (isset($_POST['search'])) {
             $searchQueryEsc=mysqli_real_escape_string($con, $searchQuery);
 
             if ($searchTable == 1) {
-                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE staffID='$searchQueryEsc' AND class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
-            } else if ($searchTable == 2) {
-                $query = "SELECT staffID,name,phoneNo,class,loginAttempt,accountStatus FROM `staff` WHERE name LIKE '%$searchQueryEsc%' AND class != 0 AND staffID != '{$_SESSION["StaffID"]}';";
-            }
-        } */
+                $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.StudentID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
+                FROM summon
+                    JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
+                    JOIN offense ON summon.OffenseID = offense.OffenseID
+                    join student ON vehicle.StudentID = student.StudentID
+                    WHERE StudentID='$searchQueryEsc';";
+            } 
+            else if ($searchTable == 2) {
+                $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.StudentID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
+                FROM summon
+                    JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
+                    JOIN offense ON summon.OffenseID = offense.OffenseID
+                    join student ON vehicle.StudentID = student.StudentID 
+                WHERE Name LIKE '%$searchQueryEsc%';";
+            } 
+        }
         $result = mysqli_query($con, $query);
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
+        echo '<table class="centerthistable"> <tr><th>Number SummonID</th><th>Date and Time</th><th>Student Name</th><th>Matrix Number</th><th>License Plate</th><th>Offense</th><th>Compound(RM)</th>';
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
           echo "<td>" . $row['SummonID'] . "</td>";
           echo "<td>" . $row['SummonDateTime'] . "</td>";
           echo "<td>" . $row['Name'] . "</td>";
+          echo "<td>" . $row['StudentID'] . "</td>";
           echo "<td>" . $row['LicensePlate'] . "</td>";
           echo "<td>" . $row['OffenseName'] . "</td>";
           echo "<td>" . $row['CompoundRate'] . "</td>";
