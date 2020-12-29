@@ -40,22 +40,18 @@ if (isset($_SESSION['StaffID'])) {
         <?php if (!isset($_POST['editInfoConfirm'])) { ?>
             <div class="container">
                 <form method='POST'>
-                    <div class="col-sm-12">
+                    <div class="form-group">
                         <input type="text" name="staffID" value="<?php echo $_SESSION['StaffID']; ?>" style="display:none">
                         <label>Name:</label>
                         <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" pattern="[A-Za-z /@]{3,50}" required maxlength="50"> 
                         <small class="form-text text-muted">(3-50 Characters, no special characters except / and @)</small>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="form-group">
                         <label>Phone No:</label>
                         <input type="text" name="phoneNo" class="form-control" value="<?php echo $phoneNo; ?>" pattern="[0-9]{10,15}" placeholder="0123456789" required maxlength="15"> 
                         <small class="form-text text-muted">(10-15 numbers only)</small>
                     </div>
-                    <br><br><br>
-                    <div class="col-sm-12">
                     <input type="submit" name="editInfoConfirm" class="btn btn-primary" value="Update Information">
-                    </div>
-                    <br><br>
                 </form>
             </div>
 
@@ -80,7 +76,7 @@ if (isset($_SESSION['StaffID'])) {
             mysqli_close($con);
         ?>
             <br>
-            <div class="prompt">Update successful. You will now be redirected in 3 seconds.</div>
+            <div class="container">Update successful. You will now be redirected in 3 seconds.</div>
         <?php
             echo '<meta http-equiv="refresh" content="3">';
             die();
