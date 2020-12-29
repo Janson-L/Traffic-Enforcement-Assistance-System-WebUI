@@ -1,11 +1,12 @@
 <?php
 SESSION_START();
 if (isset($_SESSION['StaffID'])) {
-    include "connection.php";
+  include "connection.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resolve Lestari</title>
@@ -13,10 +14,11 @@ if (isset($_SESSION['StaffID'])) {
     <link rel="stylesheet" href="style/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-<?php include "navbar-footer/navbarCommander.php" ?>
-<div class="container-fluid text-center">
+  </head>
+
+  <body>
+    <?php include "navbar-footer/navbarCommander.php" ?>
+    <div class="container-fluid text-center">
       <div class="row">
         <div class="col-sm-12 text-center">
           <!--    Letak gambar dekat sini  -->
@@ -31,16 +33,13 @@ if (isset($_SESSION['StaffID'])) {
       <?php
 
       $sql = "SELECT record.LicensePlate, camera.Location, record.EntryDateTime, HOUR(TIMEDIFF(record.EntryDateTime, ADDTIME(CURRENT_TIMESTAMP(), '08:00'))) AS overdue_by
-        FROM ((record 
-LEFT JOIN camera ON camera.CameraID = record.CameraID)
-LEFT JOIN sticker
-ON record.licenseplate = sticker.LicensePlate)
-LEFT JOIN summon
-ON record.LicensePlate=summon.LicensePlate
+      FROM record 
+      INNER JOIN camera on record.CameraID=camera.CameraID
+LEFT JOIN vehicle on record.LicensePlate=vehicle.LicensePlate
+LEFT JOIN sticker ON vehicle.LicensePlate=sticker.LicensePlate
 WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
 and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
-and (summon.SummonID is null or summon.OffenseID!=2)
-        and Location='Lestari'";
+      and Location='Lestari'";
 
 
       $result = mysqli_query($con, $sql);
@@ -53,22 +52,21 @@ and (summon.SummonID is null or summon.OffenseID!=2)
           echo "<td>" . $row['EntryDateTime'] . "</td>";
           echo "<td>" . $row['overdue_by'] . " hours</td>";
           $_SESSION['ResolutionOrigin'] = 'Lestari';
-          ?>
-            <td>
-                <form method='POST' action='resolveSelection.php'>
-                    <input type="text" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" style="display:none">
-                    <input type="text" name="Location" value="<?php echo $row['Location']; ?>" style="display:none">
-                    <input type="text" name="EntryDateTime" value="<?php echo $row['EntryDateTime']; ?>" style="display:none">
-                    <input type="submit" name="resolveSelection" class="form-control"  value="Resolve">
-                </form>
-            </td>
-        </tr>
-          <?php
+      ?>
+          <td>
+            <form method='POST' action='resolveSelection.php'>
+              <input type="text" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" style="display:none">
+              <input type="text" name="Location" value="<?php echo $row['Location']; ?>" style="display:none">
+              <input type="text" name="EntryDateTime" value="<?php echo $row['EntryDateTime']; ?>" style="display:none">
+              <input type="submit" name="resolveSelection" class="form-control" value="Resolve">
+            </form>
+          </td>
+          </tr>
+      <?php
         }
         echo '</table>';
-      }
-      else{
-        echo"<div class='container-fluid text-center'>No vehicle that requires further action.</div>";
+      } else {
+        echo "<div class='container-fluid text-center'>No vehicle that requires further action.</div>";
       }
       ?>
       <br>
@@ -83,16 +81,16 @@ and (summon.SummonID is null or summon.OffenseID!=2)
         Refresh
       </a>
     </div>
-<?php
+    <?php
     mysqli_close($con);
     include "navbar-footer/footer.php"
     ?>
-    </body>
+  </body>
 
-    </html>
+  </html>
 
 <?php
 } else {
-    include "nopermission.php";
+  include "nopermission.php";
 }
 ?>
