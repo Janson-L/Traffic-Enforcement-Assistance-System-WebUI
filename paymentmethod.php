@@ -48,30 +48,35 @@ $result = mysqli_query($con, $query);
 	<table border="0">
 	<col width="200">
             <tr>
-                <td><h3><label>Name</label></h3></td>
+                <td><label>Name</label></td>
                 <td><input type="text" name="Name" value="<?php echo $row["Name"] ?>" ></input></td>
             </tr>
             <tr>
-                <td><h3><label>Matrics Number</label></h3></td>
+                <td><label>Matrics Number</label></td>
                 <td><input type="text" name="StudentID" value="<?php echo $row["StudentID"] ?>" ></input></td>
             </tr>
-	    <tr>
-                <td><h3><label></label></h3></td>
-                <td><input type="text" name="Billing_address" value="<?php echo $_POST["Billing_address"] ?>"></input></td>
+	        <tr>
+                <td><label>Number Plate</label></td>
+                <td><input type="text" name="LicensePlate" value="<?php echo $row["LicensePlate"] ?>"></input></td>
             </tr>
-	    <tr>
-                <td><h3><label>Email Address</label></h3></td>
-                <td><input type="email" name="Email_address" value="<?php echo $_POST["Email_address"] ?>"></input></td>
+	        <tr>
+                <td><label>Issue Time</label></td>
+                <td><input type="email" name="" value="<?php echo(strftime("%d.%m.%Y %H:%M")); ?>"></input></td>
+            </tr>
+            <tr>
+                <td><label>Offense</label></td>
+                <td><input type="text" name="OffenseName" value="<?php echo $row["OffenseName"] ?>" ></input></td>
+            </tr>
+            <tr>
+                <td><label>Amount</label></td>
+                <td><input type="text" name="Amount" value="<?php echo $row["CompoundRate"] ?>" ></input></td>
             </tr>
             <tr>
 		
                 <td><input type="submit" name="submit" value="Save" />
     		
             </tr>
-	<tr>
-		
-            <h4>Upon saving please verify your email account by accepting our mail</h3>		
-            </tr>
+            
         </table>
  </form>
 
