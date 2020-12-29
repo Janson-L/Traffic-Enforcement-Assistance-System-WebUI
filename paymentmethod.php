@@ -14,7 +14,7 @@ if (isset($_SESSION['StaffID'])) {
         VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$SummonID', '$StaffID');";
         if(!mysqli_query($con,$query)) {
         echo'<script>alert("Payment Failed.")</script>';
-        echo'<script>window.location="paymentmethod.php"</script>';
+        echo'<script>window.location="paymentmethod.php?id='$SummonID'"</script>';
     }
     else
         header("location:summonpayment.php");
@@ -56,7 +56,7 @@ $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.S
                 JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                 JOIN offense ON summon.OffenseID = offense.OffenseID
                 join student ON vehicle.StudentID = student.StudentID
-                WHERE summon.SummonID = $editRow";
+                WHERE summon.SummonID = '$editRow';";
 $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_assoc($result)) { ?>
 
