@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-12 text-center">
                 <br/>
-                <button class="btn btn-success">Submit</button>
+                <button id="postBtn" class="btn btn-success">Submit</button>
             </div>
         </div>
     </form>

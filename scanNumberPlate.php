@@ -12,11 +12,14 @@ if (isset($_SESSION['StaffID'])) {
         <title>Resolve Satria</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="style/spinner.css">
+        <link rel="stylesheet" href="style/fade.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
-
     <body>
+        <div class="spin" style='z-index:10'></div>
+        <div class="fadeMe"></div>
         <?php 
             include "navbar-footer/navbarCommander.php";
             $photoDirectory='api';
@@ -53,3 +56,12 @@ if (isset($_SESSION['StaffID'])) {
     include "nopermission.php";
 }
 ?>
+
+<script>
+$(".spin").hide();
+$(".fadeMe").hide();
+$("#postBtn").click(function(){
+    $(".spin").show();
+    $(".fadeMe").show();
+});
+</script>
