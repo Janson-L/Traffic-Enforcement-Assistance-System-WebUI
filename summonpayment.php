@@ -98,7 +98,8 @@ if (isset($_SESSION['StaffID'])) {
             FROM summon
                 JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                 JOIN offense ON summon.OffenseID = offense.OffenseID
-                join student ON vehicle.StudentID = student.StudentID;";
+                join student ON vehicle.StudentID = student.StudentID
+                join payment on summon.SummonID != payment.SummonID;";
         }
 
         if (isset($_POST['search'])) {

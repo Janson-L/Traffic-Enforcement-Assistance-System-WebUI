@@ -2,6 +2,23 @@
 SESSION_START();
 if (isset($_SESSION['StaffID'])) {
     include "connection.php";
+
+
+    if(isset($_POST['submit'])) {
+        //Insert
+        $StaffID = $_SESSION["StaffID"];
+        $PaymentMethod=$_POST['PaymentMethod'];
+        $PaymentDateTime=$_POST['PaymentDateTime'];
+        $SummonID=$_POST['SummonID'];
+        $query= "INSERT INTO payment (PaymentID, PaymentMethod, PaymentDateTime, SummonID, StaffID)
+        VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$SummonID', '$StaffID');";
+        if(!mysqli_query($con,$query)) {
+        echo'<script>alert("Payment Failed.")</script>';
+        echo'<script>window.location="paymentmethod.php"</script>';
+    }
+    else
+        header("location:summonpayment.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +61,7 @@ $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_assoc($result)) { ?>
 
 <form name="ConfirmPayment" action="paymentmethod.php" method="post">
-	<input type="hidden" name="SummonID" value="<?php echo $row["SummonID"]; ?>"/>        
+    <input type="hidden" name="SummonID" value="<?php echo $editRow; ?>"/>
 	<table border="0">
 	<col width="200">
             <tr>
@@ -61,33 +78,34 @@ $result = mysqli_query($con, $query);
             </tr>
 	        <tr>
                 <td><label>Issue Time</label></td>
-                <td><input type="email" name="" value="<?php echo(strftime("%d.%m.%Y %H:%M")); ?>"></input></td>
+                <td><input type="text" name="PaymentDateTime" value="<?php echo(strftime("%d.%m.%Y %H:%M")); ?>"></input></td>
             </tr>
             <tr>
                 <td><label>Offense</label></td>
                 <td><input type="text" name="OffenseName" value="<?php echo $row["OffenseName"] ?>" ></input></td>
             </tr>
             <tr>
-                <td><label>Amount</label></td>
+                <td><label>Amount (RM)</label></td>
                 <td><input type="text" name="Amount" value="<?php echo $row["CompoundRate"] ?>" ></input></td>
             </tr>
             <tr>
-		
-                <td><input type="submit" name="submit" value="Save" />
-    		
+                <td><label>Payment Method</label></td>
+                <td>
+                    <select name="PaymentMethod" id="cars">
+                        <option value="0">Cash</option>
+                        <option value="1">Debit Card</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+            <?php echo "<td>" ?>
+                <td><input type="submit" name="cancel" value="Cancel" />
+                <input type="submit" name="submit" value="Confirm" /> </td>
             </tr>
             
         </table>
- </form>
+</form>
 
-     <!--  echo "<tr>";
-      echo "<td>" . $row['SummonID'] . "</input></td>";
-      echo "<td>" . $row['SummonDateTime'] . "</td>";
-      echo "<td>" . $row['Name'] . "</td>";
-      echo "<td>" . $row['StudentID'] . "</td>";
-      echo "<td>" . $row['LicensePlate'] . "</td>";
-      echo "<td>" . $row['OffenseName'] . "</td>";
-      echo "<td>" . $row['CompoundRate'] . "</td>"; -->
     <?php
     }
     ?>
@@ -96,6 +114,8 @@ $result = mysqli_query($con, $query);
 
 
 <?php
+}else{
+    include "nopermission.php";
 }
-/* include "nopermission.php"; */
+
 ?>
