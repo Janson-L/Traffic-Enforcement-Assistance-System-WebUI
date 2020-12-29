@@ -12,6 +12,8 @@ if (isset($_SESSION['StaffID'])) {
         <title>Resolve With Summon</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="style/spinner.css">
+        <link rel="stylesheet" href="style/fade.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
@@ -56,6 +58,8 @@ if (isset($_SESSION['StaffID'])) {
             mysqli_stmt_close($stmt);
             mysqli_close($con);
         ?>
+            <div class="spin"></div>
+            <div class="fadeMe"></div>
             <div class="container-fluid text-center">
                 <div class="row">
                     <div class="col-sm-12 text-center">
@@ -74,9 +78,12 @@ if (isset($_SESSION['StaffID'])) {
                    
                 <a href="<?php if ($_SESSION['ResolutionOrigin'] == 'Satria') {
                                 echo "resolveSatria.php";
-                            } else {
-                                echo "resolveLestari.php";
-                            } ?>" class="btn btn-primary">
+                            } elseif($_SESSION['ResolutionOrigin'] == 'Lestari') {
+                                echo "resolveLestari.php";}
+                            else{
+                                echo "scanNumberPlate.php";
+                            }
+                             ?>" class="btn btn-primary">
                     &larr; Back
                 </a>
             </div>
@@ -105,3 +112,12 @@ if (isset($_SESSION['StaffID'])) {
     include "nopermission.php";
 }
 ?>
+
+<script>
+$(".spin").hide();
+$(".fadeMe").hide();
+$("#postBtn").click(function(){
+    $(".spin").show();
+    $(".fadeMe").show();
+});
+</script>

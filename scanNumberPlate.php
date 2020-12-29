@@ -18,7 +18,7 @@ if (isset($_SESSION['StaffID'])) {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="spin" style='z-index:10'></div>
+        <div class="spin"></div>
         <div class="fadeMe"></div>
         <?php 
             include "navbar-footer/navbarCommander.php";

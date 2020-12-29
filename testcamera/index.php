@@ -27,7 +27,7 @@
             echo "/Traffic-Enforcement-Assistance-System/testcamera/storeImage.php";
         }
         else{
-            echo"/Traffic-Enforcement-Assistance-System/licensePlateConfirmation.php";
+            echo"/Traffic-Enforcement-Assistance-System/confirmLicensePlate.php";
         }
     ?>">
         <div class="row">

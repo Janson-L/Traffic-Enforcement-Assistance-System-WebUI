@@ -28,9 +28,11 @@ if (isset($_SESSION['StaffID'])) {
                     <!--    Letak gambar dekat sini  -->
                     <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
                     <h2>Confirm License Plate</h2>
-                    <h3>Is this license plate correct?</h3>
+                    <h3>Please check the license plate in the text box. Make necessary changes.</h3>
                     <form method='POST' action='displayVehicleInfo.php'>
-                            <input type="text" name="LicensePlate" value="<?php echo $licensePlateOCR; ?>">
+                            <label>License Plate:</label>
+                            <input type="text" name="LicensePlate" class="form-control" value="<?php echo $licensePlateOCR; ?>">
+                            <br><br>
                             <input type="submit" id='summonBtn' name="confirmLicensePlate" class="btn btn-primary" value="Submit">
                         </form>
                     <br>

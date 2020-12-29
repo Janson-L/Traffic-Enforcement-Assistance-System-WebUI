@@ -24,7 +24,12 @@ if (isset($_SESSION['StaffID'])) {
         <div class="prompt">Summon successfully issued. You will now be redirected in 5 seconds.</div>
         <?php
         include "navbar-footer/footer.php";
-        header("Refresh:5;URL=resolve.php");
+        if($_SESSION['Class'] == "2"){
+            header("Refresh:5;URL=commander.php");
+        }
+        else{
+            header("Refresh:5;URL=officer.php");
+        }
         die();
         ?>
     </body>
