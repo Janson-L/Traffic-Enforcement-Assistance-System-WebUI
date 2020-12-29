@@ -29,11 +29,10 @@ if (isset($_SESSION['StaffID'])) {
                     <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
                     <h2>Confirm License Plate</h2>
                     <h3>Is this license plate correct?</h3>
-                    <form method='POST' action='/Traffic-Enforcement-Assistance-System/displayVehicleInfo.php'>
-                        <input type="text" class="form-control" name='licensePlate' value='<?php echo $licensePlateOCR ?>' required pattern="^[A-Za-z0-9]{3,10}$">(All caps and no space)
-                        <br><br>
-                        <div class="row"><button type="submit" class="btn btn-default" name="search">Search</button></div>
-                    </form>
+                    <form method='POST' action='displayVehicleInfo.php'>
+                            <input type="text" name="LicensePlate" value="<?php echo $licensePlateOCR; ?>">
+                            <input type="submit" id='summonBtn' name="confirmLicensePlate" class="btn btn-primary" value="Submit">
+                        </form>
                     <br>
                     <div class="row">
                         <a href="/Traffic-Enforcement-Assistance-System/scanNumberPlate.php" class="btn btn-primary">

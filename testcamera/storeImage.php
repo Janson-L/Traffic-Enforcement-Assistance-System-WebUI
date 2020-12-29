@@ -18,8 +18,8 @@ if (isset($_SESSION['StaffID'])) {
     <?php
         include $_SERVER['DOCUMENT_ROOT'] ."/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php";
     ?>
-       <!-- onload="window.location.href ='/Traffic-Enforcement-Assistance-System/summonIssueSuccess.php';" -->
-        <body>
+       
+        <body onload="window.location.href ='/Traffic-Enforcement-Assistance-System/summonIssueSuccess.php';">
             <div class="container-fluid text-center">
                 <div class="row">
                     <div class="col-sm-12 text-center">

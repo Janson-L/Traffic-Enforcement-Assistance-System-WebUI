@@ -21,7 +21,7 @@ if (isset($_SESSION['StaffID'])) {
         include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php";
 
 
-        $licensePlate = mysqli_real_escape_string($con, $_POST['licensePlate']);
+        $licensePlate = mysqli_real_escape_string($con, $_POST['LicensePlate']);
 
         $query = "SELECT vehicle.licensePlate,vehicle.staffID,vehicle.studentID,sticker.stickerID,sticker.type,student.name as studentName,staff.name as staffName
         FROM `vehicle` 
@@ -67,8 +67,14 @@ if (isset($_SESSION['StaffID'])) {
                         echo '</table>';
 
                     ?>
+                        <br>
                         <form method='POST' action='resolveWithSummon.php'>
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
+                            <select name='offenseID' class="form-control">
+                                <option value="1" selected>Sticker Misuse</option>
+                                <option value="2">Illegal Parking</option>
+                            </select>
+                            <br>
                             <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-primary" value="Summon">
                         </form>
 
