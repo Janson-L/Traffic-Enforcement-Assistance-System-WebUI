@@ -1,6 +1,7 @@
 <?php
 SESSION_START();
-include "connection.php";
+if (isset($_SESSION['StaffID'])) {
+    include "connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -134,9 +135,10 @@ include "connection.php";
           echo "<td>" . $row['CompoundRate'] . "</td>";
           ?>
           <td>
-                <form method='POST' action='paymentmethod.php'>
+                <!-- <form method='POST' action='paymentmethod.php'>
                     <input type="submit" name="resolveSelection" class="form-control"  value="Pay Now">
-                </form>
+                </form> -->
+                <a href="paymentmethod.php?id=<?= $row['SummonID']; ?>">Pay Now</a>
             </td>
 
           <?php
@@ -147,6 +149,15 @@ include "connection.php";
         echo"<div class='container-fluid text-center'>No records found.</div>";
       }
       ?>
-
+<?php
+    mysqli_close($con);
+    include "navbar-footer/footer.php"
+    ?>
 </body>
 </html>
+
+<?php
+} else {
+    include "nopermission.php";
+}
+?>
