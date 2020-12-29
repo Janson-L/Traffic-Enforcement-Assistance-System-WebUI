@@ -20,13 +20,16 @@ if (isset($_SESSION['StaffID'])) {
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php";
 
-        $licensePlate = $_POST['licensePlate'];
 
-        $query = 'SELECT vehicle.licensePlate,vehicle.staffID,vehicle.studentID,sticker.StickerID,sticker.type 
+        $licensePlate = mysqli_real_escape_string($con, $_POST['licensePlate']);
+
+        $query = "SELECT vehicle.licensePlate,vehicle.staffID,vehicle.studentID,sticker.stickerID,sticker.type,student.name as studentName,staff.name as staffName
         FROM `vehicle` 
         INNER JOIN sticker ON vehicle.LicensePlate=sticker.LicensePlate
-        WHERE vehicle.LicensePlate=?';
-         $result = mysqli_query($con, $sql);
+        LEFT JOIN staff ON vehicle.StaffID = staff.StaffID
+        LEFT JOIN student ON vehicle.StudentID = student.StudentID
+        WHERE vehicle.LicensePlate='$licensePlate'";
+        $result = mysqli_query($con, $query);
         ?>
 
 
@@ -39,30 +42,48 @@ if (isset($_SESSION['StaffID'])) {
                     <h3>Brief Summary of the Vehicle</h3>
                     <?php
                     if (mysqli_num_rows($result) > 0) {
-                        echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
+                        echo '<table class="centerthistable">';
                         while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>";
-                            echo "<td>" . $row['LicensePlate'] . "</td>";
-                            echo "<td>" . $row['Location'] . "</td>";
-                            echo "<td>" . $row['EntryDateTime'] . "</td>";
-                            echo "<td>" . $row['overdue_by'] . " hours</td>";
-                            $_SESSION['ResolutionOrigin'] = 'Lestari';
-                    ?>
-                            <td>
-                                <form method='POST' action='resolveSelection.php'>
-                                    <input type="text" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" style="display:none">
-                                    <input type="text" name="Location" value="<?php echo $row['Location']; ?>" style="display:none">
-                                    <input type="text" name="EntryDateTime" value="<?php echo $row['EntryDateTime']; ?>" style="display:none">
-                                    <input type="submit" name="resolveSelection" class="form-control" value="Resolve">
-                                </form>
-                            </td>
-                    <?php
+                            echo "<tr><td>License Plate Number:</td><td>" . $row['licensePlate'] . "</td></tr>";
+                            echo  "<tr><td>Sticker ID:</td><td>" . $row['stickerID'] . "</td></tr>";
+
+                            if ($row['type'] == 1) {
+                                $stickerType = 'Staff';
+                            } elseif ($row['type'] == 2) {
+                                $stickerType = 'Inside Student';
+                            } elseif ($row['type'] == 3) {
+                                $stickerType = 'Outside Student';
+                            }
+
+                            echo  "<tr><td>Sticker Type:</td><td>" . $stickerType . "</td></tr>";
+                            if (is_null($row['studentID'])) {
+                                echo "<tr><td>Staff ID:</td><td>" . $row['staffID'] . "</td></tr>";
+                                echo "<tr><td>Staff Name:</td><td>" . $row['staffName'] . "</td></tr>";
+                            } else {
+                                echo "<tr><td>Student ID:</td><td>" . $row['studentID'] . "</td></tr>";
+                                echo "<tr><td>Student Name:</td><td>" . $row['studentName'] . "</td></tr>";
+                            }
                         }
                         echo '</table>';
+
+                    ?>
+                        <form method='POST' action='resolveWithSummon.php'>
+                            <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
+                            <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-primary" value="Summon">
+                        </form>
+
+                    <?php
                     } else {
                         echo "<div class='container-fluid text-center'>Not a registered vehicle</div>";
                     }
+
                     ?>
+                    <br>
+                    <div class="row">
+                        <a href="/Traffic-Enforcement-Assistance-System/scanNumberPlate.php" class="btn btn-primary">
+                            Back
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

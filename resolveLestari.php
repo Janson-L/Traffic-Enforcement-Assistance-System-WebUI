@@ -45,13 +45,14 @@ and (summon.SummonID is null or summon.OffenseID!=2)
 
       $result = mysqli_query($con, $sql);
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="centerthistable"> <tr><th>Number Plate</th><th>Location</th><th>Entry DateTime</th><th>Overdue by</th>';
+        echo '<table class="centerthistable">';
         while ($row = mysqli_fetch_assoc($result)) {
-          echo "<tr>";
+          echo "<tr><th>";
           echo "<td>" . $row['LicensePlate'] . "</td>";
           echo "<td>" . $row['Location'] . "</td>";
           echo "<td>" . $row['EntryDateTime'] . "</td>";
           echo "<td>" . $row['overdue_by'] . " hours</td>";
+          echo "</td>";
           $_SESSION['ResolutionOrigin'] = 'Lestari';
           ?>
             <td>
