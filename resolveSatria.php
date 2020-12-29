@@ -62,6 +62,7 @@ and (summon.SummonID is null or summon.OffenseID!=2)
                     <input type="submit" name="resolveSelection" class="form-control"  value="Resolve">
                 </form>
             </td>
+        </tr>
           <?php
         }
         echo '</table>';
