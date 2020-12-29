@@ -16,10 +16,10 @@ if (isset($_SESSION['StaffID'])) {
     </head>
 
     <?php
-        include "/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php";
+        include $_SERVER['DOCUMENT_ROOT'] ."/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php";
     ?>
-
-        <body onload="window.location.href ='/Traffic-Enforcement-Assistance-System/summonIssueSuccess.php';">
+       <!-- onload="window.location.href ='/Traffic-Enforcement-Assistance-System/summonIssueSuccess.php';" -->
+        <body>
             <div class="container-fluid text-center">
                 <div class="row">
                     <div class="col-sm-12 text-center">
@@ -31,13 +31,13 @@ if (isset($_SESSION['StaffID'])) {
             </div>
 
             <?php
-            include "/Traffic-Enforcement-Assistance-System/navbar-footer/footer.php";
-            include "/Traffic-Enforcement-Assistance-System/digitalocean/do-space-upload.php";
+            include $_SERVER['DOCUMENT_ROOT'] ."/Traffic-Enforcement-Assistance-System/navbar-footer/footer.php";
+            include $_SERVER['DOCUMENT_ROOT'] ."/Traffic-Enforcement-Assistance-System/digitalocean/do-space-upload.php";
             doSpaceUploadb64uri($_POST['image'], $_POST['photoDirectory']);
             ?>
         </body>
 <?php
 } else {
-    include "/Traffic-Enforcement-Assistance-System/nopermission.php";
+    include $_SERVER['DOCUMENT_ROOT'] ."/Traffic-Enforcement-Assistance-System/nopermission.php";
 }
 ?>

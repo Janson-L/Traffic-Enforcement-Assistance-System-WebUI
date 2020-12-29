@@ -23,7 +23,7 @@ if (isset($_SESSION['StaffID'])) {
         <?php include "navbar-footer/navbarCommander.php";
         if (isset($_POST['resolveSelection'])) {
             $licensePlate = $_POST['LicensePlate'];
-            $registeredVehicle='false';
+            $registeredVehicle = 'false';
 
             $query = 'SELECT licensePlate FROM vehicle WHERE licensePlate=?';
             $stmt = mysqli_stmt_init($con);
@@ -34,11 +34,11 @@ if (isset($_SESSION['StaffID'])) {
             $resultCheck = mysqli_stmt_num_rows($stmt);
 
             if ($resultCheck > 0) {
-                $registeredVehicle='true';
+                $registeredVehicle = 'true';
             }
             mysqli_stmt_close($stmt);
             mysqli_close($con);
-            
+
         ?>
             <div class="container-fluid text-center">
                 <div class="row">
@@ -50,6 +50,10 @@ if (isset($_SESSION['StaffID'])) {
 
                         <form method='POST' action='resolveWithSummon.php'>
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
+                            <select name='offenseID' style="display:none">
+                                <option value="1">Sticker Misuse</option>
+                                <option value="2" selected>Illegal Parking</option>
+                            </select>
                             <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-primary" value="Summon">
                         </form>
 
@@ -62,7 +66,7 @@ if (isset($_SESSION['StaffID'])) {
                 </div>
                 <br><br><br>
                 <div class="col-sm-12 text-center">
-                    <a href="<?php if ($_SESSION['ResolutionOrigin']=='Satria') {
+                    <a href="<?php if ($_SESSION['ResolutionOrigin'] == 'Satria') {
                                     echo "resolveSatria.php";
                                 } else {
                                     echo "resolveLestari.php";
@@ -72,7 +76,7 @@ if (isset($_SESSION['StaffID'])) {
                 </div>
             </div>
             <script>
-                if (!<?php echo $registeredVehicle?>) {
+                if (!<?php echo $registeredVehicle ?>) {
                     document.getElementById("summonBtn").disabled = true;
                     alert("Not a registered vehicle. The vehicle cannot be summoned.\nPlease handle this vehicle manually.");
                 }
