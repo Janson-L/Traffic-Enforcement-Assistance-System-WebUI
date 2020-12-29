@@ -122,7 +122,7 @@ include "connection.php";
         }
         $result = mysqli_query($con, $query);
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="centerthistable"> <tr><th>Number SummonID</th><th>Date and Time</th><th>Student Name</th><th>Matrix Number</th><th>License Plate</th><th>Offense</th><th>Compound(RM)</th>';
+        echo '<table class="centerthistable"> <tr><th>SummonID</th><th>Date and Time</th><th>Student Name</th><th>Matrix Number</th><th>Number Plate</th><th>Offense</th><th>Compound(RM)</th>';
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
           echo "<td>" . $row['SummonID'] . "</td>";
@@ -133,6 +133,11 @@ include "connection.php";
           echo "<td>" . $row['OffenseName'] . "</td>";
           echo "<td>" . $row['CompoundRate'] . "</td>";
           ?>
+          <td>
+                <form method='POST' action='paymentmethod.php'>
+                    <input type="submit" name="resolveSelection" class="form-control"  value="Pay Now">
+                </form>
+            </td>
 
           <?php
         }
