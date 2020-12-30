@@ -7,13 +7,9 @@ if (isset($_SESSION['StaffID'])) {
     if(isset($_POST['submit'])) {
         //Insert
         $StaffID = $_SESSION["StaffID"];
-        echo $StaffID;
         $PaymentMethod=$_POST['PaymentMethod'];
-        echo $PaymentMethod;
         $PaymentDateTime=$_POST['PaymentDateTime'];
-        echo $PaymentDateTime;
         $SummonID=$_POST['SummonID'];
-        echo $SummonID;
         $query= "INSERT INTO payment (PaymentID, PaymentMethod, PaymentDateTime, SummonID, StaffID)
         VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$SummonID', '$StaffID');";
         if(!mysqli_query($con,$query)) {
