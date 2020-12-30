@@ -7,14 +7,18 @@ if (isset($_SESSION['StaffID'])) {
     if(isset($_POST['submit'])) {
         //Insert
         $StaffID = $_SESSION["StaffID"];
+        echo $StaffID;
         $PaymentMethod=$_POST['PaymentMethod'];
+        echo $PaymentMethod;
         $PaymentDateTime=$_POST['PaymentDateTime'];
+        echo $PaymentDateTime;
         $SummonID=$_POST['SummonID'];
+        echo $SummonID;
         $query= "INSERT INTO payment (PaymentID, PaymentMethod, PaymentDateTime, SummonID, StaffID)
         VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$SummonID', '$StaffID');";
         if(!mysqli_query($con,$query)) {
         echo'<script>alert("Payment Failed.")</script>';
-        echo'<script>window.location="paymentmethod.php?id='$SummonID'"</script>';
+        echo'<script>window.location="paymentmethod.php?id=<?= $SummonID;?>"</script>';
     }
     else
         header("location:summonpayment.php");
@@ -56,7 +60,8 @@ $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.S
                 JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                 JOIN offense ON summon.OffenseID = offense.OffenseID
                 join student ON vehicle.StudentID = student.StudentID
-                WHERE summon.SummonID = '$editRow';";
+                WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                AND summon.SummonID = '$editRow';";
 $result = mysqli_query($con, $query);
     while ($row = mysqli_fetch_assoc($result)) { ?>
 
@@ -78,7 +83,7 @@ $result = mysqli_query($con, $query);
             </tr>
 	        <tr>
                 <td><label>Issue Time</label></td>
-                <td><input type="text" name="PaymentDateTime" value="<?php echo(strftime("%d.%m.%Y %H:%M")); ?>"></input></td>
+                <td><input type="text" name="PaymentDateTime" value="<?php echo(strftime("%Y.%m.%d %H:%M")); ?>"></input></td>
             </tr>
             <tr>
                 <td><label>Offense</label></td>
@@ -91,7 +96,7 @@ $result = mysqli_query($con, $query);
             <tr>
                 <td><label>Payment Method</label></td>
                 <td>
-                    <select name="PaymentMethod" id="cars">
+                    <select name="PaymentMethod" id="PaymentMethod">
                         <option value="0">Cash</option>
                         <option value="1">Debit Card</option>
                     </select>

@@ -99,7 +99,7 @@ if (isset($_SESSION['StaffID'])) {
                 JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                 JOIN offense ON summon.OffenseID = offense.OffenseID
                 join student ON vehicle.StudentID = student.StudentID
-                join payment on summon.SummonID != payment.SummonID;";
+                WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment);";
         }
 
         if (isset($_POST['search'])) {
@@ -111,7 +111,8 @@ if (isset($_SESSION['StaffID'])) {
                     JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID
-                    WHERE vehicle.StudentID = '$searchQueryEsc';";
+                    WHERE summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                    AND vehicle.StudentID = '$searchQueryEsc';";
             } 
             else if ($searchTable == 2) {
                 $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.StudentID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
@@ -119,7 +120,8 @@ if (isset($_SESSION['StaffID'])) {
                     JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID 
-                    WHERE student.Name LIKE '%$searchQueryEsc%';";
+                    WHERE summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                    AND student.Name LIKE '%$searchQueryEsc%';";
             }
         }
         $result = mysqli_query($con, $query);
