@@ -99,7 +99,8 @@ if (isset($_SESSION['StaffID'])) {
                 JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                 JOIN offense ON summon.OffenseID = offense.OffenseID
                 join student ON vehicle.StudentID = student.StudentID
-                WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment);";
+                WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                ORDER BY summon.SummonID;";
         }
 
         if (isset($_POST['search'])) {
@@ -112,7 +113,8 @@ if (isset($_SESSION['StaffID'])) {
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID
                     WHERE summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
-                    AND vehicle.StudentID = '$searchQueryEsc';";
+                    AND vehicle.StudentID = '$searchQueryEsc'
+                    ORDER BY summon.SummonID;";
             } 
             else if ($searchTable == 2) {
                 $query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.StudentID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
@@ -121,7 +123,8 @@ if (isset($_SESSION['StaffID'])) {
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID 
                     WHERE summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
-                    AND student.Name LIKE '%$searchQueryEsc%';";
+                    AND student.Name LIKE '%$searchQueryEsc%'
+                    ORDER BY summon.SummonID;";
             }
         }
         $result = mysqli_query($con, $query);
@@ -141,7 +144,7 @@ if (isset($_SESSION['StaffID'])) {
                 <!-- <form method='POST' action='paymentmethod.php'>
                     <input type="submit" name="resolveSelection" class="form-control"  value="Pay Now">
                 </form> -->
-                <a href="paymentmethod.php?id=<?= $row['SummonID']; ?>">Pay Now</a>
+                <button><a href="paymentmethod.php?id=<?= $row['SummonID']; ?>">Pay Now</a></button>
             </td>
 
           <?php

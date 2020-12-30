@@ -16,7 +16,8 @@ if (isset($_SESSION['StaffID'])) {
         echo'<script>alert("Payment Failed.")</script>';
         echo'<script>window.location="paymentmethod.php?id=<?= $SummonID;?>"</script>';
     }
-    else
+    else{
+        echo'<script>alert("Payment Successful.")</script>';
         header("location:summonpayment.php");
     }
 ?>
@@ -99,8 +100,8 @@ $result = mysqli_query($con, $query);
                 </td>
             </tr>
             <tr>
-            <?php echo "<td>" ?>
-                <td><input type="submit" name="cancel" value="Cancel" />
+                <?php echo "<td>" ?>
+                <button><a href="summonpayment.php">Cancel</a></button>
                 <input type="submit" name="submit" value="Confirm" /> </td>
             </tr>
             
