@@ -20,6 +20,7 @@ if (isset($_SESSION['StaffID'])) {
         echo'<script>alert("Payment Successful.")</script>';
         header("location:summonpayment.php");
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +117,7 @@ $result = mysqli_query($con, $query);
 
 
 <?php
-}else{
+} else{
     include "nopermission.php";
 }
 
