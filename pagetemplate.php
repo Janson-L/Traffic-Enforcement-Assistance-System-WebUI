@@ -15,10 +15,20 @@ if (isset($_SESSION['StaffID'])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<?php include "navbar-footer/navbarCommander.php" ?>
+<?php include "/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php" ?>
+<div class="container-fluid text-center">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <!--    Letak gambar dekat sini  -->
+                    <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
+                    <h2>Scan License Plate</h2>
+                    <h3>Take a photo of the vehicle's license plate</h3>
+                </div>
+            </div>
+        </div>
 <?php
     mysqli_close($con);
-    include "navbar-footer/footer.php"
+    include "/Traffic-Enforcement-Assistance-System/navbar-footer/footer.php"
     ?>
     </body>
 
@@ -26,6 +36,6 @@ if (isset($_SESSION['StaffID'])) {
 
 <?php
 } else {
-    include "nopermission.php";
+    include "/Traffic-Enforcement-Assistance-System/nopermission.php";
 }
 ?>

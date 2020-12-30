@@ -30,26 +30,28 @@ if (isset($_SESSION['StaffID'])) {
         }
         ?>
         <?php if ($validUpdate != true) { ?>
+            <div class="col-sm-12 text-center">
+            <!--    Letak gambar dekat sini  -->
+            <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
+            <h2>Edit Personal Info</h2>
+            <h3>Update your personal info</h3>
+        </div>
             <div class="container">
                 <form method='POST'>
                     <input type="text" name="staffID" value=<?php echo "{$_SESSION['StaffID']}" ?> style="display:none">
-                    <div class="row">
-                        <div class="col-25"><label>New Password:</label></div>
-                        <div class="col-75"><input type="password" name="newPassword" required maxlength="12"></div>
+                    <div class="form-group">
+                        <label>New Password:</label>
+                        <input class="form-control" type="password" name="newPassword" required maxlength="12">
                     </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label>Retype New Password:</label></div>
-                        <div class="col-75"><input type="password" name="newPasswordRetype" required maxlength="12"><br></div>
+                    <div class="form-group">
+                        <label>Retype New Password:</label>
+                        <input class="form-control" type="password" name="newPasswordRetype" required maxlength="12">
                     </div>
                     <input type="text" name="loginAttempt" value="0" style="display:none">
                     <input type="text" name="accountStatus" value="1" style="display:none">
-                    <br>
-                    <div class="row">
-                        <div class="col-75"></div>
-                        <div class="col-5"></div>
-                        <div class="col-5"></div>
-                        <div class="col-5"><input type="submit" name="resetPasswordConfirm" value="Confirm"></div>
+               
+                    <input type="submit" name="resetPasswordConfirm" class="btn btn-primary" value="Confirm">
+    
 
                 </form>
             </div>
@@ -73,7 +75,7 @@ if (isset($_SESSION['StaffID'])) {
             mysqli_close($con);
         ?>
             <br>
-            <div class="prompt">Update successful. You will now be redirected in 3 seconds.</div>
+            <div class="container">Update successful. You will now be redirected in 3 seconds.</div>
         <?php
             echo '<meta http-equiv="refresh" content="3">';
             die();

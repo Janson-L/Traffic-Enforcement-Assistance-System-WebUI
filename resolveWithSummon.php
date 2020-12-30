@@ -12,6 +12,8 @@ if (isset($_SESSION['StaffID'])) {
         <title>Resolve With Summon</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="style/spinner.css">
+        <link rel="stylesheet" href="style/fade.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
@@ -24,7 +26,7 @@ if (isset($_SESSION['StaffID'])) {
             $timeOffset='08:00';
             $photoDirectory='1';
             $licensePlate = $_POST['LicensePlate'];
-            $offenseID=2;
+            $offenseID=$_POST['offenseID'];
             $staffID=$_SESSION['StaffID'];
             
             
@@ -32,7 +34,7 @@ if (isset($_SESSION['StaffID'])) {
             VALUES (NULL,ADDTIME(CURRENT_TIMESTAMP(), ?),?,?,?,?);';
             $stmt = mysqli_stmt_init($con);
             mysqli_stmt_prepare($stmt, $query);
-            mysqli_stmt_bind_param($stmt, "sssss", $timeOffset,$photoDirectory,$offenseID,$licensePlate,$staffID);
+            mysqli_stmt_bind_param($stmt, "ssiss", $timeOffset,$photoDirectory,$offenseID,$licensePlate,$staffID);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
 
@@ -56,6 +58,8 @@ if (isset($_SESSION['StaffID'])) {
             mysqli_stmt_close($stmt);
             mysqli_close($con);
         ?>
+            <div class="spin"></div>
+            <div class="fadeMe"></div>
             <div class="container-fluid text-center">
                 <div class="row">
                     <div class="col-sm-12 text-center">
@@ -70,13 +74,16 @@ if (isset($_SESSION['StaffID'])) {
             
             ?>
             <div class="col-sm-12 text-center">
-                <?php include "testCamera/index.php";?>
+                <?php include "testcamera/index.php";?>
                    
                 <a href="<?php if ($_SESSION['ResolutionOrigin'] == 'Satria') {
                                 echo "resolveSatria.php";
-                            } else {
-                                echo "resolveLestari.php";
-                            } ?>" class="btn btn-primary">
+                            } elseif($_SESSION['ResolutionOrigin'] == 'Lestari') {
+                                echo "resolveLestari.php";}
+                            else{
+                                echo "scanNumberPlate.php";
+                            }
+                             ?>" class="btn btn-primary">
                     &larr; Back
                 </a>
             </div>
@@ -105,3 +112,12 @@ if (isset($_SESSION['StaffID'])) {
     include "nopermission.php";
 }
 ?>
+
+<script>
+$(".spin").hide();
+$(".fadeMe").hide();
+$("#postBtn").click(function(){
+    $(".spin").show();
+    $(".fadeMe").show();
+});
+</script>

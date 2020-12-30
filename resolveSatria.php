@@ -31,16 +31,13 @@ if (isset($_SESSION['StaffID'])) {
       <?php
 
       $sql = "SELECT record.LicensePlate, camera.Location, record.EntryDateTime, HOUR(TIMEDIFF(record.EntryDateTime, ADDTIME(CURRENT_TIMESTAMP(), '08:00'))) AS overdue_by
-        FROM ((record 
-LEFT JOIN camera ON camera.CameraID = record.CameraID)
-LEFT JOIN sticker
-ON record.licenseplate = sticker.LicensePlate)
-LEFT JOIN summon
-ON record.LicensePlate=summon.LicensePlate
+      FROM record 
+      INNER JOIN camera on record.CameraID=camera.CameraID
+LEFT JOIN vehicle on record.LicensePlate=vehicle.LicensePlate
+LEFT JOIN sticker ON vehicle.LicensePlate=sticker.LicensePlate
 WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
 and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
-and (summon.SummonID is null or summon.OffenseID!=2)
-        and Location='Satria'";
+      and Location='Satria'";
 
 
       $result = mysqli_query($con, $sql);
@@ -62,6 +59,7 @@ and (summon.SummonID is null or summon.OffenseID!=2)
                     <input type="submit" name="resolveSelection" class="form-control"  value="Resolve">
                 </form>
             </td>
+        </tr>
           <?php
         }
         echo '</table>';
