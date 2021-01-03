@@ -22,7 +22,7 @@ if (isset($_SESSION['StaffID'])) {
         include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/licensePlateReader.php";
         $licensePlateOCR = getLicensePlate($_POST['image']);
         ?>
-        <div class="container-fluid text-center">
+        <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <!--    Letak gambar dekat sini  -->
@@ -30,19 +30,21 @@ if (isset($_SESSION['StaffID'])) {
                     <h2>Confirm License Plate</h2>
                     <h3>Please check the license plate in the text box. Edit if it is not correct.</h3>
                     <form method='POST' action='displayVehicleInfo.php'>
+                        <div class="form-group">
                             <label>License Plate:</label>
-                            <input type="text" name="LicensePlate" class="form-control" value="<?php echo $licensePlateOCR; ?>">
-                            <br><br>
-                            <input type="submit" id='summonBtn' name="confirmLicensePlate" class="btn btn-primary" value="Submit">
-                        </form>
-                    <br>
-                    <div class="row">
-                        <a href="/Traffic-Enforcement-Assistance-System/scanNumberPlate.php" class="btn btn-primary">
-                            Back
-                        </a>
-                    </div>
+                            <input type="text" name="LicensePlate" class="form-control" value="<?php echo $licensePlateOCR; ?>" pattern="^[A-Z0-9]{4,10}$">
+                            <small class="form-text text-muted">(4-10 Characters, Capital Letters, and no space)</small>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" id='summonBtn' name="confirmLicensePlate" class="btn btn-success" value="Submit">
+                    </form>
                 </div>
+
+                    <a href="/Traffic-Enforcement-Assistance-System/scanNumberPlate.php" class="btn btn-primary">
+                    &larr; Back
+                    </a>
             </div>
+        </div>
         </div>
         <?php
 

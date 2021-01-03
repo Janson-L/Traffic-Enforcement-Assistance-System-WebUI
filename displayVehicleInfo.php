@@ -33,7 +33,7 @@ if (isset($_SESSION['StaffID'])) {
         ?>
 
 
-        <div class="container-fluid text-center">
+        <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <!--    Letak gambar dekat sini  -->
@@ -67,27 +67,56 @@ if (isset($_SESSION['StaffID'])) {
                         echo '</table>';
 
                     ?>
-                        <br>
                         <form method='POST' action='resolveWithSummon.php'>
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
-                            <select name='offenseID' class="form-control">
-                                <option value="1" selected>Sticker Misuse</option>
-                                <option value="2">Illegal Parking</option>
-                            </select>
-                            <br>
-                            <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-primary" value="Summon">
+                            <div class="form-group">
+                                <label>Offense Type: </label>
+                                <select name='offenseID' class="form-control">
+                                    <option value="1" selected>Sticker Misuse</option>
+                                    <option value="2">Illegal Parking</option>
+                                </select>
+                            </div>
+                            <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-success" value="Summon">
                         </form>
+                        <br>
 
                     <?php
                     } else {
-                        echo "<div class='container-fluid text-center'>Not a registered vehicle</div>";
+                        echo "<div class='alert alert-info' role='alert'>Not a registered vehicle. Please enter the staffID or studentID to proceed with issuing summon. </div>";
+                    ?>
+                        <form method='POST' action='resolveWithSummon.php'>
+                            <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
+                            <div class="form-group">
+                                <label>Identification Type: </label>
+                                <select name='type' class="form-control">
+                                    <option value="staff" selected>staffID</option>
+                                    <option value="student">studentID</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                    <label>ID: </label>
+                                    <input type="text" name="id" class="form-control" required pattern="^[A-Z0-9]{4,10}$" ?>
+                                    <small class="form-text text-muted">(4-10 Characters, Capital Letter if applicable)</small>
+                                </div>
+
+                            <div class="form-group">
+                                <label>Offense Type: </label>
+                                <select name='offenseID' class="form-control">
+                                    <option value="1" selected>Sticker Misuse</option>
+                                    <option value="2">Illegal Parking</option>
+                                </select>
+                            </div>
+                            <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-success" value="Summon">
+                        </form>
+                    <?php
                     }
 
                     ?>
                     <br>
-                    <div class="row">
+                    <div class="form-group">
+
                         <a href="/Traffic-Enforcement-Assistance-System/scanNumberPlate.php" class="btn btn-primary">
-                            Back
+                            &larr; Back
                         </a>
                     </div>
                 </div>
