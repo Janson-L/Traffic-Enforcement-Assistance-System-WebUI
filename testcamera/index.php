@@ -34,14 +34,14 @@
             <div class="col-md-6">
                 <div id="my_camera"></div>
                 <br/>
-                <input type=button value="Take a Photo" onClick="take_snapshot()">
+                <input type=button class="btn btn-default" value="Take a Photo" onClick="take_snapshot()">
                 <input type="hidden" name="image" class="image-tag">
                 <input type="text" name="photoDirectory" value="<?php echo $photoDirectory?>" style="display:none">
             </div>
             <div class="col-md-6">
                 <div id="results">Your captured image will appear here...</div>
             </div>
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center form-group">
                 <br/>
                 <button id="postBtn" class="btn btn-success">Submit</button>
             </div>
