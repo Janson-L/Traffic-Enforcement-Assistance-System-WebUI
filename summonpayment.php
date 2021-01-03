@@ -3,7 +3,7 @@ SESSION_START();
 
 if (isset($_POST["AddToCart"])){
     if(isset($_SESSION["ShoppingCart"])){
-        $item_array_SummonID = array_column($_SESSION["ShoppingCart"], "SummonID");
+        $item_array_SummonID = array_column($_SESSION["ShoppingCart"], "item_SummonID");
         if(!in_array($_GET["SummonID"], $item_array_SummonID)){
             $count = count($_SESSION["ShoppingCart"]);
             $item_array = array(
@@ -18,7 +18,7 @@ if (isset($_POST["AddToCart"])){
             $_SESSION["ShoppingCart"][$count] = $item_array;
         }
         else{
-            echo '<script>alert("Item Already Added")</script>';
+            echo '<script>alert("Summon Already Added")</script>';
             echo '<script>window.location="summonpayment.php"</script>';
         }
     }
@@ -251,6 +251,10 @@ if (isset($_SESSION['StaffID'])) {
                     <tr>
                         <td colspan="6" align="right">Total</td>
                         <td > RM <?php echo number_format($total, 2); ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" align="right"><button type="button" onclick="window.location.href='paymentmethod.php';">Pay Now</button></td>
+                        
                     </tr>
                     <?php
                     }
