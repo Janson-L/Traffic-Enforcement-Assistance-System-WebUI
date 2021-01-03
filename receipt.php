@@ -1,27 +1,18 @@
 <?php
 SESSION_START();
+
 if (isset($_SESSION['StaffID'])) {
     include "connection.php";
 
-
-    if(isset($_POST['submit'])) {
-        //Insert
-        $PaymentMethod=$_POST['PaymentMethod'];
-        $PaymentDateTime = strftime("%Y.%m.%d %H:%M");
-        $StaffID = $_SESSION['StaffID'];
-        foreach($_SESSION["ShoppingCart"] as $keys => $values) {
-            $SummonID=$values["item_SummonID"];
-            $query= "INSERT INTO payment (PaymentID, PaymentMethod, PaymentDateTime, SummonID, StaffID)
-            VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$SummonID', '$StaffID');";
-            if(!mysqli_query($con,$query)) {
-            echo'<script>alert("Payment Failed.")</script>';
-        }
-        else{
-            echo'<script>alert("Payment Successful.")</script>';
-            header("location:receipt.php");
-        }
+if (isset($_GET["action"])){
+    if($_GET["action"] == "delete")
+    {
+        unset($_SESSION["ShoppingCart"]);
+        echo '<script>window.location="summonpayment.php"</script>';
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +45,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <div>
         <br />
-        <h4>Summon Cart<h4>
+        <h4 align="center"><b>PAYMENT SUCCESSFUL</b></h4>
             <div>
                 <table class="centerthistable">
                     <tr>
@@ -84,7 +75,6 @@ if (isset($_SESSION['StaffID'])) {
                             $total = $total + $values["item_CompoundRate"];
                         }
                     ?>
-                    <form name="ConfirmPayment" action="paymentmethod.php" method="post">
                     
                     <tr>
                         <td colspan="6" align="right">Total</td>
@@ -92,21 +82,13 @@ if (isset($_SESSION['StaffID'])) {
                     </tr>
 
                     <tr>
-                        <td colspan="6" align="right"><label>Payment Method</label></td>
-                        <td>
-                            <select name="PaymentMethod" id="PaymentMethod">
-                                <option value="0">Cash</option>
-                                <option value="1">Debit Card</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
                         <td colspan="7" align="right">
-                            <button><a href="summonpayment.php">Cancel</a></button>
-                            <input type="submit" name="submit" value="Confirm" /> 
+                            <button><a href="receipt.php?action=delete"><span>Okay</span></a></button>
+
+                            <button onclick="window.print()">Print Receipt</button> 
                         </td>
                     </tr>
-                    </form>
+
                     <?php
                     }
                     ?>
