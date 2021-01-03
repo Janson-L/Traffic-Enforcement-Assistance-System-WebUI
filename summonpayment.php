@@ -226,7 +226,6 @@ if (isset($_SESSION['StaffID'])) {
                         <th>Number Plate</th>
                         <th>Offense</th>
                         <th>Compound</th>
-                       
                         <th>Actions</th>
                     </tr>
                     <?php
