@@ -1,5 +1,52 @@
 <?php
 SESSION_START();
+
+if (isset($_POST["AddToCart"])){
+    if(isset($_SESSION["ShoppingCart"])){
+        $item_array_SummonID = array_column($_SESSION["ShoppingCart"], "SummonID");
+        if(!in_array($_GET["SummonID"], $item_array_SummonID)){
+            $count = count($_SESSION["ShoppingCart"]);
+            $item_array = array(
+                'item_SummonID'         =>  $_GET['SummonID'],
+                'item_SummonDateTime'   =>  $_POST['SummonDateTime'],
+                'item_Name'             =>  $_POST['Name'],
+                'item_StudentID'        =>  $_POST['StudentID'],
+                'item_LicensePlate'     =>  $_POST['LicensePlate'],
+                'item_OffenseName'      =>  $_POST['OffenseName'],
+                'item_CompoundRate'     =>  $_POST['CompoundRate']
+            );
+            $_SESSION["ShoppingCart"][$count] = $item_array;
+        }
+        else{
+            echo '<script>alert("Item Already Added")</script>';
+            echo '<script>window.location="summonpayment.php"</script>';
+        }
+    }
+    else{
+        $item_array = array(
+            'item_SummonID'         =>  $_GET['SummonID'],
+            'item_SummonDateTime'   =>  $_POST['SummonDateTime'],
+            'item_Name'             =>  $_POST['Name'],
+            'item_StudentID'        =>  $_POST['StudentID'],
+            'item_LicensePlate'     =>  $_POST['LicensePlate'],
+            'item_OffenseName'      =>  $_POST['OffenseName'],
+            'item_CompoundRate'     =>  $_POST['CompoundRate']
+        );
+        $_SESSION["ShoppingCart"][0] = $item_array;
+    }
+}
+
+if (isset($_GET["action"])){
+    if($_GET["action"] == "delete"){
+        foreach($_SESSION["ShoppingCart"] as $keys => $values){
+            if ($values["item_SummonID"] == $_GET["SummonID"]){
+                unset($_SESSION["ShoppingCart"][$keys]);
+                echo '<script>alert("Summon Removed from Cart")</script>';
+            }
+        }
+    }
+}
+
 if (isset($_SESSION['StaffID'])) {
     include "connection.php";
 ?>
@@ -140,24 +187,80 @@ if (isset($_SESSION['StaffID'])) {
           echo "<td>" . $row['OffenseName'] . "</td>";
           echo "<td>" . $row['CompoundRate'] . "</td>";
           ?>
-          <td>
-                <!-- <form method='POST' action='paymentmethod.php'>
-                    <input type="submit" name="resolveSelection" class="form-control"  value="Pay Now">
-                </form> -->
-                <button><a href="paymentmethod.php?id=<?= $row['SummonID']; ?>">Pay Now</a></button>
-            </td>
+        <form method="post" action="summonpayment.php?action=add&SummonID=<?php echo $row["SummonID"]; ?>" >
+        <input type="hidden" name="SummonID" value="<?php echo $row['SummonID']; ?>" />
+        <input type="hidden" name="SummonDateTime" value="<?php echo $row['SummonDateTime']; ?>" />
+        <input type="hidden" name="Name" value="<?php echo $row['Name']; ?>" />
+        <input type="hidden" name="StudentID" value="<?php echo $row['StudentID']; ?>" />
+        <input type="hidden" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" />
+        <input type="hidden" name="OffenseName" value="<?php echo $row['OffenseName']; ?>" />
+        <input type="hidden" name="CompoundRate" value="<?php echo $row['CompoundRate']; ?>" />
+        <td>
+            <button type="submit" name="AddToCart" class="form-control">Add to Cart</button>
 
-          <?php
-        }
+            <!-- <button><a href="paymentmethod.php?id=<?= $row['SummonID']; ?>">Pay Now</a></button> -->
+        </td>
+        </form>
+        
+        </div>
+
+    <?php
+    }
         echo '</table>';
-      }
-      else{
+    }
+    else{
         echo"<div class='container-fluid text-center'>No records found.</div>";
-      }
-      ?>
+    }
+    ?>
+
+<div>
+        <br />
+        <h4>Summon Cart<h4>
+            <div>
+                <table class="centerthistable">
+                    <tr>
+                        <th>Summon ID</th>
+                        <th>Date and Time</th>
+                        <th>Name</th>
+                        <th>Matrics Number</th>
+                        <th>Number Plate</th>
+                        <th>Offense</th>
+                        <th>Compound</th>
+                       
+                        <th>Actions</th>
+                    </tr>
+                    <?php
+                    if(!empty($_SESSION["ShoppingCart"])){
+                        $total = 0;
+                        foreach($_SESSION["ShoppingCart"] as $keys => $values){
+                    ?>
+                    <tr>
+                        <td><?php echo $values["item_SummonID"]; ?></td>
+                        <td><?php echo $values["item_SummonDateTime"]; ?></td>
+                        <td><?php echo $values["item_Name"]; ?></td>
+                        <td><?php echo $values["item_StudentID"]; ?></td>
+                        <td><?php echo $values["item_LicensePlate"]; ?></td>
+                        <td><?php echo $values["item_OffenseName"]; ?></td>
+                        <td> RM <?php echo number_format($values["item_CompoundRate"], 2); ?></td>
+                        <td><a href="summonpayment.php?action=delete&SummonID=<?php echo $values["item_SummonID"]; ?>"><span>Remove</span></a></td>
+                    </tr>
+                    <?php
+                            $total = $total + $values["item_CompoundRate"];
+                        }
+                    ?>
+                    <tr>
+                        <td colspan="6" align="right">Total</td>
+                        <td > RM <?php echo number_format($total, 2); ?></td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                </table>
+            </div>
+
+
 <?php
     mysqli_close($con);
-    include "navbar-footer/footer.php"
     ?>
 </body>
 </html>
