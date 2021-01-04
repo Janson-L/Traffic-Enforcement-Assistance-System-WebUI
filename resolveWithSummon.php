@@ -27,8 +27,6 @@ if (isset($_SESSION['StaffID'])) {
             $photoDirectory = '1';
             $licensePlate = $_POST['LicensePlate'];
             $offenseID = $_POST['offenseID'];
-            echo $_POST['type'];
-            echo $_POST['id'];
 
             if (isset($_POST['type'])) {
                 if($_POST['type']=='staff'){
@@ -125,16 +123,16 @@ if (isset($_SESSION['StaffID'])) {
             <div class="col-sm-12 text-center">
                 <?php include "testcamera/index.php"; ?>
 
-                <a href="<?php if ($_SESSION['ResolutionOrigin'] == 'Satria') {
+                <!-- <a href="<?php /*if ($_SESSION['ResolutionOrigin'] == 'Satria') {
                                 echo "resolveSatria.php";
                             } elseif ($_SESSION['ResolutionOrigin'] == 'Lestari') {
                                 echo "resolveLestari.php";
                             } else {
                                 echo "scanNumberPlate.php";
-                            }
+                            }*/
                             ?>" class="btn btn-primary">
                     &larr; Back
-                </a>
+                </a> -->
             </div>
         <?php
         } else { ?>

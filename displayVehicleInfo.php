@@ -40,12 +40,17 @@ if (isset($_SESSION['StaffID'])) {
                     <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
                     <h2>Display Vehicle Info</h2>
                     <h3>Brief Summary of the Vehicle</h3>
+                </div>
+                <div class="col-sm-12">
                     <?php
                     if (mysqli_num_rows($result) > 0) {
                         echo '<table class="centerthistable">';
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr><td>License Plate Number:</td><td>" . $row['licensePlate'] . "</td></tr>";
-                            echo  "<tr><td>Sticker ID:</td><td>" . $row['stickerID'] . "</td></tr>";
+                            if(is_null($row['stickerID'])){
+                                $stickerID='NULL';
+                            }
+                            echo  "<tr><td>Sticker ID:</td><td>" . $stickerID . "</td></tr>";
 
                             if ($row['type'] == 1) {
                                 $stickerType = 'Staff';
@@ -53,6 +58,9 @@ if (isset($_SESSION['StaffID'])) {
                                 $stickerType = 'Inside Student';
                             } elseif ($row['type'] == 3) {
                                 $stickerType = 'Outside Student';
+                            }
+                            else{
+                                $stickerType='NULL';
                             }
 
                             echo  "<tr><td>Sticker Type:</td><td>" . $stickerType . "</td></tr>";
@@ -76,13 +84,14 @@ if (isset($_SESSION['StaffID'])) {
                                     <option value="2">Illegal Parking</option>
                                 </select>
                             </div>
+                            <div class="form-group text-center">
                             <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-success" value="Summon">
+                            </div>
                         </form>
-                        <br>
 
                     <?php
                     } else {
-                        echo "<div class='alert alert-info' role='alert'>Not a registered vehicle. Please enter the staffID or studentID to proceed with issuing summon. </div>";
+                        echo "<div class='alert alert-info text-center' role='alert'>Not a registered vehicle. Please enter the staffID or studentID to proceed with issuing summon. </div>";
                     ?>
                         <form method='POST' action='resolveWithSummon.php'>
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
@@ -106,15 +115,15 @@ if (isset($_SESSION['StaffID'])) {
                                     <option value="2">Illegal Parking</option>
                                 </select>
                             </div>
+                            <div class="form-group text-center">
                             <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-success" value="Summon">
+                            </div>
                         </form>
                     <?php
                     }
 
                     ?>
-                    <br>
-                    <div class="form-group">
-
+                    <div class="form-group text-center">
                         <a href="/Traffic-Enforcement-Assistance-System/scanNumberPlate.php" class="btn btn-primary">
                             &larr; Back
                         </a>
