@@ -7,7 +7,8 @@ if (isset($_SESSION['StaffID'])) {
     if(isset($_POST['submit'])) {
         //Insert
         $PaymentMethod=$_POST['PaymentMethod'];
-        $PaymentDateTime = strftime("%Y.%m.%d %H:%M");
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $PaymentDateTime = strftime(date("Y-m-d H:i:s"));
         $StaffID = $_SESSION['StaffID'];
         foreach($_SESSION["ShoppingCart"] as $keys => $values) {
             $SummonID=$values["item_SummonID"];
