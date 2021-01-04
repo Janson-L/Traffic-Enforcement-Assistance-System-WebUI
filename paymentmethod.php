@@ -7,7 +7,8 @@ if (isset($_SESSION['StaffID'])) {
     if(isset($_POST['submit'])) {
         //Insert
         $PaymentMethod=$_POST['PaymentMethod'];
-        $PaymentDateTime = strftime("%Y.%m.%d %H:%M");
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $PaymentDateTime = strftime(date("Y-m-d H:i:s"));
         $StaffID = $_SESSION['StaffID'];
         foreach($_SESSION["ShoppingCart"] as $keys => $values) {
             $SummonID=$values["item_SummonID"];
@@ -41,21 +42,22 @@ if (isset($_SESSION['StaffID'])) {
     include "navbar-footer/navbar.php";
     ?>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-sm-12 text-center">
                 <!--    Letak gambar dekat sini  -->
                 <img src="image/Logo_Polis_Bantuan-01.png"
                     style="height:100px;width: auto;margin: 0 auto;display: block;">
                 <h2>Summon Payment</h2>
+                <h3>Finalize Payment Details<h3>
             </div>
         </div>
     </div>
 
     <div>
         <br />
-        <h4>Summon Cart<h4>
-            <div>
+        
+            <div style="overflow-x:auto;">
                 <table class="centerthistable">
                     <tr>
                         <th>Summon ID</th>
@@ -94,7 +96,7 @@ if (isset($_SESSION['StaffID'])) {
                     <tr>
                         <td colspan="6" align="right"><label>Payment Method</label></td>
                         <td>
-                            <select name="PaymentMethod" id="PaymentMethod">
+                            <select name="PaymentMethod" id="PaymentMethod" class="form-control">
                                 <option value="0">Cash</option>
                                 <option value="1">Debit Card</option>
                             </select>
@@ -102,8 +104,8 @@ if (isset($_SESSION['StaffID'])) {
                     </tr>
                     <tr>
                         <td colspan="7" align="right">
-                            <button><a href="summonpayment.php">Cancel</a></button>
-                            <input type="submit" name="submit" value="Confirm" /> 
+                            <a href="summonpayment.php" class="btn btn-primary">Cancel</a>
+                            <input type="submit" name="submit" value="Confirm" class="btn btn-success" /> 
                         </td>
                     </tr>
                     </form>

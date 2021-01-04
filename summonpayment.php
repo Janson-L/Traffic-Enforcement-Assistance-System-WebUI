@@ -290,7 +290,7 @@ if (isset($_GET["action"])){
         <td>
             <button type="submit" name="AddToCart" class="form-control">Add to Cart</button>
 
-            <!-- <button><a href="paymentmethod.php?id=<?= $row['SummonID']; ?>">Pay Now</a></button> -->
+            <!-- <button><a href="paymentmethod.php?id=<?php //$row['SummonID']; ?>">Pay Now</a></button> -->
         </td>
         </form>
         
