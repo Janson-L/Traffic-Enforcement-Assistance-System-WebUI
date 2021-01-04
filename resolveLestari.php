@@ -17,7 +17,7 @@ if (isset($_SESSION['StaffID'])) {
   </head>
 
   <body>
-    <?php include "navbar-footer/navbar.php
+    <?php include "navbar-footer/navbar.php"; ?>
     <div class="container-fluid text-center">
       <div class="row">
         <div class="col-sm-12 text-center">

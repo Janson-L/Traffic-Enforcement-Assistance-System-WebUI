@@ -15,7 +15,7 @@ if (isset($_SESSION['StaffID'])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<?php include "navbar-footer/navbar.php
+<?php include "navbar-footer/navbar.php"; ?>
 <?php
         if (isset($_POST['resolveWithFP'])) {
             $licensePlate = $_POST['LicensePlate'];   
