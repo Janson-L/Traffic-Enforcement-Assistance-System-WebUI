@@ -40,7 +40,7 @@ if (isset($_SESSION['StaffID'])) {
         <div class="col-sm-12 text-center">
             <?php include "testCamera/index.php"; ?>
 
-            <a href="commander.php" class="btn btn-primary">
+            <a href="EaR.php" class="btn btn-primary">
                 &larr; Back
             </a>
         </div>
