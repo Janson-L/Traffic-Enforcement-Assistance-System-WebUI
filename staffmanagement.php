@@ -168,7 +168,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
                                 <form method='POST' action='deleteStaff.php'>
                                     <input type="text" name="staffID" value="<?php echo $row['staffID']; ?>" style="display:none">
                                     <input type="text" name="name" value="<?php echo $row['name']; ?>" style="display:none">
-                                    <input type="submit" name="deleteUser" class="form-control" value="Delete User">
+                                    <input type="submit" name="deleteUser" class="btn btn-danger" value="Delete User">
                                 </form>
                             </td>
                         </tr>
