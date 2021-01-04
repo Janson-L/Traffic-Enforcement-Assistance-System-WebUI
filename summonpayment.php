@@ -283,7 +283,7 @@ if (isset($_GET["action"])){
         <input type="hidden" name="SummonID" value="<?php echo $row['SummonID']; ?>" />
         <input type="hidden" name="SummonDateTime" value="<?php echo $row['SummonDateTime']; ?>" />
         <input type="hidden" name="Name" value="<?php echo $row['Name']; ?>" />
-        <input type="hidden" name="StudentID" value="<?php echo $row['StudentID']; ?>" />
+        <input type="hidden" name="ID" value="<?php echo $row['StudentID']; ?>" />
         <input type="hidden" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" />
         <input type="hidden" name="OffenseName" value="<?php echo $row['OffenseName']; ?>" />
         <input type="hidden" name="CompoundRate" value="<?php echo $row['CompoundRate']; ?>" />
