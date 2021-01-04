@@ -1,9 +1,10 @@
 <?php
-   include "connection.php"; 
+   include "../connection.php"; 
 
 $jan=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 1 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="
+SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 1 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -18,7 +19,7 @@ $jan = $row['count(summon.OffenseID)'];
 
     $feb=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 2 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 2 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -33,7 +34,7 @@ $feb = $row['count(summon.OffenseID)'];
 
 $march=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 3 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 3 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -48,7 +49,7 @@ $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.Summo
 
 $april=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 4 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 4 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -63,7 +64,7 @@ $april = $row['count(summon.OffenseID)'];
 
 $may=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 5 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 5 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -78,7 +79,7 @@ $may = $row['count(summon.OffenseID)'];
 
 $june=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 6 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 6 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -93,7 +94,7 @@ $june = $row['count(summon.OffenseID)'];
 
 $july=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 7 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 7 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -108,7 +109,7 @@ $july = $row['count(summon.OffenseID)'];
 
 $aug=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 8 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 8 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -123,7 +124,7 @@ $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.Summo
 
 $sept=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 9 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 9 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -138,7 +139,7 @@ $sept = $row['count(summon.OffenseID)'];
 
 $oct=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 10 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 10 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -154,7 +155,7 @@ $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.Summo
 
 $nov=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 11 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 11 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -169,7 +170,7 @@ $nov = $row['count(summon.OffenseID)'];
 
 $dec=0;
 $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 12 AND offense.OffenseName='Illegal Parking' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) =2021 AND MONTH(summon.SummonDateTime) = 12 AND offense.OffenseName='Sticker Misuse' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -198,7 +199,7 @@ $dec = $row['count(summon.OffenseID)'];
 					google.charts.setOnLoadCallback(drawChart);
 					function drawChart() {
 						var data = google.visualization.arrayToDataTable([
-							['Offense Month', 'Illegal parking'],
+							['Offense Month', 'Sticker Misuse'],
 
 							['January',<?php echo $jan; ?>],
   							['February',<?php echo $feb; ?>],
@@ -215,7 +216,7 @@ $dec = $row['count(summon.OffenseID)'];
 ]);
 						var options = {
 							chart: {
-								title: 'TOTAL COUNT OF ILLEGAL PARKING SUMMONS BY EACH MONTH',
+								title: 'TOTAL COUNT OF STICKER MISUSE SUMMONS BY EACH MONTH IN 2021',
 						
 							}
 						};

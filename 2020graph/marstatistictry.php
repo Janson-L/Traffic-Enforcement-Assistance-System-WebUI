@@ -1,5 +1,5 @@
 <?php
-   include "connection.php"; 
+   include "../connection.php"; 
 
 ?>
 <html>
@@ -15,7 +15,7 @@
           ['students', 'contribution'],
          <?php
          $sql = "SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE YEAR(summon.SummonDateTime) = 2020 AND MONTH(summon.SummonDateTime) = 3 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
          $fire = mysqli_query($con,$sql);
           while ($result = mysqli_fetch_assoc($fire)) {
             echo"['".$result['OffenseName']."',".$result['count(summon.OffenseID)']."],";
@@ -25,7 +25,7 @@
         ]);
 
         var options = {
-          title: 'TYPE OF SUMMONS WITH TOTAL COUNTS IN FEBRUARY'
+          title: 'TYPE OF SUMMONS WITH TOTAL COUNTS IN MARCH'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));

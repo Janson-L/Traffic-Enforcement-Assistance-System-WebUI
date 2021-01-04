@@ -1,5 +1,5 @@
 <?php
-   include "connection.php"; 
+   include "../connection.php"; 
 
 ?>
 <html>
@@ -14,8 +14,8 @@
         var data = google.visualization.arrayToDataTable([
           ['students', 'contribution'],
          <?php
-         $sql = "SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime)
-    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID WHERE MONTH(summon.SummonDateTime) = 11 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+         $sql = "SELECT offense.OffenseName, count(summon.OffenseID)
+    FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID GROUP BY offense.OffenseName";
          $fire = mysqli_query($con,$sql);
           while ($result = mysqli_fetch_assoc($fire)) {
             echo"['".$result['OffenseName']."',".$result['count(summon.OffenseID)']."],";
@@ -25,7 +25,7 @@
         ]);
 
         var options = {
-          title: 'TYPE OF SUMMONS WITH TOTAL COUNTS IN NOVEMBER'
+          title: 'TYPE OF SUMMONS WITH TOTAL COUNTS'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));

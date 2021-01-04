@@ -15,12 +15,10 @@ include "connection.php";
   <style>
   
   .a{
-	  margin-right:30%;
+	  margin-left:2%;
   }
   
-  .b{
-	  margin-left:30%;
-  }
+  
   
   
 .dropbtn {
@@ -136,10 +134,10 @@ include "connection.php";
                            
 
                        <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Bar chart graphs</button>
+  <button onclick="myFunction()" class="dropbtn">Choose A Year</button>
   <div id="myDropdown" class="dropdown-content">
-    <a href="statistictry2.php">Illegal Parking</a>
-    <a href="statistictry3.php">Sticker Misuse</a>
+    <a href="2020graph/graph.php">2020</a>
+    <a href="2021graph/graph.php">2021</a>
   </div>
 </div>
                     </form>
@@ -151,50 +149,9 @@ include "connection.php";
       </div>
 	  </div>
 	  
-     <div class = "b">
-	 <div class="col-sm-6" style="border-style:solid; align-items: center; width:20%; left:40%;" >
-        
-        
-    <form style="margin-top:30px;" action="">
-                           <form style="margin-top:30px;" action="">
-                           
-
-                       <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Pie chart graphs</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="janstatistictry.php">January</a>
-    <a href="febstatistictry.php">February</a>
-    <a href="marstatistictry.php">March</a>
-	<a href="aprstatistictry.php">April</a>
-	<a href="maystatistictry.php">May</a>
-	<a href="junstatistictry.php">June</a>
-	<a href="julstatistictry.php">July</a>
-	<a href="augstatistictry.php">August</a>
-	<a href="sepstatistictry.php">September</a>
-	<a href="octstatistictry.php">October</a>
-	<a href="novstatistictry.php">November</a>
-	<a href="decstatistictry.php">December</a>
-	
-  </div>
-</div>
-
-                    </form>
-					<br>
-					
-					</div>
+     
       
-
-
-
-
- 
-</div>
       
-      <div class="col-sm-12 text-center">
-        <a href="interface.html" class="btn btn-primary">
-          &larr; Back
-        </a>
-      </div>
     
     </div>
 
