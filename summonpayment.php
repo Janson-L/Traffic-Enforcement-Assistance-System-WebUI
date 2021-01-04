@@ -116,7 +116,7 @@ if (isset($_GET["action"])){
                 <td><?php echo $values["item_LicensePlate"]; ?></td>
                 <td><?php echo $values["item_OffenseName"]; ?></td>
                 <td> RM <?php echo number_format($values["item_CompoundRate"], 2); ?></td>
-                <td><a href="summonpayment.php?action=delete&SummonID=<?php echo $values["item_SummonID"]; ?>"><span>Remove</span></a></td>
+                <td><a href="summonpayment.php?action=delete&SummonID=<?php echo $values["item_SummonID"]; ?>"class="btn btn-danger">Remove</a></td>
             </tr>
             <?php
                     $total = $total + $values["item_CompoundRate"];
@@ -127,7 +127,7 @@ if (isset($_GET["action"])){
                 <td > RM <?php echo number_format($total, 2); ?></td>
             </tr>
             <tr>
-                <td colspan="8" align="right"><button type="button" onclick="window.location.href='paymentmethod.php';">Pay Now</button></td>
+                <td colspan="8" align="right"><button type="button" onclick="window.location.href='paymentmethod.php';" class="btn btn-primary">Pay Now</button></td>
                 
             </tr>
             <?php
@@ -268,7 +268,7 @@ if (isset($_GET["action"])){
         }
         $result = mysqli_query($con, $query) or die("Query Failed");
       if (mysqli_num_rows($result) > 0) {
-        echo '<div style="overflow-x:auto;"><table class="centerthistable"> <tr><th>SummonID</th><th>Date and Time</th><th>Student Name</th><th>Matrix Number</th><th>Number Plate</th><th>Offense</th><th>Compound(RM)</th>';
+        echo '<div style="overflow-x:auto;"><table class="centerthistable"> <tr><th>SummonID</th><th>Date and Time</th><th>Name</th><th>ID</th><th>Number Plate</th><th>Offense</th><th>Compound(RM)</th>';
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
           echo "<td>" . $row['SummonID'] . "</td>";
