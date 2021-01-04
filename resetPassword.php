@@ -9,7 +9,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Reset Password</title>
+        <title>Reset Staff Password</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -33,8 +33,8 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
             <div class="col-sm-12 text-center">
                 <!--    Letak gambar dekat sini  -->
                 <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
-                <h2>Reset Personal Password</h2>
-                <h3>Change your password.</h3>
+                <h2>Reset Staff Password</h2>
+                <h3>Change staff password as well as unlocking the account if locked.</h3>
             </div>
             <div class="container">
                 <form method='POST'>

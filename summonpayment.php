@@ -1,6 +1,6 @@
 <?php
 SESSION_START();
-
+if (isset($_SESSION['StaffID'])) {
 if (isset($_POST["AddToCart"])){
     if(isset($_SESSION["ShoppingCart"])){
         $item_array_SummonID = array_column($_SESSION["ShoppingCart"], "item_SummonID");
@@ -47,7 +47,6 @@ if (isset($_GET["action"])){
     }
 }
 
-if (isset($_SESSION['StaffID'])) {
     include "connection.php";
 ?>
 <!DOCTYPE html>
@@ -79,20 +78,20 @@ if (isset($_SESSION['StaffID'])) {
     }
     ?>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-sm-12 text-center">
                 <!--    Letak gambar dekat sini  -->
                 <img src="image/Logo_Polis_Bantuan-01.png"
                     style="height:100px;width: auto;margin: 0 auto;display: block;">
                 <h2>Summon Payment</h2>
-                <h3>List of Summons</h3>
+                <h3>Process summon payments here</h3>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row col-sm-6">
-            <form class="form-inline" method='POST'>
+    <div class="container">
+            <form method='POST'>
+            <div class="form-inline text-center">
                 <div class="form-group">
                     <label>Search Type:</label>
                     <select name='searchType' class="form-control" required>
@@ -106,16 +105,19 @@ if (isset($_SESSION['StaffID'])) {
                     <input type="text" class="form-control" name='searchQuery' value='<?php echo $searchQuery ?>'
                         required pattern="^[A-Za-z0-9 \/@]{1,50}$" maxlength="30">
                 </div>
-                <div class="form-group row">
-                    <button type="submit" class="btn btn-default" name="search">Search</button>
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary" name="search">Search</button>
+    </div>
             </form>
-            <form class="form-inline" method='POST' action='summonpayment.php'>
-                    <div><input type='submit' class="form-control" value='Refresh'></div>
+            <div class="form-group">
+            <form method='POST' action='summonpayment.php'>
+                    <div><input type='submit' class="btn btn-primary" value='Refresh'></div>
+                </div>
                 </div>
             </form>
-        </div>
     </div>
     </div>
+
 
     <?php
     if (isset($_POST['search'])) {
@@ -128,12 +130,19 @@ if (isset($_SESSION['StaffID'])) {
         }
     }
     ?>
-    <div class="container-fluid ">
+    <div class="form-group text-center">
+            <br>
+                    <a href="/Traffic-Enforcement-Assistance-System/EaR.php" class="btn btn-primary">
+                        &larr; Back
+                    </a>
+                </div>
+                </div>
+    <div class="container text-center">
         <?php
         if ($searchTable == 0) { ?>
         <h3>Show All</h3>
         <?php } else if ($searchTable == 1) { ?>
-        <h3>Search by Matrix Number</h3>
+        <h3>Search by ID</h3>
         <?php } else if ($searchTable == 2) { ?>
         <h3>Search by Name</h3>
         <?php } ?>
@@ -176,7 +185,7 @@ if (isset($_SESSION['StaffID'])) {
         }
         $result = mysqli_query($con, $query);
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="centerthistable"> <tr><th>SummonID</th><th>Date and Time</th><th>Student Name</th><th>Matrix Number</th><th>Number Plate</th><th>Offense</th><th>Compound(RM)</th>';
+        echo '<div style="overflow-x:auto;"><table class="centerthistable"> <tr><th>SummonID</th><th>Date and Time</th><th>Student Name</th><th>Matrix Number</th><th>Number Plate</th><th>Offense</th><th>Compound(RM)</th>';
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
           echo "<td>" . $row['SummonID'] . "</td>";
@@ -206,7 +215,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <?php
     }
-        echo '</table>';
+        echo '</table></div>';
     }
     else{
         echo"<div class='container-fluid text-center'>No records found.</div>";
@@ -216,7 +225,7 @@ if (isset($_SESSION['StaffID'])) {
 <div>
         <br />
         <h4>Summon Cart<h4>
-            <div>
+            <div style="overflow-x:auto;">
                 <table class="centerthistable">
                     <tr>
                         <th>Summon ID</th>
