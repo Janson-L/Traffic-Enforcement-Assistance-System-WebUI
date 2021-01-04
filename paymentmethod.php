@@ -75,7 +75,7 @@ if (isset($_SESSION['StaffID'])) {
                         <td><?php echo $values["item_SummonID"]; ?></td>
                         <td><?php echo $values["item_SummonDateTime"]; ?></td>
                         <td><?php echo $values["item_Name"]; ?></td>
-                        <td><?php echo $values["item_StudentID"]; ?></td>
+                        <td><?php echo $values["item_ID"]; ?></td>
                         <td><?php echo $values["item_LicensePlate"]; ?></td>
                         <td><?php echo $values["item_OffenseName"]; ?></td>
                         <td> RM <?php echo number_format($values["item_CompoundRate"], 2); ?></td>
