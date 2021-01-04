@@ -68,7 +68,7 @@ if (isset($_GET["action"])){
     $searchType = "";
     $searchQuery = "";
     $searchTable = 0;
-
+    
     if (isset($_POST['searchType'])) {
         $searchType = $_POST['searchType'];
     }
@@ -78,18 +78,68 @@ if (isset($_GET["action"])){
     }
     ?>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <!--    Letak gambar dekat sini  -->
-                <img src="image/Logo_Polis_Bantuan-01.png"
-                    style="height:100px;width: auto;margin: 0 auto;display: block;">
-                <h2>Summon Payment</h2>
-                <h3>Process summon payments here</h3>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <!--    Letak gambar dekat sini  -->
+            <img src="image/Logo_Polis_Bantuan-01.png"
+            style="height:100px;width: auto;margin: 0 auto;display: block;">
+            <h2>Summon Payment</h2>
+            <h3>Process summon payments here</h3>
         </div>
     </div>
-    <div class="container">
+</div>
+<div class="container text-center">
+<h3>Summon Cart</h3>
+    <div style="overflow-x:auto;">
+        <table class="centerthistable">
+            <tr>
+                <th>Summon ID</th>
+                <th>Date and Time</th>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Number Plate</th>
+                <th>Offense</th>
+                <th>Compound</th>
+                <th>Actions</th>
+            </tr>
+            <?php
+            if(!empty($_SESSION["ShoppingCart"])){
+                $total = 0;
+                foreach($_SESSION["ShoppingCart"] as $keys => $values){
+            ?>
+            <tr>
+                <td><?php echo $values["item_SummonID"]; ?></td>
+                <td><?php echo $values["item_SummonDateTime"]; ?></td>
+                <td><?php echo $values["item_Name"]; ?></td>
+                <td><?php echo $values["item_StudentID"]; ?></td>
+                <td><?php echo $values["item_LicensePlate"]; ?></td>
+                <td><?php echo $values["item_OffenseName"]; ?></td>
+                <td> RM <?php echo number_format($values["item_CompoundRate"], 2); ?></td>
+                <td><a href="summonpayment.php?action=delete&SummonID=<?php echo $values["item_SummonID"]; ?>"><span>Remove</span></a></td>
+            </tr>
+            <?php
+                    $total = $total + $values["item_CompoundRate"];
+                }
+            ?>
+            <tr>
+                <td colspan="6" align="right">Total</td>
+                <td > RM <?php echo number_format($total, 2); ?></td>
+            </tr>
+            <tr>
+                <td colspan="8" align="right"><button type="button" onclick="window.location.href='paymentmethod.php';">Pay Now</button></td>
+                
+            </tr>
+            <?php
+            }
+            ?>
+        </table>
+    </div>
+</div>
+
+<br><br><hr>
+
+<div class="container">
             <form method='POST'>
             <div class="form-inline text-center">
                 <div class="form-group">
@@ -224,51 +274,6 @@ if (isset($_GET["action"])){
 
 <div>
         <br />
-        <h4>Summon Cart<h4>
-            <div style="overflow-x:auto;">
-                <table class="centerthistable">
-                    <tr>
-                        <th>Summon ID</th>
-                        <th>Date and Time</th>
-                        <th>Name</th>
-                        <th>Matrics Number</th>
-                        <th>Number Plate</th>
-                        <th>Offense</th>
-                        <th>Compound</th>
-                        <th>Actions</th>
-                    </tr>
-                    <?php
-                    if(!empty($_SESSION["ShoppingCart"])){
-                        $total = 0;
-                        foreach($_SESSION["ShoppingCart"] as $keys => $values){
-                    ?>
-                    <tr>
-                        <td><?php echo $values["item_SummonID"]; ?></td>
-                        <td><?php echo $values["item_SummonDateTime"]; ?></td>
-                        <td><?php echo $values["item_Name"]; ?></td>
-                        <td><?php echo $values["item_StudentID"]; ?></td>
-                        <td><?php echo $values["item_LicensePlate"]; ?></td>
-                        <td><?php echo $values["item_OffenseName"]; ?></td>
-                        <td> RM <?php echo number_format($values["item_CompoundRate"], 2); ?></td>
-                        <td><a href="summonpayment.php?action=delete&SummonID=<?php echo $values["item_SummonID"]; ?>"><span>Remove</span></a></td>
-                    </tr>
-                    <?php
-                            $total = $total + $values["item_CompoundRate"];
-                        }
-                    ?>
-                    <tr>
-                        <td colspan="6" align="right">Total</td>
-                        <td > RM <?php echo number_format($total, 2); ?></td>
-                    </tr>
-                    <tr>
-                        <td colspan="8" align="right"><button type="button" onclick="window.location.href='paymentmethod.php';">Pay Now</button></td>
-                        
-                    </tr>
-                    <?php
-                    }
-                    ?>
-                </table>
-            </div>
 
 
 <?php
