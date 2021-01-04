@@ -25,7 +25,7 @@ if (isset($_SESSION['StaffID'])) {
 
         $query = "SELECT vehicle.licensePlate,vehicle.staffID,vehicle.studentID,sticker.stickerID,sticker.type,student.name as studentName,staff.name as staffName
         FROM `vehicle` 
-        INNER JOIN sticker ON vehicle.LicensePlate=sticker.LicensePlate
+        LEFT JOIN sticker ON vehicle.LicensePlate=sticker.LicensePlate
         LEFT JOIN staff ON vehicle.StaffID = staff.StaffID
         LEFT JOIN student ON vehicle.StudentID = student.StudentID
         WHERE vehicle.LicensePlate='$licensePlate'";
