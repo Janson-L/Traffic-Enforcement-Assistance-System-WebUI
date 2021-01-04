@@ -10,7 +10,7 @@ if (isset($_POST["AddToCart"])){
                 'item_SummonID'         =>  $_GET['SummonID'],
                 'item_SummonDateTime'   =>  $_POST['SummonDateTime'],
                 'item_Name'             =>  $_POST['Name'],
-                'item_StudentID'        =>  $_POST['StudentID'],
+                'item_ID'               =>  $_POST['ID'],
                 'item_LicensePlate'     =>  $_POST['LicensePlate'],
                 'item_OffenseName'      =>  $_POST['OffenseName'],
                 'item_CompoundRate'     =>  $_POST['CompoundRate']
@@ -27,7 +27,7 @@ if (isset($_POST["AddToCart"])){
             'item_SummonID'         =>  $_GET['SummonID'],
             'item_SummonDateTime'   =>  $_POST['SummonDateTime'],
             'item_Name'             =>  $_POST['Name'],
-            'item_StudentID'        =>  $_POST['StudentID'],
+            'item_ID'               =>  $_POST['ID'],
             'item_LicensePlate'     =>  $_POST['LicensePlate'],
             'item_OffenseName'      =>  $_POST['OffenseName'],
             'item_CompoundRate'     =>  $_POST['CompoundRate']
@@ -97,11 +97,11 @@ if (isset($_SESSION['StaffID'])) {
                     <label>Search Type:</label>
                     <select name='searchType' class="form-control" required>
                         <option
-                            <?php if ($searchType == "studentNameSearch") echo 'selected="selected"'; ?>value='studentNameSearch'>
+                            <?php if ($searchType == "NameSearch") echo 'selected="selected"'; ?>value='NameSearch'>
                             Search by Name</option>
                         <option
-                            <?php if ($searchType == "matrixNoSearch") echo 'selected="selected"'; ?>value='matrixNoSearch'>
-                            Search by Matrix Number</option>
+                            <?php if ($searchType == "IDSearch") echo 'selected="selected"'; ?>value='IDSearch'>
+                            Search by ID</option>
                     </select>
                     <input type="text" class="form-control" name='searchQuery' value='<?php echo $searchQuery ?>'
                         required pattern="^[A-Za-z0-9 \/@]{1,50}$" maxlength="30">
@@ -119,9 +119,9 @@ if (isset($_SESSION['StaffID'])) {
 
     <?php
     if (isset($_POST['search'])) {
-        if ($_POST['searchType'] == "matrixNoSearch") {
+        if ($_POST['searchType'] == "IDSearch") {
             $searchTable = 1;
-        } else if ($_POST['searchType'] == "studentNameSearch") {
+        } else if ($_POST['searchType'] == "NameSearch") {
             $searchTable = 2;
         } else {
             $searchTable = 0;
@@ -133,7 +133,7 @@ if (isset($_SESSION['StaffID'])) {
         if ($searchTable == 0) { ?>
         <h3>Show All</h3>
         <?php } else if ($searchTable == 1) { ?>
-        <h3>Search by Matrix Number</h3>
+        <h3>Search by ID</h3>
         <?php } else if ($searchTable == 2) { ?>
         <h3>Search by Name</h3>
         <?php } ?>
@@ -176,13 +176,13 @@ if (isset($_SESSION['StaffID'])) {
         }
         $result = mysqli_query($con, $query);
       if (mysqli_num_rows($result) > 0) {
-        echo '<table class="centerthistable"> <tr><th>SummonID</th><th>Date and Time</th><th>Student Name</th><th>Matrix Number</th><th>Number Plate</th><th>Offense</th><th>Compound(RM)</th>';
+        echo '<table class="centerthistable"> <tr><th>SummonID</th><th>Date and Time</th><th>Name</th><th>ID</th><th>Number Plate</th><th>Offense</th><th>Compound(RM)</th>';
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
           echo "<td>" . $row['SummonID'] . "</td>";
           echo "<td>" . $row['SummonDateTime'] . "</td>";
           echo "<td>" . $row['Name'] . "</td>";
-          echo "<td>" . $row['StudentID'] . "</td>";
+          echo "<td>" . $row['ID'] . "</td>";
           echo "<td>" . $row['LicensePlate'] . "</td>";
           echo "<td>" . $row['OffenseName'] . "</td>";
           echo "<td>" . $row['CompoundRate'] . "</td>";
@@ -191,7 +191,7 @@ if (isset($_SESSION['StaffID'])) {
         <input type="hidden" name="SummonID" value="<?php echo $row['SummonID']; ?>" />
         <input type="hidden" name="SummonDateTime" value="<?php echo $row['SummonDateTime']; ?>" />
         <input type="hidden" name="Name" value="<?php echo $row['Name']; ?>" />
-        <input type="hidden" name="StudentID" value="<?php echo $row['StudentID']; ?>" />
+        <input type="hidden" name="ID" value="<?php echo $row['ID']; ?>" />
         <input type="hidden" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" />
         <input type="hidden" name="OffenseName" value="<?php echo $row['OffenseName']; ?>" />
         <input type="hidden" name="CompoundRate" value="<?php echo $row['CompoundRate']; ?>" />
@@ -222,7 +222,7 @@ if (isset($_SESSION['StaffID'])) {
                         <th>Summon ID</th>
                         <th>Date and Time</th>
                         <th>Name</th>
-                        <th>Matrics Number</th>
+                        <th>ID</th>
                         <th>Number Plate</th>
                         <th>Offense</th>
                         <th>Compound</th>
@@ -237,7 +237,7 @@ if (isset($_SESSION['StaffID'])) {
                         <td><?php echo $values["item_SummonID"]; ?></td>
                         <td><?php echo $values["item_SummonDateTime"]; ?></td>
                         <td><?php echo $values["item_Name"]; ?></td>
-                        <td><?php echo $values["item_StudentID"]; ?></td>
+                        <td><?php echo $values["item_ID"]; ?></td>
                         <td><?php echo $values["item_LicensePlate"]; ?></td>
                         <td><?php echo $values["item_OffenseName"]; ?></td>
                         <td> RM <?php echo number_format($values["item_CompoundRate"], 2); ?></td>
