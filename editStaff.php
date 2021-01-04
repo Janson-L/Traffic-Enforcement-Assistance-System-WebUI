@@ -17,7 +17,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
 
     <body>
         <?php
-        include "navbar-footer/navbarCommander.php";
+        include "navbar-footer/navbar.php";
         if (!isset($_POST['editUserConfirm'])) { ?>
             <h2>Edit User </h2>
             <div class="container">

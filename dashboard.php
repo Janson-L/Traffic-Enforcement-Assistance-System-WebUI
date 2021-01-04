@@ -20,7 +20,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
   <body>
 
     <?php
-    include "navbar-footer/navbarCommander.php";
+    include "navbar-footer/navbar.php";
     ?>
     <!-- start dekat sini i edit-->
 

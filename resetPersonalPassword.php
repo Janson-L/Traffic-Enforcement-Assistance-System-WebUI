@@ -18,7 +18,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <body>
         <?php
-        include "navbar-footer/navbarCommander.php";
+        include "navbar-footer/navbar.php";
         $out = "";
         $validUpdate = false;
         if (isset($_POST['newPassword']) && isset($_POST['newPasswordRetype'])) {

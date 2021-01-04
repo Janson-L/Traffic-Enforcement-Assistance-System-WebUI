@@ -21,7 +21,7 @@ if (isset($_SESSION['StaffID'])) {
         <div class="spin"></div>
         <div class="fadeMe"></div>
         <?php 
-            include "navbar-footer/navbarCommander.php";
+            include "navbar-footer/navbar.php
             $photoDirectory='api';
         ?>
         <div class="container-fluid text-center">

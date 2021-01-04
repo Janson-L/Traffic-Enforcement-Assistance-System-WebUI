@@ -18,7 +18,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <body>
         <?php
-        include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php";
+        include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/navbar-footer/navbar.php";
 
 
         $licensePlate = mysqli_real_escape_string($con, $_POST['LicensePlate']);

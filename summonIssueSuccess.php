@@ -17,7 +17,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <body>
         <?php
-        include "navbar-footer/navbarCommander.php";
+        include "navbar-footer/navbar.php
         $_SESSION['ResolutionOrigin'] = '';
         ?>
         <br>

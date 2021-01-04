@@ -19,7 +19,7 @@ if (isset($_SESSION['StaffID'])) {
     </head>
 
     <body>
-        <?php include "navbar-footer/navbarCommander.php";
+        <?php include "navbar-footer/navbar.php
 
         if (isset($_POST['resolveWithSummon'])) {
             include "connection.php";

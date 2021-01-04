@@ -17,7 +17,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <body>
         <?php
-        include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php";
+        include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/navbar-footer/navbar.php";
         include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/navbar-footer/footer.php";
         include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/licensePlateReader.php";
         $licensePlateOCR = getLicensePlate($_POST['image']);

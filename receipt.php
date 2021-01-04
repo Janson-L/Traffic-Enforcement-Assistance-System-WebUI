@@ -29,7 +29,7 @@ if (isset($_GET["action"])){
 
 <body>
     <?php
-    include "navbar-footer/navbarCommander.php";
+    include "navbar-footer/navbar.php";
     ?>
 
     <div class="container-fluid">

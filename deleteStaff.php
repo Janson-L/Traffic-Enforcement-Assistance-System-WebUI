@@ -18,7 +18,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
 
     <body>
         <?php
-        include "navbar-footer/navbarCommander.php";
+        include "navbar-footer/navbar.php";
         if (isset($_POST['deleteUser'])) {
         ?>
             <h2>Confirmation</h2>
