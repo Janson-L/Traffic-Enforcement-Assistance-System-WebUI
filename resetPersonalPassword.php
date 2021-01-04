@@ -33,8 +33,8 @@ if (isset($_SESSION['StaffID'])) {
             <div class="col-sm-12 text-center">
             <!--    Letak gambar dekat sini  -->
             <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
-            <h2>Edit Personal Info</h2>
-            <h3>Update your personal info</h3>
+            <h2>Reset Personal Password</h2>
+            <h3>Change your password.</h3>
         </div>
             <div class="container">
                 <form method='POST'>
@@ -49,11 +49,15 @@ if (isset($_SESSION['StaffID'])) {
                     </div>
                     <input type="text" name="loginAttempt" value="0" style="display:none">
                     <input type="text" name="accountStatus" value="1" style="display:none">
-               
-                    <input type="submit" name="resetPasswordConfirm" class="btn btn-primary" value="Confirm">
-    
-
+                    <div class="form-group text-center">
+                    <input type="submit" name="resetPasswordConfirm" class="btn btn-success" value="Confirm">   
+                    </div> 
                 </form>
+                <div class="form-group text-center">
+                    <a href="profileManagement.php" class="btn btn-primary">
+                        &larr; Back
+                    </a>
+                </div>
             </div>
         <?php } ?>
 
