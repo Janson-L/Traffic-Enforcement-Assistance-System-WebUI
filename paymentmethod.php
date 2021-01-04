@@ -73,7 +73,7 @@ if (isset($_SESSION['StaffID'])) {
                     ?>
                     <tr>
                         <td><?php echo $values["item_SummonID"]; ?></td>
-                        <td><?php echo $values["item_SummonDateTime"]; ?></td>
+                        <td><?php echo strftime("%Y.%m.%d %H:%M"); ?></td>
                         <td><?php echo $values["item_Name"]; ?></td>
                         <td><?php echo $values["item_ID"]; ?></td>
                         <td><?php echo $values["item_LicensePlate"]; ?></td>
