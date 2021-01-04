@@ -36,7 +36,14 @@ if (isset($_SESSION['StaffID'])) {
             <h2>Reset Personal Password</h2>
             <h3>Change your password.</h3>
         </div>
-            <div class="container">
+            <div class="container"> 
+            <?php
+                    if (!is_null($out)&&isset($_POST['newPassword']) && isset($_POST['newPasswordRetype'])){
+                        ?>
+                         <div class="col-sm-12 alert alert-danger text-center" role="alert"><?php echo "$out" ?></div>
+                        <?php 
+                    }  
+                ?>
                 <form method='POST'>
                     <input type="text" name="staffID" value=<?php echo "{$_SESSION['StaffID']}" ?> style="display:none">
                     <div class="form-group">
@@ -79,13 +86,11 @@ if (isset($_SESSION['StaffID'])) {
             mysqli_close($con);
         ?>
             <br>
-            <div class="container">Update successful. You will now be redirected in 3 seconds.</div>
+            <div class="container alert alert-success text-center" role="alert">Update successful. You will now be redirected in 3 seconds.</div>
         <?php
-            echo '<meta http-equiv="refresh" content="3">';
+            header("Refresh:3;URL=profileManagement.php");
             die();
         } else { ?>
-            <br>
-            <div class="error"><?php echo "$out" ?></div>
         <?php
         }
         ?>

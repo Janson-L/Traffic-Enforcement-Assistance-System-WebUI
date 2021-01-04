@@ -68,7 +68,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
             mysqli_close($con);
         ?>
             <br>
-            <div class="prompt">Update successful. You will now be redirected back to Staff Management Page in 3 seconds.</div>
+            <div class="container alert alert-success text-center" role="alert">Update successful. You will now be redirected back to Staff Management Page in 3 seconds.</div>
         <?php
 
             header("Refresh:3;URL=staffmanagement.php");

@@ -30,7 +30,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
             <br><br>
             <div class="form-group">
                 <a href="editPersonalInfo.php" class="btn btn-default">
-                    Update Personal Details
+                    Update Personal Info
                 </a>
             </div>
             <div class="form-group">

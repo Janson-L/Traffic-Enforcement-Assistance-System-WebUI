@@ -21,7 +21,7 @@ if (isset($_SESSION['StaffID'])) {
         $_SESSION['ResolutionOrigin'] = '';
         ?>
         <br>
-        <div class="prompt">Summon successfully issued. You will now be redirected in 5 seconds.</div>
+        <div class="container alert alert-success text-center" role="alert">Summon successfully issued. You will now be redirected in 5 seconds.</div>
         <?php
         include "navbar-footer/footer.php";
         if($_SESSION['Class'] == "2"){
