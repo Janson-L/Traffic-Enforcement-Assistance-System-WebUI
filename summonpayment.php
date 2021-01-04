@@ -182,7 +182,7 @@ if (isset($_SESSION['StaffID'])) {
           echo "<td>" . $row['SummonID'] . "</td>";
           echo "<td>" . $row['SummonDateTime'] . "</td>";
           echo "<td>" . $row['Name'] . "</td>";
-          echo "<td>" . $row['ID'] . "</td>";
+          echo "<td>" . $row['StudentID'] . "</td>";
           echo "<td>" . $row['LicensePlate'] . "</td>";
           echo "<td>" . $row['OffenseName'] . "</td>";
           echo "<td>" . $row['CompoundRate'] . "</td>";
@@ -191,7 +191,7 @@ if (isset($_SESSION['StaffID'])) {
         <input type="hidden" name="SummonID" value="<?php echo $row['SummonID']; ?>" />
         <input type="hidden" name="SummonDateTime" value="<?php echo $row['SummonDateTime']; ?>" />
         <input type="hidden" name="Name" value="<?php echo $row['Name']; ?>" />
-        <input type="hidden" name="ID" value="<?php echo $row['ID']; ?>" />
+        <input type="hidden" name="StudentID" value="<?php echo $row['StudentID']; ?>" />
         <input type="hidden" name="LicensePlate" value="<?php echo $row['LicensePlate']; ?>" />
         <input type="hidden" name="OffenseName" value="<?php echo $row['OffenseName']; ?>" />
         <input type="hidden" name="CompoundRate" value="<?php echo $row['CompoundRate']; ?>" />
@@ -237,7 +237,7 @@ if (isset($_SESSION['StaffID'])) {
                         <td><?php echo $values["item_SummonID"]; ?></td>
                         <td><?php echo $values["item_SummonDateTime"]; ?></td>
                         <td><?php echo $values["item_Name"]; ?></td>
-                        <td><?php echo $values["item_ID"]; ?></td>
+                        <td><?php echo $values["item_StudentID"]; ?></td>
                         <td><?php echo $values["item_LicensePlate"]; ?></td>
                         <td><?php echo $values["item_OffenseName"]; ?></td>
                         <td> RM <?php echo number_format($values["item_CompoundRate"], 2); ?></td>
