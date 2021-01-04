@@ -16,6 +16,9 @@ if (isset($_GET["action"])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<style type="text/css" media="print">
+   .no-print { display: none; }
+</style>
 
 <head>
     <title>Summon Payment</title>
@@ -83,7 +86,7 @@ if (isset($_GET["action"])){
 
                     <tr>
                         <td colspan="7" align="right">
-                            <button><a href="receipt.php?action=delete"><span>Okay</span></a></button>
+                            <button class="no-print"><a href="receipt.php?action=delete"><span>Okay</span></a></button>
 
                             <button onclick="window.print()">Print Receipt</button> 
                         </td>
@@ -98,6 +101,11 @@ if (isset($_GET["action"])){
 
 </div>
     <?php
+    }
+    else{
+        include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/nopermission.php";
+        header("location: login.php");
+        die();
     }
     ?>
 
