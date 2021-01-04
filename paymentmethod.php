@@ -61,7 +61,7 @@ if (isset($_SESSION['StaffID'])) {
                         <th>Summon ID</th>
                         <th>Date and Time</th>
                         <th>Name</th>
-                        <th>Matrics Number</th>
+                        <th>ID</th>
                         <th>Number Plate</th>
                         <th>Offense</th>
                         <th>Compound</th>

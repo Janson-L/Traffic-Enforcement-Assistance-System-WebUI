@@ -10,7 +10,7 @@ if (isset($_POST["AddToCart"])){
                 'item_SummonID'         =>  $_GET['SummonID'],
                 'item_SummonDateTime'   =>  $_POST['SummonDateTime'],
                 'item_Name'             =>  $_POST['Name'],
-                'item_StudentID'        =>  $_POST['StudentID'],
+                'item_ID'               =>  $_POST['ID'],
                 'item_LicensePlate'     =>  $_POST['LicensePlate'],
                 'item_OffenseName'      =>  $_POST['OffenseName'],
                 'item_CompoundRate'     =>  $_POST['CompoundRate']
@@ -27,7 +27,7 @@ if (isset($_POST["AddToCart"])){
             'item_SummonID'         =>  $_GET['SummonID'],
             'item_SummonDateTime'   =>  $_POST['SummonDateTime'],
             'item_Name'             =>  $_POST['Name'],
-            'item_StudentID'        =>  $_POST['StudentID'],
+            'item_ID'               =>  $_POST['ID'],
             'item_LicensePlate'     =>  $_POST['LicensePlate'],
             'item_OffenseName'      =>  $_POST['OffenseName'],
             'item_CompoundRate'     =>  $_POST['CompoundRate']
@@ -146,11 +146,11 @@ if (isset($_GET["action"])){
                     <label>Search Type:</label>
                     <select name='searchType' class="form-control" required>
                         <option
-                            <?php if ($searchType == "studentNameSearch") echo 'selected="selected"'; ?>value='studentNameSearch'>
+                            <?php if ($searchType == "NameSearch") echo 'selected="selected"'; ?>value='NameSearch'>
                             Search by Name</option>
                         <option
-                            <?php if ($searchType == "matrixNoSearch") echo 'selected="selected"'; ?>value='matrixNoSearch'>
-                            Search by Matrix Number</option>
+                            <?php if ($searchType == "IDSearch") echo 'selected="selected"'; ?>value='IDSearch'>
+                            Search by ID</option>
                     </select>
                     <input type="text" class="form-control" name='searchQuery' value='<?php echo $searchQuery ?>'
                         required pattern="^[A-Za-z0-9 \/@]{1,50}$" maxlength="30">
@@ -171,9 +171,9 @@ if (isset($_GET["action"])){
 
     <?php
     if (isset($_POST['search'])) {
-        if ($_POST['searchType'] == "matrixNoSearch") {
+        if ($_POST['searchType'] == "IDSearch") {
             $searchTable = 1;
-        } else if ($_POST['searchType'] == "studentNameSearch") {
+        } else if ($_POST['searchType'] == "NameSearch") {
             $searchTable = 2;
         } else {
             $searchTable = 0;
@@ -206,7 +206,17 @@ if (isset($_GET["action"])){
                 JOIN offense ON summon.OffenseID = offense.OffenseID
                 join student ON vehicle.StudentID = student.StudentID
                 WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
-                ORDER BY summon.SummonID;";
+                
+                UNION
+                
+                SELECT summon.SummonID, summon.SummonDateTime, staff.Name, vehicle.StaffID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
+                FROM summon
+                    JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
+                    JOIN offense ON summon.OffenseID = offense.OffenseID
+                    JOIN staff ON vehicle.StaffID = staff.StaffID
+                
+                    WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                    ORDER BY summon.SummonID;";
         }
 
         if (isset($_POST['search'])) {
@@ -218,7 +228,17 @@ if (isset($_GET["action"])){
                     JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID
-                    WHERE summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                    WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                    
+                    UNION
+                    
+                    SELECT summon.SummonID, summon.SummonDateTime, staff.Name, vehicle.StaffID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
+                    FROM summon
+                        JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
+                        JOIN offense ON summon.OffenseID = offense.OffenseID
+                        JOIN staff ON vehicle.StaffID = staff.StaffID
+                        WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+
                     AND vehicle.StudentID = '$searchQueryEsc'
                     ORDER BY summon.SummonID;";
             } 
@@ -229,6 +249,16 @@ if (isset($_GET["action"])){
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID 
                     WHERE summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+
+                    UNION
+                    
+                    SELECT summon.SummonID, summon.SummonDateTime, staff.Name, vehicle.StaffID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
+                    FROM summon
+                        JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
+                        JOIN offense ON summon.OffenseID = offense.OffenseID
+                        JOIN staff ON vehicle.StaffID = staff.StaffID
+                        WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                        
                     AND student.Name LIKE '%$searchQueryEsc%'
                     ORDER BY summon.SummonID;";
             }
