@@ -31,7 +31,7 @@ if (isset($_SESSION['StaffID'])) {
         mysqli_stmt_bind_result($stmt, $name, $phoneNo);
         mysqli_stmt_fetch($stmt);
         ?>
-         <div class="col-sm-12 text-center">
+         <div class="container text-center">
             <!--    Letak gambar dekat sini  -->
             <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
             <h2>Edit Personal Info</h2>
@@ -51,8 +51,17 @@ if (isset($_SESSION['StaffID'])) {
                         <input type="text" name="phoneNo" class="form-control" value="<?php echo $phoneNo; ?>" pattern="[0-9]{10,15}" placeholder="0123456789" required maxlength="15"> 
                         <small class="form-text text-muted">(10-15 numbers only)</small>
                     </div>
-                    <input type="submit" name="editInfoConfirm" class="btn btn-primary" value="Update Information">
+                    <div class="text-center">
+                    <div class="form-group">
+                    <input type="submit" name="editInfoConfirm" class="btn btn-success" value="Update Information">
+                    </div>
                 </form>
+                <div class="form-group">
+                    <a href="profileManagement.php" class="btn btn-primary">
+                        &larr; Back
+                    </a>
+                </div>
+                    </div>
             </div>
 
 

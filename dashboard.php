@@ -34,43 +34,23 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
         </div>
       </div>
     </div>
-    <div class="col-sm-6 text-center" style="border-style:solid; width:20%; left:20%;">
-      <h3><a href="dashboardSatria.php">Satria</a></h3>
-      <h2>
-        <?php
-        $Location = "Satria";
+    <br>
+    <div class="row form-group">
+      <div class="col-sm-6 col-xs-12 text-center" style="border-style:solid; width:20%; left:20%;">
+        <h3><a href="dashboardSatria.php">Satria</a></h3>
+        <h2>
+          <?php
+          $Location = "Satria";
 
-        $sql = "SELECT count(camera.location)
-        FROM record 
-      INNER JOIN camera on record.CameraID=camera.CameraID
-LEFT JOIN vehicle on record.LicensePlate=vehicle.LicensePlate
-LEFT JOIN sticker ON vehicle.LicensePlate=sticker.LicensePlate
-WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
-and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
-      and Location=?";
-        $stmt = mysqli_stmt_init($con);
-        if (!(mysqli_stmt_prepare($stmt, $sql))) {
-          echo "Prepare failed: (" . $con->errno . ") " . $con->error;
-        } else {
-          if (!(mysqli_stmt_bind_param($stmt, "s", $Location))) {
-            echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
-          } else {
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_bind_result($stmt, $result);
-            while (mysqli_stmt_fetch($stmt)) {
-              echo $result;
-            }
-          }
-        }
-
-        ?></h2>
-
-
-    </div>
-    <div class="col-sm-6 text-center" style="border-style:solid; width:20%; left:40%;">
-      <h3><a href="dashboardLestari.php">Lestari</a></h3>
-      <h2><?php
-          $Location = "Lestari";
+          $sql = "SELECT count(camera.location)
+                  FROM record 
+                  INNER JOIN camera on record.CameraID=camera.CameraID
+                  LEFT JOIN vehicle on record.LicensePlate=vehicle.LicensePlate
+                  LEFT JOIN sticker ON vehicle.LicensePlate=sticker.LicensePlate
+                  WHERE record.exitdatetime is null and (sticker.type is null or sticker.type=3)
+                  and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
+                  and Location=?";
+          $stmt = mysqli_stmt_init($con);
           if (!(mysqli_stmt_prepare($stmt, $sql))) {
             echo "Prepare failed: (" . $con->errno . ") " . $con->error;
           } else {
@@ -84,13 +64,46 @@ and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
               }
             }
           }
-          ?>
-      </h2>
-    </div>
 
-    <div class="col-sm-12 text-center">
+          ?></h2>
+
+
+      </div>
+      <div class="col-sm-6 col-xs-12 text-center" style="border-style:solid; width:20%; left:40%;">
+        <h3><a href="dashboardLestari.php">Lestari</a></h3>
+        <h2><?php
+            $Location = "Lestari";
+            if (!(mysqli_stmt_prepare($stmt, $sql))) {
+              echo "Prepare failed: (" . $con->errno . ") " . $con->error;
+            } else {
+              if (!(mysqli_stmt_bind_param($stmt, "s", $Location))) {
+                echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+              } else {
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_bind_result($stmt, $result);
+                while (mysqli_stmt_fetch($stmt)) {
+                  echo $result;
+                }
+              }
+            }
+            ?>
+        </h2>
+      </div>
+    </div>
+    <div class="form-group text-center">
       <a href="dashboard.php" class="btn btn-primary">
         Refresh
+      </a>
+    </div>
+    <div class="form-group text-center">
+      <a href="<?php
+                if ($_SESSION['Class'] == "2") {
+                  echo "/Traffic-Enforcement-Assistance-System/commander.php";
+                } else {
+                  echo "/Traffic-Enforcement-Assistance-System/officer.php";
+                }
+                ?>" class="btn btn-primary">
+        &larr; Back
       </a>
     </div>
 
