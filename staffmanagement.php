@@ -69,7 +69,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
         </form>
         </div>
         </div>
-        </div>
+        
 
         <?php
         if (isset($_POST['search'])) {
@@ -82,6 +82,14 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
             }
         }
         ?>
+
+        <div class="form-group text-center">
+            <br>
+                    <a href="/Traffic-Enforcement-Assistance-System/commander.php" class="btn btn-primary">
+                        &larr; Back
+                    </a>
+                </div>
+                </div>
         <div class="container text-center">
             <?php
             if ($searchTable == 0) { ?>
