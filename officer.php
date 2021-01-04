@@ -64,7 +64,5 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "1") {
 <?php
 } else {
   include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/nopermission.php";
-  header("location: login.php");
-  die();
 }
 ?>
