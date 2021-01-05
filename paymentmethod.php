@@ -10,18 +10,43 @@ if (isset($_SESSION['StaffID'])) {
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $PaymentDateTime = strftime(date("Y-m-d H:i:s"));
         $StaffID = $_SESSION['StaffID'];
-        foreach($_SESSION["ShoppingCart"] as $keys => $values) {
-            $SummonID=$values["item_SummonID"];
-            $query= "INSERT INTO payment (PaymentID, PaymentMethod, PaymentDateTime, SummonID, StaffID)
-            VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$SummonID', '$StaffID');";
+            $total = $_GET['total'];
+            $query = "INSERT INTO payment (PaymentID, PaymentMethod, PaymentDateTime, Amount, StaffID)
+            VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$total', '$StaffID');";
             if(!mysqli_query($con,$query)) {
             echo'<script>alert("Payment Failed.")</script>';
         }
         else{
-            echo'<script>alert("Payment Successful.")</script>';
-            header("location:receipt.php");
+            $query = "SELECT `PaymentID` 
+            FROM `payment` 
+            ORDER BY `PaymentID` DESC
+            LIMIT 1;";
+            
+            $result = mysqli_query($con, $query);
+            if(mysqli_num_rows($result)>0)
+            {
+                while ($row = $result->fetch_assoc())
+                {
+                    $PaymentID = $row['PaymentID'];
+                }
+            }
+            foreach($_SESSION["ShoppingCart"] as $keys => $values)
+            { 
+                $SummonID=$values["item_SummonID"];
+                $query = "INSERT INTO summon_payment (`PaymentID`, `SummonID`)
+                VALUES ('$PaymentID', '$SummonID');";
+                if(!mysqli_query($con,$query)) {
+                    echo'<script>alert("Payment Failed.")</script>';
+                }
+                else{
+                    echo'<script>alert("Payment Successful.")</script>';
+                    header("location:receipt.php");
+                }
+            }
+
         }
-    }
+
+    
 }
 ?>
 <!DOCTYPE html>
@@ -86,7 +111,7 @@ if (isset($_SESSION['StaffID'])) {
                             $total = $total + $values["item_CompoundRate"];
                         }
                     ?>
-                    <form name="ConfirmPayment" action="paymentmethod.php" method="post">
+                    <form name="ConfirmPayment" action="paymentmethod.php?total=<?php echo $total;?>" method="post">
                     
                     <tr>
                         <td colspan="6" align="right">Total</td>

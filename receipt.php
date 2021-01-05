@@ -34,14 +34,14 @@ if (isset($_SESSION['StaffID'])) {
     <body>
         <?php
         include "navbar-footer/navbar.php";
-        $query = "SELECT `PaymentID`, `PaymentMethod`, `PaymentDateTime`, `SummonID`, `StaffID` 
+        $query = "SELECT `PaymentID`, `PaymentMethod`, `PaymentDateTime`, `StaffID` 
             FROM `payment` 
             ORDER BY `PaymentID` DESC
             LIMIT 1;";
         $stmt = mysqli_stmt_init($con);
         mysqli_stmt_prepare($stmt, $query) or die("Query Preparation Failed");
         mysqli_stmt_execute($stmt) or die("Query Failed");
-        mysqli_stmt_bind_result($stmt,$paymentID, $paymentMethod, $paymentDateTime, $summonID, $staffID);
+        mysqli_stmt_bind_result($stmt,$paymentID, $paymentMethod, $paymentDateTime, $staffID);
         mysqli_stmt_fetch($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($con);

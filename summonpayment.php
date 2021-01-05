@@ -205,7 +205,7 @@ if (isset($_GET["action"])){
                 JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                 JOIN offense ON summon.OffenseID = offense.OffenseID
                 join student ON vehicle.StudentID = student.StudentID
-                WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                WHERE  summon.SummonID NOT IN (SELECT summon_payment.SummonID FROM summon_payment)
                 
                 UNION
                 
@@ -215,7 +215,7 @@ if (isset($_GET["action"])){
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     JOIN staff ON vehicle.StaffID = staff.StaffID
                 
-                    WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                    WHERE  summon.SummonID NOT IN (SELECT summon_payment.SummonID FROM summon_payment)
                     ORDER BY SummonID";
         }
 
@@ -227,8 +227,8 @@ if (isset($_GET["action"])){
                 FROM summon
                     JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                     JOIN offense ON summon.OffenseID = offense.OffenseID
-                    join student ON vehicle.StudentID = student.StudentID 
-                    WHERE summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                    join student ON vehicle.StudentID = student.StudentID
+                    WHERE summon.SummonID NOT IN (SELECT summon_payment.SummonID FROM summon_payment)
 					AND student.StudentID='$searchQuery'
                     
                     UNION
@@ -238,7 +238,7 @@ if (isset($_GET["action"])){
                         JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                         JOIN offense ON summon.OffenseID = offense.OffenseID
                         JOIN staff ON vehicle.StaffID = staff.StaffID
-                        WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                        WHERE  summon.SummonID NOT IN (SELECT summon_payment.SummonID FROM summon_payment)
                         AND staff.StaffID='$searchQuery'
                         
                     ORDER BY SummonID";
@@ -250,7 +250,7 @@ if (isset($_GET["action"])){
                     JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                     JOIN offense ON summon.OffenseID = offense.OffenseID
                     join student ON vehicle.StudentID = student.StudentID
-                    WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                    WHERE  summon.SummonID NOT IN (SELECT summon_payment.SummonID FROM summon_payment)
                     AND student.Name LIKE '%$searchQuery%'
                     
                     UNION
@@ -260,7 +260,7 @@ if (isset($_GET["action"])){
                         JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
                         JOIN offense ON summon.OffenseID = offense.OffenseID
                         JOIN staff ON vehicle.StaffID = staff.StaffID
-                        WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
+                        WHERE  summon.SummonID NOT IN (SELECT summon_payment.SummonID FROM summon_payment)
                         AND staff.Name LIKE '%$searchQuery%'
                         
                      ORDER BY summonID";
