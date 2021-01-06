@@ -25,7 +25,7 @@
         </li>
         <?php if ($_SESSION['Class'] == "2") { ?>
           <li><a href="/Traffic-Enforcement-Assistance-System/dashboard.php">Dashboard</a></li>
-          <li><a href="#">Analysis and Statistic</a></li>
+          <li><a href="graph2.php">Analysis and Statistic</a></li>
           <li><a href="/Traffic-Enforcement-Assistance-System/staffmanagement.php">Staff Management</a></li>
           <li class="dropdown">
           <?php } ?>
