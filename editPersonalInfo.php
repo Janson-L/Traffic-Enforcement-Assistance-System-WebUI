@@ -9,7 +9,7 @@ if (isset($_SESSION['StaffID'])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edit Personal Info</title>
+        <title>Update Personal Info</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <body>
         <?php
-        include "navbar-footer/navbarCommander.php";
+        include "navbar-footer/navbar.php";
         $staffID = $_SESSION['StaffID'];
         $query = "SELECT name, phoneNo FROM staff WHERE staffID=?;";
         $stmt = mysqli_stmt_init($con);
@@ -31,13 +31,14 @@ if (isset($_SESSION['StaffID'])) {
         mysqli_stmt_bind_result($stmt, $name, $phoneNo);
         mysqli_stmt_fetch($stmt);
         ?>
-         <div class="col-sm-12 text-center">
+         
+        <?php if (!isset($_POST['editInfoConfirm'])) { ?>
+            <div class="container text-center">
             <!--    Letak gambar dekat sini  -->
             <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
-            <h2>Edit Personal Info</h2>
-            <h3>Update your personal info</h3>
+            <h2>Update Personal Info</h2>
+            <h3>Update your personal details</h3>
         </div>
-        <?php if (!isset($_POST['editInfoConfirm'])) { ?>
             <div class="container">
                 <form method='POST'>
                     <div class="form-group">
@@ -51,8 +52,17 @@ if (isset($_SESSION['StaffID'])) {
                         <input type="text" name="phoneNo" class="form-control" value="<?php echo $phoneNo; ?>" pattern="[0-9]{10,15}" placeholder="0123456789" required maxlength="15"> 
                         <small class="form-text text-muted">(10-15 numbers only)</small>
                     </div>
-                    <input type="submit" name="editInfoConfirm" class="btn btn-primary" value="Update Information">
+                    <div class="text-center">
+                    <div class="form-group">
+                    <input type="submit" name="editInfoConfirm" class="btn btn-success" value="Update Information">
+                    </div>
                 </form>
+                <div class="form-group">
+                    <a href="profileManagement.php" class="btn btn-primary">
+                        &larr; Back
+                    </a>
+                </div>
+                    </div>
             </div>
 
 
@@ -76,9 +86,9 @@ if (isset($_SESSION['StaffID'])) {
             mysqli_close($con);
         ?>
             <br>
-            <div class="container">Update successful. You will now be redirected in 3 seconds.</div>
+            <div class="container alert alert-success text-center" role="alert">Update successful. You will now be redirected in 3 seconds.</div>
         <?php
-            echo '<meta http-equiv="refresh" content="3">';
+            header("Refresh:3;URL=profileManagement.php");
             die();
         }
         ?>
