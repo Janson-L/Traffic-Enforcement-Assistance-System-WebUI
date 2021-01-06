@@ -7,7 +7,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+    <script src="/Traffic-Enforcement-Assistance-System/js/webcam.js"></script>
 
     <style type="text/css">
 
@@ -34,14 +34,14 @@
             <div class="col-md-6">
                 <div id="my_camera"></div>
                 <br/>
-                <input type=button value="Take a Photo" onClick="take_snapshot()">
+                <input type=button class="btn btn-default" value="Take a Photo" onClick="take_snapshot()">
                 <input type="hidden" name="image" class="image-tag">
                 <input type="text" name="photoDirectory" value="<?php echo $photoDirectory?>" style="display:none">
             </div>
             <div class="col-md-6">
                 <div id="results">Your captured image will appear here...</div>
             </div>
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center form-group">
                 <br/>
                 <button id="postBtn" class="btn btn-success">Submit</button>
             </div>
@@ -60,7 +60,14 @@
         image_format: 'jpeg',
         jpeg_quality: 100
     });
-
+    
+    Webcam.on("init", function () {
+        Webcam.getCameras(function (cameras) {
+          if (cameras.length > 0) {
+            Webcam.setAndInitCamera(cameras[cameras.length - 1].id);
+          }
+        });
+      });
     Webcam.attach( '#my_camera' );
 
     function take_snapshot() {

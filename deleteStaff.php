@@ -18,12 +18,12 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
 
     <body>
         <?php
-        include "navbar-footer/navbarCommander.php";
+        include "navbar-footer/navbar.php";
         if (isset($_POST['deleteUser'])) {
         ?>
             <h2>Confirmation</h2>
             <div class="container">
-                <div class="prompt">Are you sure you want to delete <?php echo "{$_POST['name']} ({$_POST['staffID']})" ?> ?</div>
+                <div class="container alert alert-warning text-center" role="alert">Are you sure you want to delete <?php echo "{$_POST['name']} ({$_POST['staffID']})" ?> ?</div>
                 <form method='POST'>
                     <input type="text" name="staffID" value="<?php echo $_POST['staffID']; ?>" style="display:none">
                     <input type="text" name="name" value="<?php echo $_POST['name']; ?>" style="display:none">
@@ -49,7 +49,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
             mysqli_close($con);
         ?>
             <br>
-            <div class="prompt">Delete successful. You will now be redirected back to Staff Management Page in 3 seconds.</div>
+            <div class="container alert alert-success text-center" role="alert">Delete successful. You will now be redirected back to Staff Management Page in 3 seconds.</div>
         <?php
             header("Refresh:3;URL=staffmanagement.php");
             die();

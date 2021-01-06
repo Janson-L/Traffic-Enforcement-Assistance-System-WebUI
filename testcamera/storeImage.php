@@ -16,7 +16,7 @@ if (isset($_SESSION['StaffID'])) {
     </head>
 
     <?php
-        include $_SERVER['DOCUMENT_ROOT'] ."/Traffic-Enforcement-Assistance-System/navbar-footer/navbarCommander.php";
+        include $_SERVER['DOCUMENT_ROOT'] ."/Traffic-Enforcement-Assistance-System/navbar-footer/navbar.php";
     ?>
        
         <body onload="window.location.href ='/Traffic-Enforcement-Assistance-System/summonIssueSuccess.php';">

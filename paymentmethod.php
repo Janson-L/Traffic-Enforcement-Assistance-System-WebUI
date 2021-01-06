@@ -6,20 +6,47 @@ if (isset($_SESSION['StaffID'])) {
 
     if(isset($_POST['submit'])) {
         //Insert
-        $StaffID = $_SESSION["StaffID"];
         $PaymentMethod=$_POST['PaymentMethod'];
-        $PaymentDateTime=$_POST['PaymentDateTime'];
-        $SummonID=$_POST['SummonID'];
-        $query= "INSERT INTO payment (PaymentID, PaymentMethod, PaymentDateTime, SummonID, StaffID)
-        VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$SummonID', '$StaffID');";
-        if(!mysqli_query($con,$query)) {
-        echo'<script>alert("Payment Failed.")</script>';
-        echo'<script>window.location="paymentmethod.php?id=<?= $SummonID;?>"</script>';
-    }
-    else{
-        echo'<script>alert("Payment Successful.")</script>';
-        header("location:summonpayment.php");
-    }
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $PaymentDateTime = strftime(date("Y-m-d H:i:s"));
+        $StaffID = $_SESSION['StaffID'];
+            $total = $_GET['total'];
+            $query = "INSERT INTO payment (PaymentID, PaymentMethod, PaymentDateTime, Amount, StaffID)
+            VALUES (null, '$PaymentMethod', '$PaymentDateTime', '$total', '$StaffID');";
+            if(!mysqli_query($con,$query)) {
+            echo'<script>alert("Payment Failed.")</script>';
+        }
+        else{
+            $query = "SELECT `PaymentID` 
+            FROM `payment` 
+            ORDER BY `PaymentID` DESC
+            LIMIT 1;";
+            
+            $result = mysqli_query($con, $query);
+            if(mysqli_num_rows($result)>0)
+            {
+                while ($row = $result->fetch_assoc())
+                {
+                    $PaymentID = $row['PaymentID'];
+                }
+            }
+            foreach($_SESSION["ShoppingCart"] as $keys => $values)
+            { 
+                $SummonID=$values["item_SummonID"];
+                $query = "INSERT INTO summon_payment (`PaymentID`, `SummonID`)
+                VALUES ('$PaymentID', '$SummonID');";
+                if(!mysqli_query($con,$query)) {
+                    echo'<script>alert("Payment Failed.")</script>';
+                }
+                else{
+                    echo'<script>alert("Payment Successful.")</script>';
+                    header("location:receipt.php");
+                }
+            }
+
+        }
+
+    
 }
 ?>
 <!DOCTYPE html>
@@ -37,88 +64,86 @@ if (isset($_SESSION['StaffID'])) {
 
 <body>
     <?php
-    include "navbar-footer/navbarCommander.php";
+    include "navbar-footer/navbar.php";
     ?>
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-sm-12 text-center">
                 <!--    Letak gambar dekat sini  -->
                 <img src="image/Logo_Polis_Bantuan-01.png"
                     style="height:100px;width: auto;margin: 0 auto;display: block;">
                 <h2>Summon Payment</h2>
+                <h3>Finalize Payment Details<h3>
             </div>
         </div>
     </div>
 
-<?php
-$editRow = $_GET['id'];
-$query = "SELECT summon.SummonID, summon.SummonDateTime, student.Name, vehicle.StudentID, summon.LicensePlate, offense.OffenseName, offense.CompoundRate
-            FROM summon
-                JOIN vehicle ON summon.LicensePlate = vehicle.LicensePlate
-                JOIN offense ON summon.OffenseID = offense.OffenseID
-                join student ON vehicle.StudentID = student.StudentID
-                WHERE  summon.SummonID NOT IN (SELECT payment.SummonID FROM payment)
-                AND summon.SummonID = '$editRow';";
-$result = mysqli_query($con, $query);
-    while ($row = mysqli_fetch_assoc($result)) { ?>
+    <div>
+        <br />
+        
+            <div style="overflow-x:auto;">
+                <table class="centerthistable">
+                    <tr>
+                        <th>Summon ID</th>
+                        <th>Date and Time</th>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Number Plate</th>
+                        <th>Offense</th>
+                        <th>Compound</th>
+                    </tr>
+                    <?php
+                    if(!empty($_SESSION["ShoppingCart"])){
+                        $total = 0;
+                        foreach($_SESSION["ShoppingCart"] as $keys => $values){
+                    ?>
+                    <tr>
+                        <td><?php echo $values["item_SummonID"]; ?></td>
+                        <td><?php echo $values["item_SummonDateTime"]; ?></td>
+                        <td><?php echo $values["item_Name"]; ?></td>
+                        <td><?php echo $values["item_ID"]; ?></td>
+                        <td><?php echo $values["item_LicensePlate"]; ?></td>
+                        <td><?php echo $values["item_OffenseName"]; ?></td>
+                        <td> RM <?php echo number_format($values["item_CompoundRate"], 2); ?></td>
+                    </tr>
+                    <?php
+                            $total = $total + $values["item_CompoundRate"];
+                        }
+                    ?>
+                    <form name="ConfirmPayment" action="paymentmethod.php?total=<?php echo $total;?>" method="post">
+                    
+                    <tr>
+                        <td colspan="6" align="right">Total</td>
+                        <td > RM <?php echo number_format($total, 2); ?></td>
+                    </tr>
 
-<form name="ConfirmPayment" action="paymentmethod.php" method="post">
-    <input type="hidden" name="SummonID" value="<?php echo $editRow; ?>"/>
-	<table border="0">
-	<col width="200">
-            <tr>
-                <td><label>Name</label></td>
-                <td><input type="text" name="Name" value="<?php echo $row["Name"] ?>" ></input></td>
-            </tr>
-            <tr>
-                <td><label>Matrics Number</label></td>
-                <td><input type="text" name="StudentID" value="<?php echo $row["StudentID"] ?>" ></input></td>
-            </tr>
-	        <tr>
-                <td><label>Number Plate</label></td>
-                <td><input type="text" name="LicensePlate" value="<?php echo $row["LicensePlate"] ?>"></input></td>
-            </tr>
-	        <tr>
-                <td><label>Issue Time</label></td>
-                <td><input type="text" name="PaymentDateTime" value="<?php echo(strftime("%Y.%m.%d %H:%M")); ?>"></input></td>
-            </tr>
-            <tr>
-                <td><label>Offense</label></td>
-                <td><input type="text" name="OffenseName" value="<?php echo $row["OffenseName"] ?>" ></input></td>
-            </tr>
-            <tr>
-                <td><label>Amount (RM)</label></td>
-                <td><input type="text" name="Amount" value="<?php echo $row["CompoundRate"] ?>" ></input></td>
-            </tr>
-            <tr>
-                <td><label>Payment Method</label></td>
-                <td>
-                    <select name="PaymentMethod" id="PaymentMethod">
-                        <option value="0">Cash</option>
-                        <option value="1">Debit Card</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <?php echo "<td>" ?>
-                <button><a href="summonpayment.php">Cancel</a></button>
-                <input type="submit" name="submit" value="Confirm" /> </td>
-            </tr>
-            
-        </table>
-</form>
+                    <tr>
+                        <td colspan="6" align="right"><label>Payment Method</label></td>
+                        <td>
+                            <select name="PaymentMethod" id="PaymentMethod" class="form-control">
+                                <option value="0">Cash</option>
+                                <option value="1">Debit Card</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" align="right">
+                            <a href="summonpayment.php" class="btn btn-primary">Cancel</a>
+                            <input type="submit" name="submit" value="Confirm" class="btn btn-success" /> 
+                        </td>
+                    </tr>
+                    </form>
+                    <?php
+                    }
+                    ?>
+                </table>
+            </div>
+<div align="right">
 
+</div>
     <?php
     }
     ?>
 
 
-
-
-<?php
-} else{
-    include "nopermission.php";
-}
-
-?>

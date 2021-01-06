@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
+if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "1") {
 
 ?>
 
@@ -9,7 +9,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
   <html>
 
   <head>
-    <title>Commander Landing Page</title>
+    <title>Officer Landing Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -38,28 +38,13 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
 
     <div class="container-fluid text-center">
       <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
-      <h2>Commander Landing Page</h2>
-      <h3>Landing page for Commander.</h3>
+      <h2>Officer Landing Page</h2>
+      <h3>Landing page for Officer.</h3>
       <h4>Welcome back <b><?php echo $staffName; ?></h4>
       <br><br>
           <div class="form-group">
             <a href="EaR.php" class="btn btn-default">
               Enforcement and Resolution
-            </a>
-          </div>
-          <div class="form-group">
-            <a href="dashboard.php" class="btn btn-default">
-              Dashboard
-            </a>
-          </div>
-          <div class="form-group">
-            <a href="graph2.php" class="btn btn-default">
-              Analysis and Statistics
-            </a>
-          </div>
-          <div class="form-group">
-            <a href="staffManagement.php" class="btn btn-default">
-              Staff Management
             </a>
           </div>
           <div class="form-group">
@@ -79,7 +64,5 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
 <?php
 } else {
   include $_SERVER['DOCUMENT_ROOT'] . "/Traffic-Enforcement-Assistance-System/nopermission.php";
-  header("location: login.php");
-  die();
 }
 ?>

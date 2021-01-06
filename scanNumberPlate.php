@@ -21,7 +21,7 @@ if (isset($_SESSION['StaffID'])) {
         <div class="spin"></div>
         <div class="fadeMe"></div>
         <?php 
-            include "navbar-footer/navbarCommander.php";
+            include "navbar-footer/navbar.php"; 
             $photoDirectory='api';
         ?>
         <div class="container-fluid text-center">
@@ -40,7 +40,7 @@ if (isset($_SESSION['StaffID'])) {
         <div class="col-sm-12 text-center">
             <?php include "testCamera/index.php"; ?>
 
-            <a href="commander.php" class="btn btn-primary">
+            <a href="EaR.php" class="btn btn-primary">
                 &larr; Back
             </a>
         </div>

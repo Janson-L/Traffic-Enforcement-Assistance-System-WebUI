@@ -18,7 +18,7 @@ if (isset($_SESSION['StaffID'])) {
 
     <body>
         <?php
-        include "navbar-footer/navbarCommander.php";
+        include "navbar-footer/navbar.php";
         $out = "";
         $validUpdate = false;
         if (isset($_POST['newPassword']) && isset($_POST['newPasswordRetype'])) {
@@ -33,10 +33,17 @@ if (isset($_SESSION['StaffID'])) {
             <div class="col-sm-12 text-center">
             <!--    Letak gambar dekat sini  -->
             <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
-            <h2>Edit Personal Info</h2>
-            <h3>Update your personal info</h3>
+            <h2>Reset Personal Password</h2>
+            <h3>Change your password.</h3>
         </div>
-            <div class="container">
+            <div class="container"> 
+            <?php
+                    if (!is_null($out)&&isset($_POST['newPassword']) && isset($_POST['newPasswordRetype'])){
+                        ?>
+                         <div class="col-sm-12 alert alert-danger text-center" role="alert"><?php echo "$out" ?></div>
+                        <?php 
+                    }  
+                ?>
                 <form method='POST'>
                     <input type="text" name="staffID" value=<?php echo "{$_SESSION['StaffID']}" ?> style="display:none">
                     <div class="form-group">
@@ -49,11 +56,15 @@ if (isset($_SESSION['StaffID'])) {
                     </div>
                     <input type="text" name="loginAttempt" value="0" style="display:none">
                     <input type="text" name="accountStatus" value="1" style="display:none">
-               
-                    <input type="submit" name="resetPasswordConfirm" class="btn btn-primary" value="Confirm">
-    
-
+                    <div class="form-group text-center">
+                    <input type="submit" name="resetPasswordConfirm" class="btn btn-success" value="Confirm">   
+                    </div> 
                 </form>
+                <div class="form-group text-center">
+                    <a href="profileManagement.php" class="btn btn-primary">
+                        &larr; Back
+                    </a>
+                </div>
             </div>
         <?php } ?>
 
@@ -75,13 +86,11 @@ if (isset($_SESSION['StaffID'])) {
             mysqli_close($con);
         ?>
             <br>
-            <div class="container">Update successful. You will now be redirected in 3 seconds.</div>
+            <div class="container alert alert-success text-center" role="alert">Update successful. You will now be redirected in 3 seconds.</div>
         <?php
-            echo '<meta http-equiv="refresh" content="3">';
+            header("Refresh:3;URL=profileManagement.php");
             die();
         } else { ?>
-            <br>
-            <div class="error"><?php echo "$out" ?></div>
         <?php
         }
         ?>
