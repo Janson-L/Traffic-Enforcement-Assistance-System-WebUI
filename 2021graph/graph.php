@@ -140,6 +140,8 @@ include "../connection.php";
   <div id="myDropdown" class="dropdown-content">
     <a href="statistictry2.php">Illegal Parking</a>
     <a href="statistictry3.php">Sticker Misuse</a>
+	<a href="statistictry5.php">vvvvvSticker Misuse</a>
+	
   </div>
 </div>
                     </form>
