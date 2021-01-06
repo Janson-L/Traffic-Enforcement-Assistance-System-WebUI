@@ -22,6 +22,11 @@
 				echo "<div class='login-alert'>Login Successful!</div>";
 			}
 		}
+		else if(isset($_GET['blocked'])){
+			if($_GET['blocked']=="failed"){
+				echo "<div class='login-alert'>This account has been blocked for multiple login failures. Please contact the Commander for assistance.</div>";
+			}
+		}
 	}
 	?>
  
