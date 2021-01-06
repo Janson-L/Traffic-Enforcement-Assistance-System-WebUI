@@ -27,8 +27,8 @@
           <li><a href="/Traffic-Enforcement-Assistance-System/dashboard.php">Dashboard</a></li>
           <li><a href="#">Analysis and Statistic</a></li>
           <li><a href="/Traffic-Enforcement-Assistance-System/staffmanagement.php">Staff Management</a></li>
-          <li class="dropdown">
           <?php } ?>
+          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile Management<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/Traffic-Enforcement-Assistance-System/editPersonalInfo.php">Update Personal Details</a></li>
