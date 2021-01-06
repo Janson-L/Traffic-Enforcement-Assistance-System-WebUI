@@ -25,7 +25,7 @@
         ]);
 
         var options = {
-          title: 'TYPE OF SUMMONS WITH TOTAL COUNTS IN JULY'
+          title: 'TYPE OF SUMMONS WITH TOTAL COUNTS'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));

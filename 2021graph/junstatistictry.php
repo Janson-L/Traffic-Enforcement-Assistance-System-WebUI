@@ -25,7 +25,7 @@
         ]);
 
         var options = {
-          title: 'TYPE OF SUMMONS WITH TOTAL COUNTS'
+          title: 'TYPE OF SUMMONS WITH TOTAL COUNTS IN APRIL'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
