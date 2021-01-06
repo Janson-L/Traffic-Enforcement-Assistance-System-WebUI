@@ -2,7 +2,9 @@
    include "../connection.php"; 
 
 $jan=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 1 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 1 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -16,7 +18,9 @@ $jan = $row['totalPaid'];
     }
 
     $feb=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 2 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 2 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -30,7 +34,9 @@ $feb = $row['totalPaid'];
 }
 
 $march=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 3 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 3 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -44,7 +50,9 @@ $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.Summo
 }
 
 $april=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 4 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 4 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -58,7 +66,9 @@ $april = $row['totalPaid'];
 }
 
 $may=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 5 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 5 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -72,7 +82,9 @@ $may = $row['totalPaid'];
 }
 
 $june=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 6 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 6 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -86,7 +98,9 @@ $june = $row['totalPaid'];
 }
 
 $july=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 7 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 7 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -100,7 +114,9 @@ $july = $row['totalPaid'];
 }
 
 $aug=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 8 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 8 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -114,7 +130,9 @@ $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.Summo
 }
 
 $sept=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 9 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 9 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -128,7 +146,9 @@ $sept = $row['totalPaid'];
 }
 
 $oct=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 10 AND offense.OffenseName LIKE '%abc%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 10 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -143,7 +163,9 @@ $Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.Summo
 }
 
 $nov=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 11 AND offense.OffenseName LIKE '%abc%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 11 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)
@@ -157,7 +179,9 @@ $nov = $row['totalPaid'];
 }
 
 $dec=0;
-$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), SUM(payment.Amount) AS totalPaid FROM summon LEFT JOIN offense ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 12 AND offense.OffenseName LIKE '%Illegal%' GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
+$Query ="SELECT offense.OffenseName, count(summon.OffenseID), MONTH(summon.SummonDateTime), offense.CompoundRate*COUNT(summon_payment.PaymentID) AS totalPaid FROM summon LEFT JOIN offense 
+ON summon.OffenseID = offense.OffenseID LEFT JOIN summon_payment ON summon.SummonID = summon_payment.SummonID LEFT JOIN payment ON payment.PaymentID = summon_payment.PaymentID
+WHERE YEAR(summon.SummonDateTime)=2020 AND MONTH(summon.SummonDateTime) = 12 AND offense.OffenseName='Illegal Parking' AND summon.OffenseID=2 GROUP BY offense.OffenseName, MONTH(summon.SummonDateTime)";
 
     $Result = mysqli_query($con,$Query);
     if($Result)

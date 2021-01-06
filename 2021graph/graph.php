@@ -63,6 +63,13 @@ include "../connection.php";
 .dropdown:hover .dropbtn {
   background-color: #383535;
 }
+
+/* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
 </style>
 </head>
 <body>
@@ -113,18 +120,10 @@ include "../connection.php";
 <!-- start dekat sini i edit-->
   
 <div class="container-fluid text-center">
-  <div class="row">
-    <div class="col-sm-2 sidenav"> <br><br><br><br><br></div>
-    <div class="col-sm-10">
-    <div class="row">
-      <div class="col-sm-12 mt-5">
-      <div class="row">
-      <div class="col-sm-12 text-center">
+  <div class container
     <!--    Letak gambar dekat sini  -->
-        <img src="../image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
-      </div>
-      </div>
-      </div>
+        <img src="../image/Logo_Polis_Bantuan-01.png" style="height:200px;width: auto;margin: 0 auto;display: block;">
+      
            
 		   <div class = "a">
 
@@ -140,7 +139,8 @@ include "../connection.php";
   <div id="myDropdown" class="dropdown-content">
     <a href="statistictry2.php">Illegal Parking</a>
     <a href="statistictry3.php">Sticker Misuse</a>
-	<a href="statistictry5.php">vvvvvSticker Misuse</a>
+	<a href="statistictry4.php">Money collected from the student paid for "Illegal Parking" summon</a>
+	<a href="statistictry5.php">Money collected from the student paid for "Sticker Misuse" summon</a>
 	
   </div>
 </div>
@@ -202,12 +202,15 @@ include "../connection.php";
 
     </div>
     </div>
+	</div>
 
 <!--Finish here-->
 
-<footer class="container-fluid text-center navbar-fixed-bottom">
-  <p>Contact us: 999</p>
-</footer>
+<!--Finish here-->
+    <?php
+    mysqli_close($con);
+    include "../navbar-footer/footer.php"
+    ?>
+  </body>
 
-</body>
-</html>
+  </html>
