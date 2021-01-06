@@ -3,7 +3,6 @@ SESSION_START();
 if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
   include "connection.php";
 ?>
-
   <!DOCTYPE html>
   <html lang="en">
 
@@ -18,12 +17,9 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
   </head>
 
   <body>
-
     <?php
     include "navbar-footer/navbar.php";
     ?>
-    <!-- start dekat sini i edit-->
-
     <div class="container-fluid text-center">
       <div class="row">
         <div class="col-sm-12 text-center">
