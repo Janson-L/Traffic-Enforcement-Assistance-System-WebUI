@@ -83,8 +83,6 @@ include "../connection.php";
 <!-- start dekat sini i edit-->
   
 <div class="container-fluid text-center">
- 
-      
 	  <div class= "container">
     <!--    Letak gambar dekat sini  -->
         <img src="../image/Logo_Polis_Bantuan-01.png" style="height:200px;width: auto;margin: 0 auto;display: block;">
