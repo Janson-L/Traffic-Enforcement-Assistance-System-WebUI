@@ -17,7 +17,9 @@ if (isset($_SESSION['StaffID'])) {
   </head>
 
   <body>
-    <?php include "navbar-footer/navbar.php"; ?>
+    <?php 
+    include "navbar-footer/navbar.php"; 
+    ?>
     <div class="container-fluid text-center">
       <div class="row">
         <div class="col-sm-12 text-center">
@@ -28,7 +30,9 @@ if (isset($_SESSION['StaffID'])) {
         </div>
       </div>
     </div>
-    <div class="col-sm-6 text-center" style="border-style:solid; width:20%; left:20%;">
+    <br>
+    <div class="row form-group">
+      <div class="col-sm-6 col-xs-12 text-center" style="border-style:solid; width:20%; left:20%;">
       <h3><a href="resolveSatria.php">Satria</a></h3>
       <h2>
         <?php
@@ -61,7 +65,7 @@ and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
 
 
     </div>
-    <div class="col-sm-6 text-center" style="border-style:solid; width:20%; left:40%;">
+    <div class="col-sm-6 col-xs-12 text-center" style="border-style:solid; width:20%; left:40%;">
       <h3><a href="resolveLestari.php">Lestari</a></h3>
       <h2><?php
           $Location = "Lestari";
@@ -81,13 +85,17 @@ and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
           ?>
       </h2>
     </div>
-    
-    <div class="col-sm-12 text-center">
+    </div>
+    <div class="form-group text-center">
       <a href="resolve.php" class="btn btn-primary">
         Refresh
       </a>
     </div>
-  </body>
+    <div class="form-group text-center">
+      <a href="EaR.php" class="btn btn-primary">
+        &larr; Back
+      </a>
+    </div>
 
   </html>
   <?php

@@ -50,7 +50,10 @@ if (isset($_SESSION['StaffID'])) {
                             if(is_null($row['stickerID'])){
                                 $stickerID='NULL';
                             }
-                            echo  "<tr><td>Sticker ID:</td><td>" . $stickerID . "</td></tr>";
+                            else{
+                                $stickerID=$row['stickerID'];
+                            }
+                            echo  "<tr><td>Sticker ID:</td><td>" .$stickerID. "</td></tr>";
 
                             if ($row['type'] == 1) {
                                 $stickerType = 'Staff';
