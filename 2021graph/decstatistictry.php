@@ -33,7 +33,7 @@
         chart.draw(data, options);
       }
         
-        <!-- function print-->
+        
 
 function myFunction() {
     window.print();
