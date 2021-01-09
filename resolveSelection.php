@@ -54,13 +54,13 @@ if (isset($_SESSION['StaffID'])) {
                                 <option value="1">Sticker Misuse</option>
                                 <option value="2" selected>Illegal Parking</option>
                             </select>
-                            <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-primary" value="Summon">
+                            <input type="submit" id='summonBtn' name="resolveWithSummon" class="btn btn-default" value="Summon">
                         </form>
 
                         <br>
                         <form id='overrideConfirmation' method='POST' action='resolveWithManualOverride.php' onsubmit="return confirm('Are you sure the vehicle is no longer in the area?');">
                             <input type="text" name="LicensePlate" value="<?php echo $_POST['LicensePlate']; ?>" style="display:none">
-                            <input type="submit" name="resolveWithFP" class="btn btn-primary" value="Manual Override">
+                            <input type="submit" name="resolveWithFP" class="btn btn-default" value="Manual Override">
                         </form>
                     </div>
                 </div>

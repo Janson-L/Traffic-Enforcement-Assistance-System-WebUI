@@ -31,13 +31,13 @@ if (isset($_SESSION['StaffID'])) {
                     </a>
                 </div>
                 <div class="form-group">
-                    <a href="summonPayment.php" class="btn btn-default">
-                        Summon Payment
+                    <a href="resolve.php" class="btn btn-default">
+                        Resolve Overparked Vehicle
                     </a>
                 </div>
                 <div class="form-group">
-                    <a href="resolve.php" class="btn btn-default">
-                        Resolve Overparked Vehicle
+                    <a href="summonPayment.php" class="btn btn-default">
+                        Summon Payment
                     </a>
                 </div>
                 <div class="form-group">
