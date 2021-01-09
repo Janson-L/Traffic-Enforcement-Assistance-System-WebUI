@@ -16,7 +16,7 @@ $result=mysqli_stmt_get_result($stmt);
 
 if($data=mysqli_fetch_assoc($result)){
 	if($data['AccountStatus']==0){
-		header("Location:login.php?message=accountLocked");
+		header("Location:login.php?accountLocked=true");
 	}
 	else
 	{
