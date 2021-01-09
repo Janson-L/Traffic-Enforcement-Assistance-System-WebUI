@@ -21,7 +21,7 @@ if (isset($_SESSION['StaffID'])) {
                 <div class="col-sm-12 text-center">
                     <!--    Letak gambar dekat sini  -->
                     <img src="image/Logo_Polis_Bantuan-01.png" style="height:100px;width: auto;margin: 0 auto;display: block;">
-                    <h2>Scan License Plate</h2>
+                    <h2>Check Vehicle Details</h2>
                     <h3>Take a photo of the vehicle's license plate</h3>
                 </div>
             </div>

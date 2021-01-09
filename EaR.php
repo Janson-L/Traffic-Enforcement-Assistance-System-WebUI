@@ -27,7 +27,7 @@ if (isset($_SESSION['StaffID'])) {
                 <br>
                 <div class="form-group">
                     <a href="scanNumberPlate.php" class="btn btn-default">
-                        Scan Number Plate
+                        Check Vehicle Details
                     </a>
                 </div>
                 <div class="form-group">

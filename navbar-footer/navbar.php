@@ -18,7 +18,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Enforcement Action and Resolution<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/Traffic-Enforcement-Assistance-System/scanNumberPlate.php">Scan Number Plate</a></li>
+            <li><a href="/Traffic-Enforcement-Assistance-System/scanNumberPlate.php">Check Vehicle Details</a></li>
             <li><a href="/Traffic-Enforcement-Assistance-System/summonpayment.php">Summon Payment</a></li>
             <li><a href="/Traffic-Enforcement-Assistance-System/resolve.php">Resolve Overparked Vehicles</a></li>
           </ul>
