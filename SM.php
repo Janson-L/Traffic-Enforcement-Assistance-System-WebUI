@@ -26,7 +26,7 @@ if (isset($_SESSION['StaffID'])) {
                 <h3>Manage Staff Accounts</h3>
                 <br>
                 <div class="form-group">
-                    <a href="staffmanagement.php" class="btn btn-default">
+                    <a href="staffManagement.php" class="btn btn-default">
                         Staff List 
                     </a>
                 </div>

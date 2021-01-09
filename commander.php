@@ -58,7 +58,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
             </a>
           </div>
           <div class="form-group">
-            <a href="staffManagement.php" class="btn btn-default">
+            <a href="SM.php" class="btn btn-default">
               Staff Management
             </a>
           </div>
