@@ -36,6 +36,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
         <h3>View details of overparked vehicles in Lestari Residential College</h3>
       </div>
     </div>
+    <br>
 
     <div class="main-wrapper mx-auto">
       <?php
@@ -62,16 +63,17 @@ and HOUR(TIMEDIFF(EntryDateTime,ADDTIME(CURRENT_TIMESTAMP(), '08:00')))>=8
         }
         echo '</table>';
       } else {
-        echo "<div class='container-fluid text-center'>No vehicle that requires further action.</div>";
+        echo "<div class='container alert alert-info text-center' role='alert'>No vehicle that requires further action.</div>";
       }
       ?>
-      <br>
-      <div class="col-sm-12 text-center">
-        <a href="dashboard.php" class="btn btn-primary">
-          &larr; Back
-        </a>
+        <div class="form-group text-center">
         <a href="dashboardLestari.php" class="btn btn-primary">
           Refresh
+        </a>
+        </div>
+      <div class="form-group text-center">
+        <a href="dashboard.php" class="btn btn-primary">
+          &larr; Back
         </a>
       </div>
     </div>
