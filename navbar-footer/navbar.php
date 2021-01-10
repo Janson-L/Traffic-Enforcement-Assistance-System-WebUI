@@ -14,7 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/Traffic-Enforcement-Assistance-System/commander.php">Home</a></li>
+        <li><a href="<?php if ($_SESSION['Class'] == "2") { echo"/Traffic-Enforcement-Assistance-System/commander.php";} else{echo "/Traffic-Enforcement-Assistance-System/officer.php";}?>">Home</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Enforcement Action and Resolution<span class="caret"></span></a>
           <ul class="dropdown-menu">
