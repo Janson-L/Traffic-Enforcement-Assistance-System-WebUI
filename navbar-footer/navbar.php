@@ -25,7 +25,7 @@
         </li>
         <?php if ($_SESSION['Class'] == "2") { ?>
           <li><a href="/Traffic-Enforcement-Assistance-System/dashboard.php">Dashboard</a></li>
-          <li><a href="graph2.php">Analysis and Statistic</a></li>
+          <li><a href="graph2.php">Analysis and Statistics</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Staff Management<span class="caret"></span></a>
             <ul class="dropdown-menu">
