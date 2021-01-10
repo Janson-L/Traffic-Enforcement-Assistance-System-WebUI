@@ -85,7 +85,7 @@ if (isset($_SESSION['StaffID']) && $_SESSION['Class'] == "2") {
 
         <div class="form-group text-center">
             <br>
-                    <a href="/Traffic-Enforcement-Assistance-System/commander.php" class="btn btn-primary">
+                    <a href="/Traffic-Enforcement-Assistance-System/SM.php" class="btn btn-primary">
                         &larr; Back
                     </a>
                 </div>
